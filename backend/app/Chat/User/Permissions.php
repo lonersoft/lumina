@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Chat\User;
+namespace Lumina\Chat\User;
 
-use MythicalDash\Chat\Database;
+use Lumina\Chat\Database;
 
 class Permissions extends Database
 {
@@ -192,7 +192,7 @@ class Permissions extends Database
     {
         // Check if the role has root permission
         try {
-            $root = \MythicalDash\Permissions::ADMIN_ROOT;
+            $root = \Lumina\Permissions::ADMIN_ROOT;
             $con = self::getPdoConnection();
             $stmt = $con->prepare('SELECT granted FROM ' . self::TABLE_NAME . ' WHERE role_id = :role_id AND permission = :permission AND deleted = \'false\'');
             $stmt->bindParam(':role_id', $role_id, \PDO::PARAM_INT);

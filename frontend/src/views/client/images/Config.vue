@@ -111,7 +111,7 @@ import CardComponent from '@/components/client/ui/Card/CardComponent.vue';
 import Button from '@/components/client/ui/Button.vue';
 import { ref } from 'vue';
 import { Copy, Key, Download, FileJson } from 'lucide-vue-next';
-import Session from '@/mythicaldash/Session';
+import Session from '@/lumina/Session';
 
 // Mock API key for demonstration
 const apiKey = Session.getInfo('image_hosting_upload_key');

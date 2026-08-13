@@ -30,7 +30,7 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Plugins\Mixins;
+namespace Lumina\Plugins\Mixins;
 
 /**
  * Base interface for all plugin mixins.
@@ -38,7 +38,7 @@ namespace MythicalDash\Plugins\Mixins;
  * Mixins provide reusable functionality that can be included in multiple plugins.
  * They allow for better code organization and reuse across the plugin ecosystem.
  */
-interface MythicalDashMixin
+interface LuminaMixin
 {
     /**
      * Initialize the mixin with the plugin identifier.
@@ -62,3 +62,9 @@ interface MythicalDashMixin
      */
     public static function getMixinVersion(): string;
 }
+
+interface MythicalDashMixin extends LuminaMixin {}
+
+class_alias('Lumina\Plugins\Mixins\LuminaMixin', 'MythicalDash\Plugins\Mixins\MythicalDashMixin');
+
+

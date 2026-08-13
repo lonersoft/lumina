@@ -106,7 +106,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
 import { RefreshCcw, Loader, Users, Server, TicketIcon, ServerCrash } from 'lucide-vue-next';
-import Dashboard from '@/mythicaldash/admin/Dashboard';
+import Dashboard from '@/lumina/admin/Dashboard';
 import Chart from 'chart.js/auto';
 
 const isRefreshing = ref(false);

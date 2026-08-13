@@ -30,14 +30,14 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Services\Pterodactyl\Admin\Resources;
+namespace Lumina\Services\Pterodactyl\Admin\Resources;
 
 use GuzzleHttp\Exception\ClientException;
-use MythicalDash\Services\Pterodactyl\Admin\PterodactylAdmin;
-use MythicalDash\Services\Pterodactyl\Exceptions\RateLimitException;
-use MythicalDash\Services\Pterodactyl\Exceptions\PermissionException;
-use MythicalDash\Services\Pterodactyl\Exceptions\AuthenticationException;
-use MythicalDash\Services\Pterodactyl\Exceptions\ResourceNotFoundException;
+use Lumina\Services\Pterodactyl\Admin\PterodactylAdmin;
+use Lumina\Services\Pterodactyl\Exceptions\RateLimitException;
+use Lumina\Services\Pterodactyl\Exceptions\PermissionException;
+use Lumina\Services\Pterodactyl\Exceptions\AuthenticationException;
+use Lumina\Services\Pterodactyl\Exceptions\ResourceNotFoundException;
 
 class NestsResource extends PterodactylAdmin
 {

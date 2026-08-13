@@ -30,23 +30,23 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Plugins\PluginConfig;
-use MythicalDash\Plugins\PluginSettings;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Plugins\Events\Events\PluginsSettingsEvent;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Plugins\PluginConfig;
+use Lumina\Plugins\PluginSettings;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Plugins\Events\Events\PluginsSettingsEvent;
 
 $router->get('/api/admin/plugins/list', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
     global $pluginManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_PLUGINS_LIST, $session);
     $plugins = $pluginManager->getLoadedMemoryPlugins();
     $pluginsList = [];
@@ -63,7 +63,7 @@ $router->get('/api/admin/plugins/(.*)/config', function ($identifier): void {
     $appInstance->allowOnlyGET();
     global $pluginManager;
     $plugins = $pluginManager->getLoadedMemoryPlugins();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_PLUGINS_LIST, $session);
 
     if (in_array($identifier, $plugins)) {
@@ -85,7 +85,7 @@ $router->post('/api/admin/plugins/(.*)/settings/set', function ($identifier): vo
     $appInstance->allowOnlyPOST();
 
     global $pluginManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_PLUGINS_EDIT, $session);
 
@@ -146,7 +146,7 @@ $router->post('/api/admin/plugins/(.*)/settings/remove', function ($identifier):
     $appInstance->allowOnlyPOST();
 
     global $pluginManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_PLUGINS_EDIT, $session);
 

@@ -30,22 +30,22 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash;
+namespace Lumina;
 
 use RateLimit\Rate;
-use MythicalDash\Chat\Database;
+use Lumina\Chat\Database;
 use RateLimit\RedisRateLimiter;
-use MythicalDash\Hooks\MythicalAPP;
-use MythicalDash\Router\Router as rt;
-use MythicalDash\Config\ConfigFactory;
-use MythicalDash\Logger\LoggerFactory;
+use Lumina\Hooks\LuminaAPP;
+use Lumina\Router\Router as rt;
+use Lumina\Config\ConfigFactory;
+use Lumina\Logger\LoggerFactory;
 use RateLimit\Exception\LimitExceeded;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Plugins\Events\Events\AppEvent;
-use MythicalDash\Hooks\MythicalSystems\Utils\XChaCha20;
+use Lumina\Config\ConfigInterface;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Plugins\Events\Events\AppEvent;
+use Lumina\Hooks\MythicalSystems\Utils\XChaCha20;
 
-class App extends MythicalAPP
+class App extends LuminaAPP
 {
     public static App $instance;
     public Database $db;
@@ -81,8 +81,8 @@ class App extends MythicalAPP
         }
 
         /**
-         * @global \MythicalDash\Plugins\PluginManager $pluginManager
-         * @global \MythicalDash\Plugins\Events\PluginEvent $eventManager
+         * @global \Lumina\Plugins\PluginManager $pluginManager
+         * @global \Lumina\Plugins\Events\PluginEvent $eventManager
          */
         global $pluginManager, $eventManager;
 
@@ -393,7 +393,7 @@ class App extends MythicalAPP
      */
     public function getLogger(): LoggerFactory
     {
-        return new LoggerFactory(__DIR__ . '/../storage/logs/mythicaldash.log');
+        return new LoggerFactory(__DIR__ . '/../storage/logs/lumina.log');
     }
 
     /**
@@ -459,3 +459,6 @@ class App extends MythicalAPP
         return random_int(100000, 999999);
     }
 }
+
+class_alias('Lumina\App', 'MythicalDash\App');
+

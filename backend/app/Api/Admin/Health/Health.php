@@ -30,18 +30,18 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\TimedTask;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Services\Cloud\MythicalCloudLogs;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\TimedTask;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Services\Cloud\MythicalCloudLogs;
 
 $router->get('/api/admin/health', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
 
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     $accountToken = $session->SESSION_KEY;
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_HEALTH_VIEW, $session);
@@ -343,7 +343,7 @@ $router->post('/api/admin/logs/upload', function (): void {
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
 
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     $accountToken = $session->SESSION_KEY;
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_DASHBOARD_VIEW, $session);

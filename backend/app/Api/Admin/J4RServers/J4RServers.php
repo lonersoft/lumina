@@ -30,22 +30,22 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\Chat\J4RServers\J4RServers;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Plugins\Events\Events\J4REvent;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\Chat\J4RServers\J4RServers;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Plugins\Events\Events\J4REvent;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 // Get all J4R servers
 $router->get('/api/admin/j4r/servers', function () {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_J4R_SERVERS_LIST, $session);
 
@@ -62,7 +62,7 @@ $router->get('/api/admin/j4r/servers/available', function () {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_J4R_SERVERS_LIST, $session);
 
@@ -78,7 +78,7 @@ $router->get('/api/admin/j4r/servers/paginated', function () {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_J4R_SERVERS_LIST, $session);
 
@@ -112,7 +112,7 @@ $router->get('/api/admin/j4r/servers/(.*)', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_J4R_SERVERS_LIST, $session);
 
@@ -136,7 +136,7 @@ $router->post('/api/admin/j4r/servers/create', function () {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_J4R_SERVERS_CREATE, $session);
 
@@ -223,7 +223,7 @@ $router->post('/api/admin/j4r/servers/(.*)/update', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_J4R_SERVERS_EDIT, $session);
 
@@ -324,7 +324,7 @@ $router->post('/api/admin/j4r/servers/(.*)/delete', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_J4R_SERVERS_DELETE, $session);
 
@@ -378,7 +378,7 @@ $router->post('/api/admin/j4r/servers/(.*)/lock', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_J4R_SERVERS_EDIT, $session);
 
@@ -428,7 +428,7 @@ $router->post('/api/admin/j4r/servers/(.*)/unlock', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_J4R_SERVERS_EDIT, $session);
 
@@ -478,7 +478,7 @@ $router->get('/api/admin/j4r/servers/stats', function () {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_J4R_SERVERS_LIST, $session);
 

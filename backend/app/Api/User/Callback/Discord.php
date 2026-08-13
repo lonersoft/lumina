@@ -30,24 +30,24 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Mail\Mail;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Chat\Servers\Server;
-use MythicalDash\Middleware\Firewall;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\Hooks\DiscordOAuthHelper;
-use MythicalDash\Chat\User\PermissionUtils;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Hooks\Pterodactyl\Admin\Servers;
-use MythicalDash\Plugins\Events\Events\AuthEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Plugins\Events\Events\DiscordEvent;
-use MythicalDash\Chat\IPRelationships\IPRelationship;
-use MythicalDash\Hooks\MythicalSystems\User\UUIDManager;
+use Lumina\App;
+use Lumina\Mail\Mail;
+use Lumina\Chat\User\User;
+use Lumina\Chat\User\Session;
+use Lumina\Chat\Servers\Server;
+use Lumina\Middleware\Firewall;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\Hooks\DiscordOAuthHelper;
+use Lumina\Chat\User\PermissionUtils;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Hooks\Pterodactyl\Admin\Servers;
+use Lumina\Plugins\Events\Events\AuthEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Plugins\Events\Events\DiscordEvent;
+use Lumina\Chat\IPRelationships\IPRelationship;
+use Lumina\Hooks\MythicalSystems\User\UUIDManager;
 
 // Discord Link Callback
 $router->get('/api/user/auth/callback/discord/link', function () {
@@ -289,7 +289,7 @@ $router->get('/api/user/auth/callback/discord/login', function () {
          * Login user in Pterodactyl.
          */
         try {
-            MythicalDash\Hooks\Pterodactyl\Admin\User::performLogin(
+            Lumina\Hooks\Pterodactyl\Admin\User::performLogin(
                 $userInfoArray[UserColumns::PTERODACTYL_USER_ID],
                 $userInfoArray[UserColumns::EMAIL],
                 $userInfoArray[UserColumns::USERNAME],
@@ -326,7 +326,7 @@ $router->get('/api/user/auth/callback/discord/login', function () {
         Firewall::handle($appInstance, $currentIP);
 
         // Check if user has alt bypass permission
-        $hasAltBypassPermission = PermissionUtils::userHasPermission($loginResult, MythicalDash\Permissions::USER_PERMISSION_BYPASS_ALTING);
+        $hasAltBypassPermission = PermissionUtils::userHasPermission($loginResult, Lumina\Permissions::USER_PERMISSION_BYPASS_ALTING);
 
         if ($config->getDBSetting(ConfigInterface::FIREWALL_BLOCK_ALTS, 'false') == 'true' && !$hasAltBypassPermission) {
             $processedUsers = []; // Initialize the array

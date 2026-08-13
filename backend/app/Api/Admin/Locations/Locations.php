@@ -30,25 +30,25 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Locations\Locations;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Plugins\Events\Events\LocationEvent;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Locations\Locations;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Plugins\Events\Events\LocationEvent;
 
 $router->get('/api/admin/locations/pterodactyl', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     $accountToken = $session->SESSION_KEY;
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_LOCATIONS_LIST, $session);
-    $locations = MythicalDash\Hooks\Pterodactyl\Admin\Locations::getLocations();
+    $locations = Lumina\Hooks\Pterodactyl\Admin\Locations::getLocations();
 
     $appInstance->OK('Pterodactyl api locations', [
         'locations' => $locations,
@@ -59,7 +59,7 @@ $router->get('/api/admin/locations', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     $accountToken = $session->SESSION_KEY;
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_LOCATIONS_LIST, $session);
@@ -75,7 +75,7 @@ $router->post('/api/admin/locations/create', function (): void {
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
     global $eventManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_LOCATIONS_CREATE, $session);
     UserActivities::add(
@@ -125,7 +125,7 @@ $router->post('/api/admin/locations/create', function (): void {
             return;
         }
 
-        if (!MythicalDash\Hooks\Pterodactyl\Admin\Locations::doesLocationExist($pterodactyl_location_id)) {
+        if (!Lumina\Hooks\Pterodactyl\Admin\Locations::doesLocationExist($pterodactyl_location_id)) {
             $appInstance->BadRequest('Invalid Pterodactyl location ID', ['error_code' => 'ERROR_INVALID_PTERODACTYL_LOCATION_ID']);
 
             return;
@@ -163,7 +163,7 @@ $router->post('/api/admin/locations/(.*)/update', function ($id): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_LOCATIONS_EDIT, $session);
     if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['node_ip']) && isset($_POST['status']) && isset($_POST['slots']) && isset($_POST['image_id'])) {
@@ -241,7 +241,7 @@ $router->post('/api/admin/locations/(.*)/delete', function ($id): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     global $eventManager;
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_LOCATIONS_DELETE, $session);

@@ -19,7 +19,7 @@ import {
     Images,
     UserSearchIcon,
 } from 'lucide-vue-next';
-import Translation from '@/mythicaldash/Translation';
+import Translation from '@/lumina/Translation';
 import { useSettingsStore } from '@/stores/settings';
 import { useI18n } from 'vue-i18n';
 import { useSkinSettings } from '@/composables/useSkinSettings';

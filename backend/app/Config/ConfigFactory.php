@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Config;
+namespace Lumina\Config;
 
-use MythicalDash\App;
-use MythicalDash\Hooks\MythicalSystems\Utils\XChaCha20;
+use Lumina\App;
+use Lumina\Hooks\MythicalSystems\Utils\XChaCha20;
 
 class ConfigFactory
 {
@@ -114,7 +114,7 @@ class ConfigFactory
 
         // If not found in database, try to get default value using reflection
         try {
-            $reflection = new \ReflectionClass('MythicalDash\Config\PublicConfig');
+            $reflection = new \ReflectionClass('Lumina\Config\PublicConfig');
             $method = $reflection->getMethod('getPublicSettingsWithDefaults');
             $defaultValues = $method->invoke(null);
 

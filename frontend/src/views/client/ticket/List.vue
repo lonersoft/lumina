@@ -6,13 +6,13 @@ import { format } from 'date-fns';
 import LayoutDashboard from '@/components/client/LayoutDashboard.vue';
 import TableTanstack from '@/components/client/ui/Table/TableTanstack.vue';
 import Button from '@/components/client/ui/Button.vue';
-import Tickets from '@/mythicaldash/Tickets';
+import Tickets from '@/lumina/Tickets';
 import { AlertCircle, Plus, Ticket } from 'lucide-vue-next';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 
 const router = useRouter();
 const { t } = useI18n();
-MythicalDOM.setPageTitle(t('tickets.pages.tickets.title'));
+LuminaDOM.setPageTitle(t('tickets.pages.tickets.title'));
 
 interface Department {
     id: number;

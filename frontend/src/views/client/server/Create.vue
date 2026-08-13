@@ -535,7 +535,7 @@ import CardComponent from '@/components/client/ui/Card/CardComponent.vue';
 import { TextInput, TextArea } from '@/components/client/ui/TextForms';
 import Button from '@/components/client/ui/Button.vue';
 import Swal from 'sweetalert2';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import { useSound } from '@vueuse/sound';
 import failedAlertSfx from '@/assets/sounds/error.mp3';
 import successAlertSfx from '@/assets/sounds/success.mp3';
@@ -550,7 +550,7 @@ const Settings = useSettingsStore();
 const { play: playError } = useSound(failedAlertSfx);
 const { play: playSuccess } = useSound(successAlertSfx);
 
-MythicalDOM.setPageTitle(t('create.pages.index.title'));
+LuminaDOM.setPageTitle(t('create.pages.index.title'));
 
 const router = useRouter();
 const isSubmitting = ref(false);

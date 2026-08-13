@@ -30,13 +30,13 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Services\Pterodactyl\Admin\Resources;
+namespace Lumina\Services\Pterodactyl\Admin\Resources;
 
 use GuzzleHttp\Exception\ClientException;
-use MythicalDash\Services\Pterodactyl\Admin\PterodactylAdmin;
-use MythicalDash\Services\Pterodactyl\Exceptions\ValidationException;
-use MythicalDash\Services\Pterodactyl\Exceptions\PterodactylException;
-use MythicalDash\Services\Pterodactyl\Exceptions\ResourceNotFoundException;
+use Lumina\Services\Pterodactyl\Admin\PterodactylAdmin;
+use Lumina\Services\Pterodactyl\Exceptions\ValidationException;
+use Lumina\Services\Pterodactyl\Exceptions\PterodactylException;
+use Lumina\Services\Pterodactyl\Exceptions\ResourceNotFoundException;
 
 class UsersResource extends PterodactylAdmin
 {

@@ -133,17 +133,17 @@ import LayoutDashboard from '@/components/client/LayoutDashboard.vue';
 import CardComponent from '@/components/client/ui/Card/CardComponent.vue';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { Clock, Coins } from 'lucide-vue-next';
-import Session from '@/mythicaldash/Session';
+import Session from '@/lumina/Session';
 import { useSettingsStore } from '@/stores/settings';
 import router from '@/router';
 import Swal from 'sweetalert2';
 const Settings = useSettingsStore();
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
-MythicalDOM.setPageTitle(t('afk.pages.index.title'));
+LuminaDOM.setPageTitle(t('afk.pages.index.title'));
 
 // AFK Timer state
 const isActive = ref(false);

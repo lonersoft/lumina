@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Plugins;
+namespace Lumina\Plugins;
 
-use MythicalDash\App;
+use Lumina\App;
 
 class PluginRequiredConfigs
 {

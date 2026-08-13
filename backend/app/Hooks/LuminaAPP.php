@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Hooks;
+namespace Lumina\Hooks;
 
-class MythicalAPP extends MythicalSystems\Api\Api
+class LuminaAPP extends MythicalSystems\Api\Api
 {
     /**
      * Return a 200 response.
@@ -163,7 +163,7 @@ class MythicalAPP extends MythicalSystems\Api\Api
             'core' => [
                 'debug_os' => SYSTEM_OS_NAME,
                 'debug_os_kernel' => SYSTEM_KERNEL_NAME,
-                'debug_name' => 'MythicalDash',
+                'debug_name' => 'Lumina',
                 'debug_debug' => APP_DEBUG,
                 'debug_version' => APP_VERSION,
                 'debug_telemetry' => TELEMETRY,
@@ -601,3 +601,7 @@ class MythicalAPP extends MythicalSystems\Api\Api
         return [];
     }
 }
+
+class_alias('Lumina\Hooks\LuminaAPP', 'MythicalDash\Hooks\MythicalAPP');
+class_alias('Lumina\Hooks\LuminaAPP', 'Lumina\Hooks\MythicalAPP');
+

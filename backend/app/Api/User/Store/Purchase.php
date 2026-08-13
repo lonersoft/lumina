@@ -30,14 +30,14 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Plugins\Events\Events\StoreEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Chat\User\Session;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Plugins\Events\Events\StoreEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 $router->post('/api/user/store/purchase', function (): void {
     App::init();

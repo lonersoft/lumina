@@ -30,11 +30,11 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Chat\Database;
+use Lumina\Cli\CommandBuilder;
 
 class Rebuild extends App implements CommandBuilder
 {
@@ -42,7 +42,7 @@ class Rebuild extends App implements CommandBuilder
     {
         $app = App::getInstance();
         if (!file_exists(__DIR__ . '/../../../storage/.env')) {
-            \MythicalDash\App::getInstance(true)->getLogger()->warning('Executed a command without a .env file');
+            \Lumina\App::getInstance(true)->getLogger()->warning('Executed a command without a .env file');
             $app->send('The .env file does not exist. Please create one before running this command');
             exit;
         }
@@ -62,7 +62,7 @@ class Rebuild extends App implements CommandBuilder
         $app->send('&aRebuilding...');
 
         try {
-            \MythicalDash\App::getInstance(true)->loadEnv();
+            \Lumina\App::getInstance(true)->loadEnv();
             if (isset($_ENV['DATABASE_HOST']) && isset($_ENV['DATABASE_DATABASE']) && isset($_ENV['DATABASE_USER']) && isset($_ENV['DATABASE_PASSWORD']) && isset($_ENV['DATABASE_PORT'])) {
                 $db = new Database($_ENV['DATABASE_HOST'], $_ENV['DATABASE_DATABASE'], $_ENV['DATABASE_USER'], $_ENV['DATABASE_PASSWORD'], $_ENV['DATABASE_PORT']);
             } else {

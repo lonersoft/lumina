@@ -281,14 +281,14 @@ To add a new permission node:
 
 1. Edit `permission_nodes.txt` in the root directory
 2. Add your permission in the format: `CONSTANT_NAME=permission.node.value | Category | Description`
-3. Run `php lumina permissionExport` to regenerate all files
+3. Run `php lumina ExportPermissions` to regenerate all files
 4. Rebuild the frontend if necessary
 
 ## File Locations
 
 - **Source:** `permission_nodes.txt` (root directory)
 - **PHP:** `backend/app/Permissions.php`
-- **TypeScript:** `frontend/src/lumina/Permissions.ts`
+- **TypeScript:** `frontend/src/mythicaldash/Permissions.ts`
 - **Documentation:** `docs/PERMISSIONS.md` (this file)
 
 ## Auto-Generation
@@ -297,4 +297,4 @@ To add a new permission node:
 
 ---
 
-*This documentation was auto-generated on 2025-11-17 17:36:00*
+*This documentation was auto-generated on 2026-08-13 16:09:46*

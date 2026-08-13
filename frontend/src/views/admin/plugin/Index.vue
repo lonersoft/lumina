@@ -104,7 +104,7 @@
 import { ref, onMounted } from 'vue';
 import { LoaderCircle, ChevronRightIcon, PackageXIcon, Settings as SettingsIcon } from 'lucide-vue-next';
 import LayoutDashboard from '@/components/admin/LayoutDashboard.vue';
-import Plugins from '@/mythicaldash/admin/Plugins';
+import Plugins from '@/lumina/admin/Plugins';
 import { useRouter } from 'vue-router';
 
 interface PluginInfo {

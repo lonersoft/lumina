@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Plugins\Mixins\Reflection;
+namespace Lumina\Plugins\Mixins\Reflection;
 
 use ReflectionClass;
-use MythicalDash\App;
+use Lumina\App;
 
 /**
  * Provides runtime class patching and modification capabilities.

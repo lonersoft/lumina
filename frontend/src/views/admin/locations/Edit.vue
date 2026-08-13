@@ -230,7 +230,7 @@ import { ref, onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import LayoutDashboard from '@/components/admin/LayoutDashboard.vue';
 import { ArrowLeftIcon, SaveIcon, LoaderIcon } from 'lucide-vue-next';
-import Locations from '@/mythicaldash/admin/Locations';
+import Locations from '@/lumina/admin/Locations';
 
 const router = useRouter();
 const route = useRoute();

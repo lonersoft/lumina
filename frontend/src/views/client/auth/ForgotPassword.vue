@@ -12,8 +12,8 @@ import Turnstile from 'vue-turnstile';
 import { useSettingsStore } from '@/stores/settings';
 const Settings = useSettingsStore();
 import { useRouter } from 'vue-router';
-import Auth from '@/mythicaldash/Auth';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import Auth from '@/lumina/Auth';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 const { play: playError } = useSound(failedAlertSfx);
 const { play: playSuccess } = useSound(successAlertSfx);
 const router = useRouter();
@@ -26,7 +26,7 @@ const form = reactive({
 });
 const turnstileKey = ref(0);
 
-MythicalDOM.setPageTitle(t('auth.pages.forgot_password.page.title'));
+LuminaDOM.setPageTitle(t('auth.pages.forgot_password.page.title'));
 
 const handleSubmit = async () => {
     loading.value = true;

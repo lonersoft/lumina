@@ -8,8 +8,8 @@ import Button from '@/components/client/ui/Button.vue';
 import { CreditCard, ArrowLeft } from 'lucide-vue-next';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import Session from '@/mythicaldash/Session';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import Session from '@/lumina/Session';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import Swal from 'sweetalert2';
 import failedAlertSfx from '@/assets/sounds/error.mp3';
 import { useSound } from '@vueuse/sound';
@@ -21,7 +21,7 @@ const router = useRouter();
 const { t } = useI18n();
 const { play: playError } = useSound(failedAlertSfx);
 
-MythicalDOM.setPageTitle(t('billing.pages.add_funds.title'));
+LuminaDOM.setPageTitle(t('billing.pages.add_funds.title'));
 
 const loading = ref(false);
 const form = reactive({

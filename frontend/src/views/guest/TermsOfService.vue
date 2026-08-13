@@ -30,7 +30,7 @@
         </main>
 
         <!-- Footer -->
-        <GuestFooter :left-text="t('terms_of_service.title')" right-text="© 2025 MythicalDash" />
+        <GuestFooter :left-text="t('terms_of_service.title')" right-text="© 2026 Lumina" />
     </div>
 </template>
 

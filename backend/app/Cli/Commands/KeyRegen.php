@@ -30,11 +30,11 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
-use MythicalDash\Hooks\MythicalSystems\Utils\XChaCha20;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
+use Lumina\Hooks\MythicalSystems\Utils\XChaCha20;
 
 class KeyRegen extends App implements CommandBuilder
 {
@@ -62,7 +62,7 @@ class KeyRegen extends App implements CommandBuilder
         }
 
         if ($isForced) {
-            $mainApp = \MythicalDash\App::getInstance(true);
+            $mainApp = \Lumina\App::getInstance(true);
             $mainApp->loadEnv();
             $mainApp->getLogger()->warning('Old encryption key was: ' . $_ENV['DATABASE_ENCRYPTION_KEY']);
             $app->send(message: '&7Old encryption key was: &e' . $_ENV['DATABASE_ENCRYPTION_KEY']);

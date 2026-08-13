@@ -606,7 +606,7 @@ account:
                 subTitle: 管理您的API密钥
                 card:
                     title: API密钥
-                    description: 您的API密钥提供对MythicalDash API的访问
+                    description: 您的API密钥提供对Lumina API的访问
                     yourKey: 您的API密钥
                     loading: 加载API密钥...
                     noApiKey: 没有可用的API密钥
@@ -1009,7 +1009,7 @@ referrals:
                             id: '3'
                             description: '当您的推荐赚取奖励时，您也将赚取奖励'
             share:
-                shareMessage: '加入我在MythicalDash上，使用我的推荐链接获取独家奖励！'
+                shareMessage: '加入我在Lumina上，使用我的推荐链接获取独家奖励！'
                 title: '分享推荐链接'
                 description: '与朋友分享您的推荐链接并赚取奖励！'
                 mailTitle: '通过电子邮件分享推荐链接'

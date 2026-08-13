@@ -238,7 +238,7 @@ import { useI18n } from 'vue-i18n';
 import LayoutDashboard from '@/components/client/LayoutDashboard.vue';
 import LoadingAnimation from '@/components/client/ui/LoadingAnimation.vue';
 import Button from '@/components/client/ui/Button.vue';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import { AlertCircle, Coins, Server, Clock, ExternalLink } from 'lucide-vue-next';
 import { useSettingsStore } from '@/stores/settings';
 import { useRouter } from 'vue-router';
@@ -262,7 +262,7 @@ if (!isLeaderboardEnabled.value) {
     });
 }
 
-MythicalDOM.setPageTitle(t('leaderboard.title'));
+LuminaDOM.setPageTitle(t('leaderboard.title'));
 
 interface Category {
     type: string;

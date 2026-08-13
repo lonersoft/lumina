@@ -30,8 +30,8 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Config\ConfigInterface;
+use Lumina\App;
+use Lumina\Config\ConfigInterface;
 
 $router->add('/api/system/custom.js', function () {
     App::init();

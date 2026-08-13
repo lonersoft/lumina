@@ -22,8 +22,8 @@ import {
     Server,
 } from 'lucide-vue-next';
 import type { MenuGroup, ProfileMenuItem } from '../types';
-import Session from '@/mythicaldash/Session';
-import Permissions from '@/mythicaldash/Permissions';
+import Session from '@/lumina/Session';
+import Permissions from '@/lumina/Permissions';
 import { useFeatureFlags } from '@/composables/useFeatureFlags';
 
 // Define the dashboard data type inline to avoid import issues

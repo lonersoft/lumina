@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Chat\User;
+namespace Lumina\Chat\User;
 
-use MythicalDash\Chat\Database;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\Chat\Database;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 class UserActivities extends Database
 {

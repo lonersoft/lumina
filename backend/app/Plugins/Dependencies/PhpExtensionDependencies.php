@@ -30,7 +30,7 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Plugins\Dependencies;
+namespace Lumina\Plugins\Dependencies;
 
 class PhpExtensionDependencies implements Dependencies
 {

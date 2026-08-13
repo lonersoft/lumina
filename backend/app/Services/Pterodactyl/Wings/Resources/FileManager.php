@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Services\Pterodactyl\Wings\Resources;
+namespace Lumina\Services\Pterodactyl\Wings\Resources;
 
-use MythicalDash\Services\Pterodactyl\Wings\WingsClient;
+use Lumina\Services\Pterodactyl\Wings\WingsClient;
 
 class FileManager extends WingsClient
 {

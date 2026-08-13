@@ -30,15 +30,15 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\User\Roles;
-use MythicalDash\Cli\CommandBuilder;
-use MythicalDash\Config\ConfigFactory;
-use MythicalDash\Chat\columns\UserColumns;
+use Lumina\Cli\App;
+use Lumina\Chat\Database;
+use Lumina\Chat\User\User;
+use Lumina\Chat\User\Roles;
+use Lumina\Cli\CommandBuilder;
+use Lumina\Config\ConfigFactory;
+use Lumina\Chat\columns\UserColumns;
 
 class MakeAdmin extends App implements CommandBuilder
 {
@@ -59,7 +59,7 @@ class MakeAdmin extends App implements CommandBuilder
             exit;
         }
 
-        \MythicalDash\App::getInstance(true)->loadEnv();
+        \Lumina\App::getInstance(true)->loadEnv();
 
         try {
             $db = new Database($_ENV['DATABASE_HOST'], $_ENV['DATABASE_DATABASE'], $_ENV['DATABASE_USER'], $_ENV['DATABASE_PASSWORD'], $_ENV['DATABASE_PORT']);

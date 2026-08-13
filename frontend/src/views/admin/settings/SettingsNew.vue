@@ -11,7 +11,7 @@
                     <p class="text-sm text-yellow-300">
                         For better reliability and advanced configuration options, we recommend using the CLI command:
                         <code class="bg-yellow-600/30 px-2 py-1 rounded text-xs font-mono"
-                            >php mythicaldash settings</code
+                            >php lumina settings</code
                         >
                     </p>
                 </div>

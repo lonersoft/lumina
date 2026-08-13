@@ -30,29 +30,29 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\Eggs\Eggs;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\Mails\MailList;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Locations\Locations;
-use MythicalDash\Chat\Servers\ServerQueue;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Hooks\Pterodactyl\Admin\Nodes;
-use MythicalDash\Hooks\Pterodactyl\Admin\Servers;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Plugins\Events\Events\UserEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Services\Pterodactyl\Admin\Resources\UsersResource;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\Eggs\Eggs;
+use Lumina\Chat\User\User;
+use Lumina\Chat\Mails\MailList;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Locations\Locations;
+use Lumina\Chat\Servers\ServerQueue;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Hooks\Pterodactyl\Admin\Nodes;
+use Lumina\Hooks\Pterodactyl\Admin\Servers;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Plugins\Events\Events\UserEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Services\Pterodactyl\Admin\Resources\UsersResource;
 
 $router->get('/api/admin/users', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_USERS_LIST, $session);
 
     $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
@@ -91,7 +91,7 @@ $router->get('/api/admin/user/(.*)/info', function ($userId): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_USERS_LIST, $session);
     if (empty($userId)) {
         $appInstance->BadRequest('User ID is required', ['error_code' => 'USER_ID_REQUIRED']);
@@ -210,7 +210,7 @@ $router->get('/api/admin/user/(.*)/info', function ($userId): void {
 
             $nestId = $server['nest'] ?? 0;
             if ($nestId != 0) {
-                $nest = MythicalDash\Chat\Eggs\EggCategories::getByPterodactylNestId((int) $nestId);
+                $nest = Lumina\Chat\Eggs\EggCategories::getByPterodactylNestId((int) $nestId);
             } else {
                 $nest = [];
             }
@@ -229,7 +229,7 @@ $router->get('/api/admin/user/(.*)/info', function ($userId): void {
             $server['service'] = $egg[0] ?? [];
 
             // Get category data
-            $server['category'] = MythicalDash\Chat\Eggs\EggCategories::get((int) $server['nest']);
+            $server['category'] = Lumina\Chat\Eggs\EggCategories::get((int) $server['nest']);
 
             // Set limits to match active servers structure
             $server['limits'] = [
@@ -264,7 +264,7 @@ $router->post('/api/admin/user/(.*)/update', function ($userId): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_USERS_EDIT, $session);
     if (empty($userId)) {
         $appInstance->BadRequest('User ID is required', ['error_code' => 'USER_ID_REQUIRED']);
@@ -335,7 +335,7 @@ $router->post('/api/admin/user/(.*)/ban', function ($userId): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_USERS_EDIT, $session);
 
     if (empty($userId)) {
@@ -403,7 +403,7 @@ $router->post('/api/admin/user/(.*)/delete', function ($userId): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_USERS_DELETE, $session);
     if (empty($userId)) {
         $appInstance->BadRequest('User ID is required', ['error_code' => 'USER_ID_REQUIRED']);
@@ -441,7 +441,7 @@ $router->post('/api/admin/user/(.*)/delete', function ($userId): void {
 $router->get('/api/admin/user/support-pin/(.*)', function ($supportPin): void {
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ANNOUNCEMENTS_LIST, $session);
     if (empty($supportPin)) {
         $appInstance->BadRequest('Support pin is required', ['error_code' => 'SUPPORT_PIN_REQUIRED']);

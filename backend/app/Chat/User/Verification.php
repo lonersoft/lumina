@@ -30,12 +30,12 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Chat\User;
+namespace Lumina\Chat\User;
 
-use MythicalDash\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\columns\EmailVerificationColumns;
+use Lumina\App;
+use Lumina\Chat\Database;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\columns\EmailVerificationColumns;
 
 class Verification extends Database
 {

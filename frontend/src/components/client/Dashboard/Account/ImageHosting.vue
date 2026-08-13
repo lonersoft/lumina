@@ -228,7 +228,7 @@
 import { ref } from 'vue';
 import CardComponent from '@/components/client/ui/Card/CardComponent.vue';
 import Button from '@/components/client/ui/Button.vue';
-import Session from '@/mythicaldash/Session';
+import Session from '@/lumina/Session';
 import { useI18n } from 'vue-i18n';
 import Swal from 'sweetalert2';
 import { useSound } from '@vueuse/sound';
@@ -249,15 +249,15 @@ const imageHostingEnabledGlobal = ref(Settings.getSetting('image_hosting_enabled
 // Embed settings
 const embedSettings = ref({
     enabled: Session.getInfo('image_hosting_embed_enabled') === 'true',
-    title: Session.getInfo('image_hosting_embed_title') || 'MythicalDash Image',
+    title: Session.getInfo('image_hosting_embed_title') || 'Lumina Image',
     description:
         Session.getInfo('image_hosting_embed_description') ||
-        'MythicalDash ImageHosting is a nice plugin bridge for creating a image hosting inside mythicaldash :D',
+        'Lumina ImageHosting is a plugin bridge for image hosting inside Lumina.',
     color: Session.getInfo('image_hosting_embed_color') || '#000000',
     image: Session.getInfo('image_hosting_embed_image') || 'https://cdn.mythical.systems/background.gif',
     thumbnail: Session.getInfo('image_hosting_embed_thumbnail') || 'https://cdn.mythical.systems/background.gif',
     url: Session.getInfo('image_hosting_embed_url') || 'https://cdn.mythical.systems/background.gif',
-    authorName: Session.getInfo('image_hosting_embed_author_name') || 'MythicalDash',
+    authorName: Session.getInfo('image_hosting_embed_author_name') || 'Lumina',
 });
 
 // Toggle image hosting

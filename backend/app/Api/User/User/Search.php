@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\Chat\User\User;
+use Lumina\App;
+use Lumina\Chat\Database;
+use Lumina\Chat\User\User;
 
 $router->get('/api/user/search', function (): void {
     App::init();

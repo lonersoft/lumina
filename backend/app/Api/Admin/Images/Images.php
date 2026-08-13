@@ -30,20 +30,20 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\Images\Image;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\Images\Image;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 $router->get('/api/admin/images', function () {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_IMAGES_LIST, $session);
     $images = Image::getAll();
@@ -54,7 +54,7 @@ $router->post('/api/admin/images/create', function () {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_IMAGES_CREATE, $session);
     if (!isset($_FILES['image'])) {
@@ -150,7 +150,7 @@ $router->post('/api/admin/images/(.*)/delete', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_IMAGES_DELETE, $session);
     if (!Image::exists($id)) {
@@ -183,7 +183,7 @@ $router->get('/api/admin/images/(.*)', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_IMAGES_LIST, $session);
     if (!Image::exists($id)) {

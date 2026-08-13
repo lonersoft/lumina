@@ -20,15 +20,15 @@ import {
     Image as ImageIcon,
     X as XIcon,
 } from 'lucide-vue-next';
-import Tickets from '@/mythicaldash/Tickets';
+import Tickets from '@/lumina/Tickets';
 import Swal from 'sweetalert2';
 import { useSettingsStore } from '@/stores/settings';
 const Settings = useSettingsStore();
 import { useI18n } from 'vue-i18n';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 const { t } = useI18n();
 
-MythicalDOM.setPageTitle(t('tickets.pages.ticket.title'));
+LuminaDOM.setPageTitle(t('tickets.pages.ticket.title'));
 
 // Add these interfaces at the top of the script section
 interface User {

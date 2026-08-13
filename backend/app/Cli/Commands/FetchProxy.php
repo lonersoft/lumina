@@ -30,11 +30,11 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Chat\Database;
+use Lumina\Cli\CommandBuilder;
 
 class FetchProxy extends App implements CommandBuilder
 {
@@ -43,13 +43,13 @@ class FetchProxy extends App implements CommandBuilder
         $startTime = microtime(true);
         $app = App::getInstance();
         if (!file_exists(__DIR__ . '/../../../storage/.env')) {
-            \MythicalDash\App::getInstance(true)->getLogger()->warning('Executed a command without a .env file');
+            \Lumina\App::getInstance(true)->getLogger()->warning('Executed a command without a .env file');
             $app->send('The .env file does not exist. Please create one before running this command');
             exit;
         }
 
         try {
-            \MythicalDash\App::getInstance(true)->loadEnv();
+            \Lumina\App::getInstance(true)->loadEnv();
             if (isset($_ENV['DATABASE_HOST']) && isset($_ENV['DATABASE_DATABASE']) && isset($_ENV['DATABASE_USER']) && isset($_ENV['DATABASE_PASSWORD']) && isset($_ENV['DATABASE_PORT'])) {
                 $db = new Database($_ENV['DATABASE_HOST'], $_ENV['DATABASE_DATABASE'], $_ENV['DATABASE_USER'], $_ENV['DATABASE_PASSWORD'], $_ENV['DATABASE_PORT']);
             } else {
@@ -120,7 +120,7 @@ class FetchProxy extends App implements CommandBuilder
             curl_setopt($ch, CURLOPT_URL, $proxyUrl);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-            curl_setopt($ch, CURLOPT_USERAGENT, 'MythicalDash/1.0');
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Lumina/1.0');
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($ch, CURLOPT_NOPROGRESS, false);
 

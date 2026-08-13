@@ -1,25 +1,25 @@
 {
-	"name": "mythicaldash-frontend",
+	"name": "lumina-frontend",
 	"version": "0.0.1",
 	"private": false,
-	"publisher": "MythicalSystems",
-	"description": "Frontend for MythicalDash - The next generation server management panel.",
+	"publisher": "Loners can Make Software (d.b.a Hack Club)",
+	"description": "Frontend for Lumina - The next generation server management panel (Based on MythicalDash).",
 	"author": {
-		"name": "NaysKutzu",
-		"email": "ghermancassian2008@gmail.com",
-		"url": "https://mythical.systems"
+		"name": "Loners can Make Software (d.b.a Hack Club)",
+		"url": "https://loners.software"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/mythicalltd/mythicaldash"
+		"url": "https://github.com/lonersoft/lumina"
 	},
 	"bugs": {
-		"url": "https://github.com/mythicalltd/mythicaldash/issues"
+		"url": "https://github.com/lonersoft/lumina/issues"
 	},
-	"homepage": "https://www.mythical.systems",
+	"homepage": "https://loners.software",
 	"license": "MIT",
 	"type": "module",
 	"keywords": [
+		"lumina",
 		"mythicaldash",
 		"vue",
 		"vite",
@@ -28,8 +28,8 @@
 		"panel"
 	],
 	"funding": {
-		"type": "github",
-		"url": "https://github.com/sponsors/nayskutzu"
+		"type": "custom",
+		"url": "https://hcb.hackclub.com/donations/start/lonersoft"
 	},
 	"engines": {
 		"node": ">=24.0.0"
@@ -48,7 +48,7 @@
 		"clean": "rm -rf dist node_modules .vite",
 		"check": "pnpm lint && pnpm type-check"
 	},
-	"packageManager": "pnpm@10.22.0",
+	"packageManager": "pnpm@11.21.0+sha512.521705bce689924eac72f5a3587122f362689ef6571e55ba80076fd637c11132ecffada26fad4ea79c485bfddbfd3d5a2a5b05805a77e893de71ec8a6cca3bb1",
 	"dependencies": {
 		"@modyfi/vite-plugin-yaml": "^1.1.1",
 		"@tailwindcss/vite": "^4.1.18",
@@ -69,7 +69,7 @@
 		"sweetalert2": "^11.26.18",
 		"tailwindcss": "^4.1.18",
 		"typescript": "~5.9.3",
-        "vite": "npm:rolldown-vite@latest",
+		"vite": "npm:rolldown-vite@latest",
 		"vite-bundle-analyzer": "^1.3.6",
 		"vite-plugin-oxlint": "^1.6.0",
 		"vite-plugin-vue-devtools": "^8.0.6",

@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Plugins\Events\Events;
+namespace Lumina\Plugins\Events\Events;
 
-use MythicalDash\Plugins\Events\PluginEvent;
+use Lumina\Plugins\Events\PluginEvent;
 
 class AuthEvent implements PluginEvent
 {

@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
 
 class Encrypt extends App implements CommandBuilder
 {
@@ -41,12 +41,12 @@ class Encrypt extends App implements CommandBuilder
     {
         $app = App::getInstance();
         $string = readline('Enter the string to encrypt: ');
-        $app->sendOutputWithNewLine('String: ' . \MythicalDash\App::getInstance(true)->encrypt($string) . '');
+        $app->sendOutputWithNewLine('String: ' . \Lumina\App::getInstance(true)->encrypt($string) . '');
     }
 
     public static function getDescription(): string
     {
-        return 'Encrypt a MythicalDash string';
+        return 'Encrypt a Lumina string';
     }
 
     public static function getSubCommands(): array

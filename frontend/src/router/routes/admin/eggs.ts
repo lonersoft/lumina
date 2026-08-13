@@ -1,5 +1,5 @@
-import Session from '@/mythicaldash/Session';
-import Permissions from '@/mythicaldash/Permissions';
+import Session from '@/lumina/Session';
+import Permissions from '@/lumina/Permissions';
 import type { RouteRecordRaw } from 'vue-router';
 
 const eggRoutes: RouteRecordRaw[] = [

@@ -2,11 +2,11 @@
 import { ref, onMounted } from 'vue';
 import Button from '@/components/client/ui/Button.vue';
 import { useRouter } from 'vue-router';
-import Session from '@/mythicaldash/Session';
-import Auth from '@/mythicaldash/Auth';
+import Session from '@/lumina/Session';
+import Auth from '@/lumina/Auth';
 import Swal from 'sweetalert2';
 import { useI18n } from 'vue-i18n';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import {
     Shield as ShieldIcon,
     Key as KeyIcon,
@@ -40,7 +40,7 @@ const passwordForm = ref({
     confirmPassword: '',
 });
 
-MythicalDOM.setPageTitle(t('account.pages.security.page.title'));
+LuminaDOM.setPageTitle(t('account.pages.security.page.title'));
 
 onMounted(() => {
     // Simulate loading

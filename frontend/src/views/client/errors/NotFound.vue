@@ -2,8 +2,8 @@
 import { ref, onMounted } from 'vue';
 import { FileQuestionIcon, ExternalLinkIcon } from 'lucide-vue-next';
 import ErrorPage from '@/components/client/Errors/ErrorPage.vue';
-import Translation from '@/mythicaldash/Translation';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import Translation from '@/lumina/Translation';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import { LoaderCircle } from 'lucide-vue-next';
@@ -15,7 +15,7 @@ const redirecting = ref(false);
 const countdown = ref(5);
 const targetUrl = ref('');
 
-MythicalDOM.setPageTitle(t('errors.notfound.title'));
+LuminaDOM.setPageTitle(t('errors.notfound.title'));
 
 const startCountdown = (url: string) => {
     targetUrl.value = url;

@@ -298,12 +298,12 @@ import { Loader as LoaderIcon, Copy as CopyIcon, Users as UsersIcon, Mail as Mai
 import { useSettingsStore } from '@/stores/settings';
 import router from '@/router';
 import Swal from 'sweetalert2';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
-MythicalDOM.setPageTitle(t('referrals.pages.index.title'));
+LuminaDOM.setPageTitle(t('referrals.pages.index.title'));
 
 // Custom icons for social platforms
 const TwitterIcon = {

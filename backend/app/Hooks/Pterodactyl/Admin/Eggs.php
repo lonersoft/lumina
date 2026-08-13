@@ -30,12 +30,12 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Hooks\Pterodactyl\Admin;
+namespace Lumina\Hooks\Pterodactyl\Admin;
 
-use MythicalDash\App;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Services\Pterodactyl\Admin\Resources\NestsResource;
-use MythicalDash\Services\Pterodactyl\Exceptions\PterodactylException;
+use Lumina\App;
+use Lumina\Config\ConfigInterface;
+use Lumina\Services\Pterodactyl\Admin\Resources\NestsResource;
+use Lumina\Services\Pterodactyl\Exceptions\PterodactylException;
 
 class Eggs extends NestsResource
 {

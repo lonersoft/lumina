@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
 
 class Help extends App implements CommandBuilder
 {
@@ -41,7 +41,7 @@ class Help extends App implements CommandBuilder
     {
         $cmdInstance = self::getInstance();
         $cmdInstance->send($cmdInstance->bars);
-        $cmdInstance->send('&5&lMythical&d&lDash &7- &d&lHelp');
+        $cmdInstance->send('&5&lLumina &7- &d&lHelp');
         $cmdInstance->send('');
 
         $commands = scandir(__DIR__);
@@ -52,7 +52,7 @@ class Help extends App implements CommandBuilder
             }
 
             $command = str_replace('.php', '', $command);
-            $commandClass = "MythicalDash\\Cli\\Commands\\$command";
+            $commandClass = "Lumina\\Cli\\Commands\\$command";
             $commandFile = __DIR__ . "/$command.php";
 
             require_once $commandFile;
@@ -89,7 +89,7 @@ class Help extends App implements CommandBuilder
                         continue;
                     }
                     $className = pathinfo($commandFile, PATHINFO_FILENAME);
-                    $commandClass = "MythicalDash\\Addons\\$plugin\\Commands\\$className";
+                    $commandClass = "Lumina\\Addons\\$plugin\\Commands\\$className";
                     $commandFilePath = $commandsFolder . "/$commandFile";
                     require_once $commandFilePath;
                     if (!class_exists($commandClass)) {

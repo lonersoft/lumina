@@ -44,7 +44,7 @@
  * 		echo $csrf_tokens->input(<name of the group>);
  */
 
-namespace MythicalDash\Hooks\MythicalSystems\Utils;
+namespace Lumina\Hooks\MythicalSystems\Utils;
 
 class CSRFHandler
 {

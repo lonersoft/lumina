@@ -30,23 +30,23 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\Chat\Eggs\Eggs;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\User\Roles;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Locations\Locations;
-use MythicalDash\Chat\Servers\ServerQueue;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Hooks\Pterodactyl\Admin\Nodes;
-use MythicalDash\Hooks\Pterodactyl\Admin\Servers;
-use MythicalDash\Plugins\Events\Events\UserEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Services\Pterodactyl\Admin\Resources\UsersResource;
+use Lumina\App;
+use Lumina\Chat\Database;
+use Lumina\Chat\Eggs\Eggs;
+use Lumina\Chat\User\User;
+use Lumina\Chat\User\Roles;
+use Lumina\Chat\User\Session;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Locations\Locations;
+use Lumina\Chat\Servers\ServerQueue;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Hooks\Pterodactyl\Admin\Nodes;
+use Lumina\Hooks\Pterodactyl\Admin\Servers;
+use Lumina\Plugins\Events\Events\UserEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Services\Pterodactyl\Admin\Resources\UsersResource;
 
 $router->post('/api/user/session/info/update', function (): void {
     App::init();
@@ -190,7 +190,7 @@ $router->post('/api/user/session/password/change', function (): void {
                         UserColumns::FIRST_NAME,
                         UserColumns::LAST_NAME,
                     ], []);
-                    MythicalDash\Hooks\Pterodactyl\Admin\User::performLogin(
+                    Lumina\Hooks\Pterodactyl\Admin\User::performLogin(
                         $pterodactylUserId,
                         $userInfoArray[UserColumns::EMAIL],
                         $userInfoArray[UserColumns::USERNAME],
@@ -379,7 +379,7 @@ $router->get('/api/user/session/servers', function (): void {
 
         $nestId = $server['nest'] ?? 0;
         if ($nestId != 0) {
-            $nest = MythicalDash\Chat\Eggs\EggCategories::getByPterodactylNestId((int) $nestId);
+            $nest = Lumina\Chat\Eggs\EggCategories::getByPterodactylNestId((int) $nestId);
         } else {
             $nest = [];
         }
@@ -398,7 +398,7 @@ $router->get('/api/user/session/servers', function (): void {
         $server['service'] = $egg[0] ?? [];
 
         // Get category data
-        $server['category'] = MythicalDash\Chat\Eggs\EggCategories::get((int) $server['nest']);
+        $server['category'] = Lumina\Chat\Eggs\EggCategories::get((int) $server['nest']);
 
         // Set limits to match active servers structure
         $server['limits'] = [

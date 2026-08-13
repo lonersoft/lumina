@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Chat\Announcements\Announcements;
+use Lumina\App;
+use Lumina\Chat\User\Session;
+use Lumina\Chat\Announcements\Announcements;
 
 $router->add('/api/user/announcements', function (): void {
     App::init();

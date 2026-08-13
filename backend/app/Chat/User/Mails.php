@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Chat\User;
+namespace Lumina\Chat\User;
 
-use MythicalDash\Chat\Database;
+use Lumina\Chat\Database;
 
 class Mails extends Database
 {
@@ -47,7 +47,7 @@ class Mails extends Database
     {
         try {
             $dbConn = Database::getPdoConnection();
-            $from = \MythicalDash\App::getInstance(true)->getConfig()->getDBSetting(\MythicalDash\Config\ConfigInterface::SMTP_FROM, 'system@mythical.systems');
+            $from = \Lumina\App::getInstance(true)->getConfig()->getDBSetting(\Lumina\Config\ConfigInterface::SMTP_FROM, 'system@mythical.systems');
             $stmt = $dbConn->prepare('INSERT INTO ' . self::getTableName() . ' (subject, body, `from`, `user`) VALUES (:subject, :body, :from, :user)');
             $stmt->bindParam(':subject', $subject);
             $stmt->bindParam(':body', $body);

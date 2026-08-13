@@ -398,10 +398,10 @@ import LoadingAnimation from '@/components/client/ui/LoadingAnimation.vue';
 import Button from '@/components/client/ui/Button.vue';
 import { AlertCircle, Coins, Clock, ExternalLink, CheckCircle2, Ban } from 'lucide-vue-next';
 import { useSettingsStore } from '@/stores/settings';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import { useRouter } from 'vue-router';
-import Session from '@/mythicaldash/Session';
-import Roles from '@/mythicaldash/admin/Roles';
+import Session from '@/lumina/Session';
+import Roles from '@/lumina/admin/Roles';
 
 const { t } = useI18n();
 const route = useRoute();
@@ -548,7 +548,7 @@ const fetchProfile = async (): Promise<void> => {
 
         if (data.success && data.user) {
             userProfile.value = data.user;
-            MythicalDOM.setPageTitle(`${t('profile.title')} - ${userProfile.value.username}`);
+            LuminaDOM.setPageTitle(`${t('profile.title')} - ${userProfile.value.username}`);
         } else {
             throw new Error(data.error || t('profile.error.failed_fetch'));
         }

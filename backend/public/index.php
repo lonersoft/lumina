@@ -30,7 +30,7 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
+use Lumina\App;
 
 /**
  * Define the environment path.

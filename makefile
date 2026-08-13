@@ -206,7 +206,7 @@ upgrade-core:
 	@mariadb-dump -p lumina > lumina_backup.sql && echo -e "${GREEN}${CHECK} Database backup created: lumina_backup.sql${NC}" || echo -e "${RED}${CROSS} Failed to create database backup${NC}"
 	@cd /var/www && zip -r lumina_backup.zip lumina/ && echo -e "${GREEN}${CHECK} File system backup created: /var/www/lumina_backup.zip${NC}" || echo -e "${RED}${CROSS} Failed to create file system backup${NC}"
 	@echo -e "\n${GREEN}${INFO} Step 2: Downloading latest release...${NC}"
-	@curl -Lo Lumina.zip https://github.com/MythicalLTD/Lumina/releases/latest/download/Lumina.zip && echo -e "${GREEN}${CHECK} Latest release downloaded${NC}" || (echo -e "${RED}${CROSS} Failed to download latest release${NC}" && exit 1)
+	@curl -Lo Lumina.zip https://github.com/lonersoft/lumina/releases/latest/download/Lumina.zip && echo -e "${GREEN}${CHECK} Latest release downloaded${NC}" || (echo -e "${RED}${CROSS} Failed to download latest release${NC}" && exit 1)
 	@echo -e "\n${GREEN}${INFO} Step 3: Extracting update files...${NC}"
 	@unzip -o Lumina.zip -d /var/www/lumina && echo -e "${GREEN}${CHECK} Files extracted successfully${NC}" || (echo -e "${RED}${CROSS} Failed to extract files${NC}" && exit 1)
 	@rm -f Lumina.zip && echo -e "${GREEN}${CHECK} Cleanup: Removed zip file${NC}"

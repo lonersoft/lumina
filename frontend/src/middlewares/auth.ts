@@ -14,7 +14,7 @@ function getCookie(name: string): string | null {
 // Check if user is authenticated
 export function isAuthenticated(): boolean {
     // Check for various possible cookie names
-    const possibleCookieNames = ['user_token', 'session_token', 'auth_token', 'token', 'mythicaldash_token'];
+    const possibleCookieNames = ['user_token', 'session_token', 'auth_token', 'token', 'lumina_token', 'mythicaldash_token'];
 
     for (const cookieName of possibleCookieNames) {
         const token = getCookie(cookieName);

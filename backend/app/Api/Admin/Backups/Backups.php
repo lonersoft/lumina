@@ -30,22 +30,22 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Hooks\Backup;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Plugins\Events\Events\BackupEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Hooks\Backup;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Plugins\Events\Events\BackupEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 $router->get('/api/admin/backups/list', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
     global $pluginManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_BACKUPS_LIST, $session);
     $backups = Backup::getBackups();
     $appInstance->OK('Backups fetched successfully', ['backups' => $backups]);
@@ -56,7 +56,7 @@ $router->get('/api/admin/backup/(.*)/restore', function (string $backupId): void
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
     global $pluginManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ROOT, $session);
     UserActivities::add($session->getInfo(UserColumns::UUID, false), UserActivitiesTypes::$admin_backup_restore, CloudFlareRealIP::getRealIP(), 'Restored backup ' . $backupId);
     $backup = Backup::restoreBackup($backupId);
@@ -73,7 +73,7 @@ $router->get('/api/admin/backup/(.*)/delete', function (string $backupId): void 
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
     global $pluginManager, $eventManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_BACKUPS_DELETE, $session);
     UserActivities::add($session->getInfo(UserColumns::UUID, false), UserActivitiesTypes::$admin_backup_delete, CloudFlareRealIP::getRealIP(), 'Deleted backup ' . $backupId);
     $backup = Backup::deleteBackup($backupId);
@@ -90,7 +90,7 @@ $router->get('/api/admin/backup/create', function (): void {
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
     global $pluginManager, $eventManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_BACKUPS_CREATE, $session);
     UserActivities::add($session->getInfo(UserColumns::UUID, false), UserActivitiesTypes::$admin_backup_create, CloudFlareRealIP::getRealIP(), 'Created backup');
     $eventManager->emit(BackupEvent::onCreateBackup(), []);

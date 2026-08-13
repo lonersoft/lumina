@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Chat\User;
+namespace Lumina\Chat\User;
 
-use MythicalDash\Chat\columns\UserColumns;
+use Lumina\Chat\columns\UserColumns;
 
 /**
  * Permission Utilities Class.
@@ -176,7 +176,7 @@ class PermissionUtils
     public static function isValidPermission(string $permission): bool
     {
         // Get all available permissions from the Permissions class
-        $allPermissions = \MythicalDash\Permissions::getAll();
+        $allPermissions = \Lumina\Permissions::getAll();
 
         foreach ($allPermissions as $perm) {
             if ($perm['value'] === $permission) {
@@ -194,7 +194,7 @@ class PermissionUtils
      */
     public static function getAllPermissionsGrouped(): array
     {
-        $allPermissions = \MythicalDash\Permissions::getAll();
+        $allPermissions = \Lumina\Permissions::getAll();
         $grouped = [];
 
         foreach ($allPermissions as $permission) {

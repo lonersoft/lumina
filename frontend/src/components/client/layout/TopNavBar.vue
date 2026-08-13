@@ -16,7 +16,7 @@
                         class="w-8 h-8 flex items-center justify-center bg-[#1a1a2e]/30 rounded-lg transition-all duration-200 group-hover:bg-indigo-500/10 group-hover:scale-105"
                         :class="topNavSettings.borderGlow ? 'shadow-md shadow-indigo-500/20' : ''"
                     >
-                        <img :src="appLogo" alt="MythicalDash" class="h-6 w-6" />
+                        <img :src="appLogo" alt="Lumina" class="h-6 w-6" />
                     </div>
                     <span
                         class="text-xl font-bold bg-linear-to-r from-indigo-400 to-indigo-600 bg-clip-text text-transparent transition-all duration-200 group-hover:from-indigo-300 group-hover:to-indigo-500 drop-shadow-sm"
@@ -166,7 +166,7 @@ import {
 import { useSettingsStore } from '@/stores/settings';
 import { useI18n } from 'vue-i18n';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
-import Session from '@/mythicaldash/Session';
+import Session from '@/lumina/Session';
 import SocialMediaLinks from './SocialMediaLinks.vue';
 import { useSkinSettings } from '@/composables/useSkinSettings';
 

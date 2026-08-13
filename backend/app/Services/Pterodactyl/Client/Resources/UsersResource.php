@@ -30,15 +30,15 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Services\Pterodactyl\Client\Resources;
+namespace Lumina\Services\Pterodactyl\Client\Resources;
 
 use GuzzleHttp\Exception\ClientException;
-use MythicalDash\Services\Pterodactyl\Client\PterodactylClient;
-use MythicalDash\Services\Pterodactyl\Exceptions\RateLimitException;
-use MythicalDash\Services\Pterodactyl\Exceptions\PermissionException;
-use MythicalDash\Services\Pterodactyl\Exceptions\ValidationException;
-use MythicalDash\Services\Pterodactyl\Exceptions\AuthenticationException;
-use MythicalDash\Services\Pterodactyl\Exceptions\ResourceNotFoundException;
+use Lumina\Services\Pterodactyl\Client\PterodactylClient;
+use Lumina\Services\Pterodactyl\Exceptions\RateLimitException;
+use Lumina\Services\Pterodactyl\Exceptions\PermissionException;
+use Lumina\Services\Pterodactyl\Exceptions\ValidationException;
+use Lumina\Services\Pterodactyl\Exceptions\AuthenticationException;
+use Lumina\Services\Pterodactyl\Exceptions\ResourceNotFoundException;
 
 class UsersResource extends PterodactylClient
 {

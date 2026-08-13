@@ -292,7 +292,7 @@
 import LayoutDashboard from '@/components/client/LayoutDashboard.vue';
 import CardComponent from '@/components/client/ui/Card/CardComponent.vue';
 import { ref, onMounted } from 'vue';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import {
     Loader as LoaderIcon,
     CheckCircle as CheckCircleIcon,
@@ -311,7 +311,7 @@ import {
     Coins,
 } from 'lucide-vue-next';
 import { RouterLink } from 'vue-router';
-import Session from '@/mythicaldash/Session';
+import Session from '@/lumina/Session';
 import Swal from 'sweetalert2';
 import { useSettingsStore } from '@/stores/settings';
 import router from '@/router';
@@ -319,7 +319,7 @@ import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const Settings = useSettingsStore();
-MythicalDOM.setPageTitle(t('store.pages.index.title'));
+LuminaDOM.setPageTitle(t('store.pages.index.title'));
 
 // Check if Store is enabled
 if (Settings.getSetting('store_enabled') === 'false') {

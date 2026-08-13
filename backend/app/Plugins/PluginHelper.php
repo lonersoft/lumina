@@ -30,7 +30,7 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Plugins;
+namespace Lumina\Plugins;
 
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -65,7 +65,7 @@ class PluginHelper
      */
     public static function getPluginConfig(string $identifier): array
     {
-        $app = \MythicalDash\App::getInstance(true);
+        $app = \Lumina\App::getInstance(true);
         $logger = $app->getLogger();
         $configPath = self::getPluginsDir() . '/' . $identifier . '/conf.yml';
 

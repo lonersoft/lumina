@@ -30,12 +30,12 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Middleware;
+namespace Lumina\Middleware;
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Services\ProxyCheck\ProxyCheck;
+use Lumina\App;
+use Lumina\Chat\User\Session;
+use Lumina\Config\ConfigInterface;
+use Lumina\Services\ProxyCheck\ProxyCheck;
 
 class Firewall implements MiddlewareBuilder
 {
@@ -52,7 +52,7 @@ class Firewall implements MiddlewareBuilder
                 // Check if user has VPN bypass permission
                 $hasVpnBypassPermission = false;
                 if ($session !== null) {
-                    $hasVpnBypassPermission = $session->hasPermission(\MythicalDash\Permissions::USER_PERMISSION_BYPASS_VPN);
+                    $hasVpnBypassPermission = $session->hasPermission(\Lumina\Permissions::USER_PERMISSION_BYPASS_VPN);
                 }
 
                 if (ProxyCheck::hasProxy($context) && !$hasVpnBypassPermission) {

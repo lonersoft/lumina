@@ -30,18 +30,18 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\Tickets\Tickets;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Middleware\PermissionMiddleware;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\User\User;
+use Lumina\Chat\Tickets\Tickets;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Middleware\PermissionMiddleware;
 
 $router->get('/api/admin/tickets', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_TICKETS_LIST, $session);
 
     $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;

@@ -30,13 +30,13 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Hooks\GitHub;
-use MythicalDash\Chat\Database;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\Middleware\PermissionMiddleware;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Hooks\GitHub;
+use Lumina\Chat\Database;
+use Lumina\Chat\User\Session;
+use Lumina\Chat\User\UserActivities;
+use Lumina\Middleware\PermissionMiddleware;
 
 global $eventManager;
 

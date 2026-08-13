@@ -3,7 +3,7 @@ declare module '@/stores/health' {
 
     interface HealthStore {
         cronData:
-            | import('/var/www/mythicaldash-v3/frontend/src/types/health').CronData
+            | import('@/types/health').CronData
             | {
                   recent: {
                       id: number;

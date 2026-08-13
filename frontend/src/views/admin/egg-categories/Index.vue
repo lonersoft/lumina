@@ -24,7 +24,7 @@ import LayoutDashboard from '@/components/admin/LayoutDashboard.vue';
 import TableTanstack from '@/components/client/ui/Table/TableTanstack.vue';
 import { PlusIcon, EditIcon, TrashIcon, LoaderCircle } from 'lucide-vue-next';
 import { useRouter } from 'vue-router';
-import EggCategories from '@/mythicaldash/admin/EggCategories';
+import EggCategories from '@/lumina/admin/EggCategories';
 
 // Category interface matching the API response
 interface Category {

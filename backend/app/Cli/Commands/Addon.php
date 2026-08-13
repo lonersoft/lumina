@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
 
 class Addon extends App implements CommandBuilder
 {
@@ -93,7 +93,7 @@ class Addon extends App implements CommandBuilder
         self::getInstance()->send('');
         $addons = $pluginManager->getLoadedMemoryPlugins();
         foreach ($addons as $plugin) {
-            $addonConfig = \MythicalDash\Plugins\PluginConfig::getConfig($plugin);
+            $addonConfig = \Lumina\Plugins\PluginConfig::getConfig($plugin);
             $name = $addonConfig['plugin']['name'];
             $version = $addonConfig['plugin']['version'];
             $description = $addonConfig['plugin']['description'];
@@ -224,7 +224,7 @@ class Addon extends App implements CommandBuilder
         if ($pluginFile) {
             require_once $pluginFile;
             $className = basename($pluginFile, '.php');
-            $namespace = 'MythicalDash\\Addons\\' . $identifier;
+            $namespace = 'Lumina\\Addons\\' . $identifier;
             $fullClassName = $namespace . '\\' . $className;
 
             if (class_exists($fullClassName) && method_exists($fullClassName, 'pluginInstall')) {
@@ -314,7 +314,7 @@ class Addon extends App implements CommandBuilder
         if ($pluginFile) {
             require_once $pluginFile;
             $className = basename($pluginFile, '.php');
-            $namespace = 'MythicalDash\\Addons\\' . $identifier;
+            $namespace = 'Lumina\\Addons\\' . $identifier;
             $fullClassName = $namespace . '\\' . $className;
 
             if (class_exists($fullClassName) && method_exists($fullClassName, 'pluginUninstall')) {
@@ -437,18 +437,18 @@ class Addon extends App implements CommandBuilder
         $pluginFile = $pluginDir . '/' . $name . '.php';
         $pluginContent = "<?php
 
-namespace MythicalDash\Addons\\" . $identifier . ";
+namespace Lumina\Addons\\" . $identifier . ";
 
-use MythicalDash\Plugins\Events\Events\AppEvent;
-use MythicalDash\Plugins\Events\Events\AuthEvent;
-use MythicalDash\Plugins\MythicalDashPlugin;
+use Lumina\Plugins\Events\Events\AppEvent;
+use Lumina\Plugins\Events\Events\AuthEvent;
+use Lumina\Plugins\MythicalDashPlugin;
 
 class " . $name . " implements MythicalDashPlugin
 {
 	/**
 	 * @inheritDoc
 	 */
-	public static function processEvents(\MythicalDash\Plugins\PluginEvents \$event): void
+	public static function processEvents(\Lumina\Plugins\PluginEvents \$event): void
 	{
 
 	}

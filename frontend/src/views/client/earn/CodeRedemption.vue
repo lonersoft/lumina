@@ -130,7 +130,7 @@ import LayoutDashboard from '@/components/client/LayoutDashboard.vue';
 import CardComponent from '@/components/client/ui/Card/CardComponent.vue';
 import { ref } from 'vue';
 import { Loader as SpinnerIcon, Coins, Calendar as CalendarIcon } from 'lucide-vue-next';
-import Session from '@/mythicaldash/Session';
+import Session from '@/lumina/Session';
 import { useSettingsStore } from '@/stores/settings';
 import router from '@/router';
 import { useSound } from '@vueuse/sound';
@@ -191,8 +191,8 @@ const DiscordIcon = defineComponent({
     },
 });
 
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
-MythicalDOM.setPageTitle(t('code_redemption.pages.index.title'));
+import { LuminaDOM } from '@/lumina/LuminaDOM';
+LuminaDOM.setPageTitle(t('code_redemption.pages.index.title'));
 
 const Settings = useSettingsStore();
 import { defineComponent, h } from 'vue';

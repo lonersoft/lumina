@@ -30,20 +30,20 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Middleware\Firewall;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Referral\ReferralUses;
-use MythicalDash\Chat\Referral\ReferralCodes;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Plugins\Events\Events\AuthEvent;
-use MythicalDash\Chat\IPRelationships\IPRelationship;
-use MythicalDash\Plugins\Events\Events\ReferralsEvent;
-use MythicalDash\Hooks\MythicalSystems\User\UUIDManager;
-use MythicalDash\Hooks\MythicalSystems\CloudFlare\Turnstile;
-use MythicalDash\Services\Pterodactyl\Admin\Resources\UsersResource;
+use Lumina\App;
+use Lumina\Chat\User\User;
+use Lumina\Middleware\Firewall;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Referral\ReferralUses;
+use Lumina\Chat\Referral\ReferralCodes;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Plugins\Events\Events\AuthEvent;
+use Lumina\Chat\IPRelationships\IPRelationship;
+use Lumina\Plugins\Events\Events\ReferralsEvent;
+use Lumina\Hooks\MythicalSystems\User\UUIDManager;
+use Lumina\Hooks\MythicalSystems\CloudFlare\Turnstile;
+use Lumina\Services\Pterodactyl\Admin\Resources\UsersResource;
 
 $router->add('/api/user/auth/register', function (): void {
     global $eventManager;
@@ -190,14 +190,14 @@ $router->add('/api/user/auth/register', function (): void {
         }
 
         try {
-            $pterodactylUserId = MythicalDash\Hooks\Pterodactyl\Admin\User::performRegister($firstName, $lastName, $username, $email, $password);
+            $pterodactylUserId = Lumina\Hooks\Pterodactyl\Admin\User::performRegister($firstName, $lastName, $username, $email, $password);
             if ($pterodactylUserId == 0 && $pterodactylUserId != null) {
                 $eventManager->emit(AuthEvent::onAuthRegisterFailed(), ['error_code' => 'PTERODACTYL_ERROR']);
                 $appInstance->InternalServerError('Internal Server Error', ['error_code' => 'PTERODACTYL_ERROR']);
             }
             $pteroUsers = new UsersResource($appInstance->getConfig()->getDBSetting(ConfigInterface::PTERODACTYL_BASE_URL, ''), $appInstance->getConfig()->getDBSetting(ConfigInterface::PTERODACTYL_API_KEY, ''));
 
-            MythicalDash\Hooks\Pterodactyl\Admin\User::performUpdateUser($pteroUsers, $pterodactylUserId, $username, $firstName, $lastName, $email, $password);
+            Lumina\Hooks\Pterodactyl\Admin\User::performUpdateUser($pteroUsers, $pterodactylUserId, $username, $firstName, $lastName, $email, $password);
         } catch (Exception $e) {
             $eventManager->emit(AuthEvent::onAuthRegisterFailed(), ['error_code' => 'PTERODACTYL_ERROR']);
             $appInstance->InternalServerError('Internal Server Error', ['error_code' => 'PTERODACTYL_ERROR']);

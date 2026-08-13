@@ -125,7 +125,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import LayoutDashboard from '@/components/admin/LayoutDashboard.vue';
 import { ArrowLeftIcon, TrashIcon, LoaderIcon } from 'lucide-vue-next';
-import ServerQueue from '@/mythicaldash/admin/ServerQueue';
+import ServerQueue from '@/lumina/admin/ServerQueue';
 import Swal from 'sweetalert2';
 import { useSound } from '@vueuse/sound';
 import failedAlertSfx from '@/assets/sounds/error.mp3';

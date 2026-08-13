@@ -611,7 +611,7 @@ account:
                 subTitle: Gérer votre clé API
                 card:
                     title: Clé API
-                    description: Votre Clé API vous donne accès à l'API MythicalDash.
+                    description: Votre Clé API vous donne accès à l'API Lumina.
                     yourKey: Votre Clé API
                     loading: Chargement de votre Clé API...
                     noApiKey: Pas de Clé API disponible
@@ -1014,7 +1014,7 @@ referrals:
                             id: '3'
                             description: 'Vos obtiendrait des récompenses pour chaque référencement'
             share:
-                shareMessage: 'Rejoigner moi sur MythicalDash et obtener des récompenses unique avec mon lien de référencement!'
+                shareMessage: 'Rejoigner moi sur Lumina et obtener des récompenses unique avec mon lien de référencement!'
                 title: 'Partager le lien référentiel'
                 description: 'Partager votre lien référentiel avec vos amis et gagner des récompenses!'
                 mailTitle: 'Partager le lien par Email'

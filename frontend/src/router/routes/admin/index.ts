@@ -18,8 +18,8 @@ import redirectLinks from './redirectLinks.ts';
 import rolesRoutes from './roles.ts';
 import j4rRoutes from './j4r.ts';
 import imageReportsRoutes from './image-reports.ts';
-import Session from '@/mythicaldash/Session';
-import Permissions from '@/mythicaldash/Permissions';
+import Session from '@/lumina/Session';
+import Permissions from '@/lumina/Permissions';
 
 // Main admin dashboard routes
 const mainAdminRoutes: RouteRecordRaw[] = [

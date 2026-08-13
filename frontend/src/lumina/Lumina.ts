@@ -11,15 +11,15 @@ interface InstallStep {
     icon?: string;
 }
 
-export class MythicalDash {
-    private static instance: MythicalDash | null = null;
+export class Lumina {
+    private static instance: Lumina | null = null;
     private container: HTMLDivElement | null = null;
     private terminal: HTMLDivElement | null = null;
     private options: Required<MythicalDashOptions>;
 
     private installSteps: InstallStep[] = [
         {
-            message: 'Initializing MythicalDash environment',
+            message: 'Initializing Lumina environment',
             duration: 800,
             icon: '🚀',
         },
@@ -65,11 +65,11 @@ export class MythicalDash {
         this.options = { ...this.defaultOptions, ...options };
     }
 
-    public static getInstance(options?: MythicalDashOptions): MythicalDash {
-        if (!MythicalDash.instance) {
-            MythicalDash.instance = new MythicalDash(options);
+    public static getInstance(options?: MythicalDashOptions): Lumina {
+        if (!Lumina.instance) {
+            Lumina.instance = new Lumina(options);
         }
-        return MythicalDash.instance;
+        return Lumina.instance;
     }
 
     private createStyles(): string {
@@ -250,14 +250,14 @@ export class MythicalDash {
     public static download(options?: MythicalDashOptions): void {
         const downloadStyle = ['color: #9333ea', 'font-size: 14px', 'font-weight: bold', 'padding: 5px'].join(';');
 
-        console.log('%c📥 Starting MythicalDash download...', downloadStyle);
+        console.log('%c📥 Starting Lumina download...', downloadStyle);
         console.log('%c🔍 Verifying download options...', downloadStyle);
 
-        MythicalDash.getInstance(options).download();
+        Lumina.getInstance(options).download();
 
         console.log('%c✅ Download initiated successfully!', downloadStyle);
 
-        MythicalDash.startClient();
+        Lumina.startClient();
     }
 
     public static startClient(): void {
@@ -282,18 +282,18 @@ export class MythicalDash {
         // ASCII Art Logo
         console.log(
             `%c
-    ███╗   ███╗██╗   ██╗████████╗██╗  ██╗██╗ ██████╗ █████╗ ██╗
-    ████╗ ████║╚██╗ ██╔╝╚══██╔══╝██║  ██║██║██╔════╝██╔══██╗██║
-    ██╔████╔██║ ╚████╔╝    ██║   ███████║██║██║     ███████║██║
-    ██║╚██╔╝██║  ╚██╔╝     ██║   ██╔══██║██║██║     ██╔══██║██║
-    ██║ ╚═╝ ██║   ██║      ██║   ██║  ██║██║╚██████╗██║  ██║███████╗
-    ╚═╝     ╚═╝   ╚═╝      ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
+    ██╗     ██╗   ██╗███╗   ███╗██╗███╗   ██╗██████╗ 
+    ██║     ██║   ██║████╗ ████║██║████╗  ██║██╔══██╗
+    ██║     ██║   ██║██╔████╔██║██║██╔██╗ ██║███████║
+    ██║     ██║   ██║██║╚██╔╝██║██║██║╚██╗██║██╔══██║
+    ███████╗╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║██║  ██║
+    ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
     `,
             styles.title,
         );
 
         // Welcome Message
-        console.log('%cWelcome to MythicalDash! 🚀', styles.subtitle);
+        console.log('%cWelcome to Lumina! 🚀 (Fork of MythicalDash)', styles.subtitle);
 
         // Environment Info
         console.log('%c🌐 Running in production mode', styles.info);
@@ -306,7 +306,7 @@ export class MythicalDash {
         // Fun Message
         const randomMessages = [
             '🎮 Level up your hosting experience!',
-            '🌟 Making hosting magical since 2024',
+            '🌟 Making hosting magical',
             '🚀 To infinity and beyond!',
             '🎯 Your success is our mission',
             '🌈 Where dreams become reality',
@@ -320,9 +320,9 @@ export class MythicalDash {
         console.log('%c📦 Version: ' + Settings.getSetting('version'));
 
         // Credits
-        console.log('%c💜 Made with love by the MythicalDash Team', styles.subtitle);
+        console.log('%c💜 Made with love by Lumina & MythicalDash Team', styles.subtitle);
 
-        MythicalDash.warnNotPaste();
+        Lumina.warnNotPaste();
     }
 
     public static warnNotPaste(): void {
@@ -357,4 +357,6 @@ export class MythicalDash {
     }
 }
 
-export default MythicalDash;
+export const MythicalDash = Lumina;
+export default Lumina;
+

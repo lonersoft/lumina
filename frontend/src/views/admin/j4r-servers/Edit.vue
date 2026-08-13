@@ -52,7 +52,7 @@
                             type="text"
                             required
                             class="bg-gray-800/30 border border-gray-700 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500"
-                            placeholder="e.g., MythicalSystems Community"
+                            placeholder="e.g., Lumina Community"
                         />
                         <p class="mt-1 text-xs text-gray-500">
                             A friendly name for the Discord server users will join.

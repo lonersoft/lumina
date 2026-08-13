@@ -30,13 +30,13 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Services\ShareXApi;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Hooks\MythicalSystems\User\UUIDManager;
+use Lumina\App;
+use Lumina\Chat\User\User;
+use Lumina\Chat\User\Session;
+use Lumina\Services\ShareXApi;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Hooks\MythicalSystems\User\UUIDManager;
 
 $app = App::getInstance(true);
 $logger = $app->getLogger();

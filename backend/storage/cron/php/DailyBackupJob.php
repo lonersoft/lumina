@@ -30,12 +30,12 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cron;
+namespace Lumina\Cron;
 
-use MythicalDash\Hooks\Backup;
-use MythicalDash\Chat\TimedTask;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi;
+use Lumina\Hooks\Backup;
+use Lumina\Chat\TimedTask;
+use Lumina\Config\ConfigInterface;
+use Lumina\Hooks\MythicalSystems\Utils\BungeeChatApi;
 
 class DailyBackupJob implements TimeTask
 {
@@ -44,7 +44,7 @@ class DailyBackupJob implements TimeTask
         $cron = new Cron('daily-backup-job', '1D');
         try {
             $cron->runIfDue(function () {
-                $app = \MythicalDash\App::getInstance(false, true);
+                $app = \Lumina\App::getInstance(false, true);
                 $chat = new BungeeChatApi();
                 $config = $app->getConfig();
 

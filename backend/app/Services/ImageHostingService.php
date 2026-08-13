@@ -30,13 +30,13 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Services;
+namespace Lumina\Services;
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Hooks\MythicalSystems\User\UUIDManager;
+use Lumina\App;
+use Lumina\Chat\User\User;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Hooks\MythicalSystems\User\UUIDManager;
 
 class ImageHostingService
 {
@@ -72,9 +72,9 @@ class ImageHostingService
      *
      * @param string $user_uuid The UUID of the user to clean up settings for
      * @param App $app The application instance
-     * @param \MythicalDash\Logger\LoggerFactory $logger The logger instance
+     * @param \Lumina\Logger\LoggerFactory $logger The logger instance
      */
-    private function cleanupUserImageSettings(string $user_uuid, App $app, \MythicalDash\Logger\LoggerFactory $logger): void
+    private function cleanupUserImageSettings(string $user_uuid, App $app, \Lumina\Logger\LoggerFactory $logger): void
     {
         try {
             $logger->info('Starting database cleanup for image hosting settings for user: ' . $user_uuid);
@@ -157,9 +157,9 @@ class ImageHostingService
      *
      * @param string $user_uuid The UUID of the user to delete images for
      * @param App $app The application instance
-     * @param \MythicalDash\Logger\LoggerFactory $logger The logger instance
+     * @param \Lumina\Logger\LoggerFactory $logger The logger instance
      */
-    private function deleteUserImages(string $user_uuid, App $app, \MythicalDash\Logger\LoggerFactory $logger): void
+    private function deleteUserImages(string $user_uuid, App $app, \Lumina\Logger\LoggerFactory $logger): void
     {
         try {
             // Define the user's image directory
@@ -252,9 +252,9 @@ class ImageHostingService
      *
      * @param string $user_uuid The UUID of the user to delete images for
      * @param App $app The application instance
-     * @param \MythicalDash\Logger\LoggerFactory $logger The logger instance
+     * @param \Lumina\Logger\LoggerFactory $logger The logger instance
      */
-    private function deleteUserImagesRecursive(string $user_uuid, App $app, \MythicalDash\Logger\LoggerFactory $logger): void
+    private function deleteUserImagesRecursive(string $user_uuid, App $app, \Lumina\Logger\LoggerFactory $logger): void
     {
         try {
             $userDir = APP_PUBLIC . '/attachments/imgs/users/' . $user_uuid;

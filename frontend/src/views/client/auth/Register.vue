@@ -12,8 +12,8 @@ import { useRouter } from 'vue-router';
 import successAlertSfx from '@/assets/sounds/success.mp3';
 import failedAlertSfx from '@/assets/sounds/error.mp3';
 import { useSound } from '@vueuse/sound';
-import Auth from '@/mythicaldash/Auth';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import Auth from '@/lumina/Auth';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 
 const { play: playError } = useSound(failedAlertSfx);
 const { play: playSuccess } = useSound(successAlertSfx);
@@ -155,7 +155,7 @@ if (router.currentRoute.value.query.ref) {
     form.referralCode = router.currentRoute.value.query.ref as string;
 }
 
-MythicalDOM.setPageTitle(t('auth.pages.register.page.title'));
+LuminaDOM.setPageTitle(t('auth.pages.register.page.title'));
 const referralsEnabled = Settings.getSetting('referrals_enabled');
 const acceptTerms = ref(false);
 const validationErrors = ref<{ [key: string]: string }>({});

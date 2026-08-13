@@ -30,18 +30,18 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\User;
+use Lumina\App;
+use Lumina\Chat\User\User;
 use PragmaRX\Google2FA\Google2FA;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Middleware\Firewall;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Plugins\Events\Events\AuthEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Hooks\MythicalSystems\CloudFlare\Turnstile;
+use Lumina\Chat\User\Session;
+use Lumina\Middleware\Firewall;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Plugins\Events\Events\AuthEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Hooks\MythicalSystems\CloudFlare\Turnstile;
 
 $router->get('/api/user/auth/2fa/setup', function (): void {
     global $eventManager;

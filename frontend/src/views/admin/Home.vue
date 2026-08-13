@@ -29,7 +29,7 @@
                             cost-effective.
                         </p>
                         <p class="text-sm text-gray-300 leading-relaxed">
-                            <strong class="text-white">100% Compatible</strong> - Works with MythicalDash v3 and all
+                            <strong class="text-white">100% Compatible</strong> - Works with Lumina v3 and all
                             other Pterodactyl Products. No migration needed, no other special steps needed.
                         </p>
                     </div>
@@ -135,25 +135,25 @@
             <!-- Sponsor Us Banner -->
             <DismissibleBanner
                 cookie-key="sponsor_banner_hidden"
-                title="Support MythicalDash"
+                title="Support Lumina & MythicalDash Development"
                 subtitle="Help us continue providing free updates and patches"
                 :icon="Heart"
             >
                 <p class="text-sm text-gray-300 mb-4 leading-relaxed">
-                    MythicalDash has been providing
+                    Lumina has been providing
                     <strong class="text-white">free updates and patches since 2021</strong>. We're committed to keeping
                     the platform free and open-source. Your support helps us maintain, improve, and add new features to
-                    MythicalDash.
+                    Lumina.
                 </p>
 
                 <template #actions>
                     <a
-                        href="https://donate.stripe.com/00gcO2epX5yj2ysfYY"
+                        href="https://hcb.hackclub.com/donations/start/lonersoft"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="group flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-black hover:bg-gray-900 border border-gray-800 hover:border-gray-700 rounded-lg text-sm font-medium text-white transition-all duration-200"
                     >
-                        <span>Donate via Stripe</span>
+                        <span>Donate to Lumina (Lonersoft)</span>
                         <ExternalLink class="w-4 h-4" />
                     </a>
                     <a
@@ -162,7 +162,7 @@
                         rel="noopener noreferrer"
                         class="group flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-gray-600 rounded-lg text-sm font-medium text-gray-200 hover:text-white transition-all duration-200"
                     >
-                        <span>Donate via PayPal</span>
+                        <span>Donate to MythicalDash Creator</span>
                         <ExternalLink class="w-4 h-4" />
                     </a>
                 </template>
@@ -648,11 +648,11 @@ import {
 import LayoutDashboard from '@/components/admin/LayoutDashboard.vue';
 import DismissibleBanner from '@/components/admin/DismissibleBanner.vue';
 import { useSettingsStore } from '@/stores/settings';
-import Dashboard from '@/mythicaldash/admin/Dashboard';
+import Dashboard from '@/lumina/admin/Dashboard';
 import { RouterLink } from 'vue-router';
 import AtAGlanceAnalytics from '@/components/admin/Analytics/AtAGlanceAnalytics.vue';
-import Session from '@/mythicaldash/Session';
-import Permissions from '@/mythicaldash/Permissions';
+import Session from '@/lumina/Session';
+import Permissions from '@/lumina/Permissions';
 import { useHealthStore } from '@/stores/health';
 import type { CronData } from '@/types/health';
 
@@ -930,25 +930,25 @@ const supportResources = [
         title: 'Documentation',
         icon: BookOpen,
         iconColor: 'text-indigo-400',
-        link: 'https://www.mythical.systems/docs',
+        link: 'https://lumina.loners.software',
     },
     {
         title: 'Discord Community',
         icon: MessageCircle,
         iconColor: 'text-violet-400',
-        link: 'https://discord.mythical.systems',
+        link: 'https://discord.loners.software',
     },
     {
         title: 'GitHub Repository',
         icon: Github,
         iconColor: 'text-gray-400',
-        link: 'https://github.com/mythicalltd',
+        link: 'https://github.com/lonersoft/lumina',
     },
     {
         title: 'Support Team',
         icon: Heart,
         iconColor: 'text-pink-400',
-        link: 'https://discord.mythical.systems',
+        link: 'https://discord.loners.software',
     },
 ];
 

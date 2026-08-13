@@ -30,14 +30,14 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Mail\templates;
+namespace Lumina\Mail\templates;
 
-use MythicalDash\App;
-use MythicalDash\Mail\Mail;
-use MythicalDash\Chat\Database;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\Servers\Server;
-use MythicalDash\Config\ConfigInterface;
+use Lumina\App;
+use Lumina\Mail\Mail;
+use Lumina\Chat\Database;
+use Lumina\Chat\User\User;
+use Lumina\Chat\Servers\Server;
+use Lumina\Config\ConfigInterface;
 
 class ServerSuspended extends Mail
 {
@@ -45,7 +45,7 @@ class ServerSuspended extends Mail
     {
         try {
             $template = self::getFinalTemplate($uuid, $ptero_server_id, $suspension_reason);
-            \MythicalDash\Chat\Mails\MailList::addEmail('Server Suspended - Immediate Action Required', $template, $uuid);
+            \Lumina\Chat\Mails\MailList::addEmail('Server Suspended - Immediate Action Required', $template, $uuid);
             // self::send($email, 'Server Suspended', $template);
         } catch (\Exception $e) {
             App::getInstance(true)->getLogger()->error('(' . APP_SOURCECODE_DIR . '/Mail/templates/ServerSuspended.php) [sendMail] Failed to send email: ' . $e->getMessage());

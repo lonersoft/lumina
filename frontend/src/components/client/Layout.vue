@@ -42,10 +42,17 @@ const bg = computed(() => Settings.getSetting('default_bg'));
 
             <!-- Footer -->
             <div class="absolute bottom-4 text-center text-sm text-gray-500">
-                <a href="https://mythical.systems" class="hover:text-indigo-400 transition-colors duration-200"
-                    >MythicalSystems</a
-                >
-                <p>LTD 2020 - {{ new Date().getFullYear() }}</p>
+                <p>
+                    © {{ new Date().getFullYear() }} {{ Settings.getSetting('app_name') || 'Lumina' }} — Powered by
+                    <a
+                        href="https://github.com/lonersoft/lumina"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:text-indigo-400 transition-colors duration-200 underline"
+                    >
+                        Lumina
+                    </a>
+                </p>
             </div>
         </div>
     </div>

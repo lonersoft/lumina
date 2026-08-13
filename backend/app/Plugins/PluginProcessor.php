@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Plugins;
+namespace Lumina\Plugins;
 
-use MythicalDash\App;
-use MythicalDash\Plugins\Mixins\MixinManager;
+use Lumina\App;
+use Lumina\Plugins\Mixins\MixinManager;
 
 class PluginProcessor
 {
@@ -69,7 +69,7 @@ class PluginProcessor
 
             $entryClass = $config['plugin']['name'];
 
-            $eventClass = "MythicalDash\\Addons\\{$identifier}\\{$entryClass}";
+            $eventClass = "Lumina\\Addons\\{$identifier}\\{$entryClass}";
             if (!class_exists($eventClass)) {
                 $logger->warning("Event class not found: {$eventClass}");
 

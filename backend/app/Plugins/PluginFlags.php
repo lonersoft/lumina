@@ -30,7 +30,7 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Plugins;
+namespace Lumina\Plugins;
 
 class PluginFlags
 {
@@ -57,7 +57,7 @@ class PluginFlags
      */
     public static function validFlags(array $flags): bool
     {
-        $app = \MythicalDash\App::getInstance(true);
+        $app = \Lumina\App::getInstance(true);
         try {
             $app->getLogger()->debug('Processing plugin flags');
             $flagList = PluginFlags::getFlags();

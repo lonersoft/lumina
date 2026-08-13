@@ -206,15 +206,13 @@ const optimizedAvatar = computed(() => {
                 class="p-4 bg-linear-to-r from-[#1a1a2e]/30 to-[#2a2a3f]/20 text-center text-xs text-gray-500 border-t border-[#2a2a3f]/30"
             >
                 <p class="flex items-center justify-center gap-2">
-                    <span>Made with</span>
-                    <span class="text-red-400 animate-pulse">❤️</span>
-                    <span>by</span>
+                    <span>Powered by</span>
                     <a
-                        href="https://mythical.systems"
+                        href="https://github.com/lonersoft/lumina"
                         target="_blank"
+                        rel="noopener noreferrer"
                         class="text-indigo-400 hover:text-indigo-300 transition-colors duration-200 font-medium hover:underline"
-                        >MythicalSystems</a
-                    >
+                    >Lumina</a>
                 </p>
             </div>
         </div>

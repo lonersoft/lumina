@@ -30,14 +30,14 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Services\PayPal;
+namespace Lumina\Services\PayPal;
 
-use MythicalDash\App;
+use Lumina\App;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\Gateways\PayPalDB;
-use MythicalDash\Config\ConfigInterface;
+use Lumina\Chat\User\User;
+use Lumina\Chat\Gateways\PayPalDB;
+use Lumina\Config\ConfigInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
 class PayPalIPN

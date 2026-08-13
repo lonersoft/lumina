@@ -30,24 +30,24 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\Eggs\EggCategories;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Chat\Eggs\Eggs as EggManager;
-use MythicalDash\Hooks\Pterodactyl\Admin\Eggs;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Plugins\Events\Events\EggsEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\Eggs\EggCategories;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Chat\Eggs\Eggs as EggManager;
+use Lumina\Hooks\Pterodactyl\Admin\Eggs;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Plugins\Events\Events\EggsEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 // Get all eggs for a specific nest
 $router->get('/api/admin/eggs/pterodactyl/(.*)/eggs', function ($nestId): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_NESTS_LIST, $session);
     $eggs = Eggs::getEggs((int) $nestId);
@@ -66,7 +66,7 @@ $router->get('/api/admin/eggs/pterodactyl', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_EGG_LIST, $session);
     $eggs = Eggs::getAllEggs();
@@ -84,7 +84,7 @@ $router->get('/api/admin/eggs/pterodactyl/(.*)', function ($eggId): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_EGG_LIST, $session);
     $egg = Eggs::getEggById((int) $eggId);
@@ -102,7 +102,7 @@ $router->get('/api/admin/eggs', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_EGG_LIST, $session);
     $eggs = EggManager::getAll();
@@ -116,7 +116,7 @@ $router->get('/api/admin/eggs', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_EGG_LIST, $session);
     $eggs = EggManager::getAll();
@@ -130,7 +130,7 @@ $router->get('/api/admin/eggs/(.*)/info', function ($id): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_EGG_LIST, $session);
     $egg = EggManager::getById((int) $id);
@@ -148,7 +148,7 @@ $router->post('/api/admin/eggs/create', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_EGG_CREATE, $session);
     if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['category']) && isset($_POST['pterodactyl_egg_id'])) {
         $name = $_POST['name'];
@@ -230,7 +230,7 @@ $router->post('/api/admin/eggs/(.*)/update', function ($id): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_EGG_EDIT, $session);
     if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['category']) && isset($_POST['enabled']) && isset($_POST['pterodactyl_egg_id'])) {
@@ -319,7 +319,7 @@ $router->post('/api/admin/eggs/(.*)/delete', function ($id): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_EGG_DELETE, $session);
     if (!EggManager::exists($id)) {
@@ -355,7 +355,7 @@ $router->get('/api/admin/eggs/category/(.*)', function ($categoryId): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_EGG_LIST, $session);
     $categoryId = (int) $categoryId;

@@ -30,18 +30,18 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Chat\User;
+namespace Lumina\Chat\User;
 
-use MythicalDash\App;
+use Lumina\App;
 use Gravatar\Gravatar;
-use MythicalDash\Mail\Mail;
-use MythicalDash\Chat\Database;
-use MythicalDash\Mail\templates\Verify;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Mail\templates\NewLogin;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Mail\templates\ResetPassword;
-use MythicalDash\Chat\columns\EmailVerificationColumns;
+use Lumina\Mail\Mail;
+use Lumina\Chat\Database;
+use Lumina\Mail\templates\Verify;
+use Lumina\Config\ConfigInterface;
+use Lumina\Mail\templates\NewLogin;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Mail\templates\ResetPassword;
+use Lumina\Chat\columns\EmailVerificationColumns;
 
 class User extends Database
 {
@@ -74,7 +74,7 @@ class User extends Database
             /**
              * The UUID generation and logic.
              */
-            $uuidMngr = new \MythicalDash\Hooks\MythicalSystems\User\UUIDManager();
+            $uuidMngr = new \Lumina\Hooks\MythicalSystems\User\UUIDManager();
             $uuid = $uuidMngr->generateUUID();
             $token = App::getInstance(true)->encrypt(date('Y-m-d H:i:s') . $uuid . random_bytes(16) . base64_encode($email));
 

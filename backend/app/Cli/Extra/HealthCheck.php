@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Extra;
+namespace Lumina\Cli\Extra;
 
-use MythicalDash\Cli\App;
+use Lumina\Cli\App;
 
 class HealthCheck
 {

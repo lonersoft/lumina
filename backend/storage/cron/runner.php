@@ -30,7 +30,7 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\Plugins\PluginManager;
+use Lumina\Plugins\PluginManager;
 
 define('APP_STARTUP', microtime(true));
 define('APP_START', microtime(true));
@@ -52,8 +52,8 @@ define('APP_UPSTREAM', 'github.com/mythicalltd/mythicaldash');
 
 require __DIR__ . '/../packages/autoload.php';
 
-use MythicalDash\Cli\App;
-use MythicalDash\App as NormalApp;
+use Lumina\Cli\App;
+use Lumina\App as NormalApp;
 
 $pluginManager = new PluginManager();
 $app = new NormalApp(false, true);
@@ -65,7 +65,7 @@ foreach (glob(__DIR__ . '/php/*.php') as $file) {
     App::sendOutputWithNewLine('');
     App::sendOutputWithNewLine('|----');
     require_once $file;
-    $className = 'MythicalDash\Cron\\' . basename($file, '.php');
+    $className = 'Lumina\Cron\\' . basename($file, '.php');
     try {
         if (class_exists($className)) {
             $worker = new $className();
@@ -94,7 +94,7 @@ if (is_dir($addonsDir)) {
             App::sendOutputWithNewLine('');
             App::sendOutputWithNewLine('|----');
             require_once $file;
-            $className = 'MythicalDash\Addons\\' . $plugin . '\Cron\\' . basename($file, '.php');
+            $className = 'Lumina\Addons\\' . $plugin . '\Cron\\' . basename($file, '.php');
             try {
                 if (class_exists($className)) {
                     $worker = new $className();

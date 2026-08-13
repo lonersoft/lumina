@@ -30,14 +30,14 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Mail\templates;
+namespace Lumina\Mail\templates;
 
-use MythicalDash\App;
-use MythicalDash\Mail\Mail;
-use MythicalDash\Chat\Database;
-use MythicalDash\Chat\User\User;
+use Lumina\App;
+use Lumina\Mail\Mail;
+use Lumina\Chat\Database;
+use Lumina\Chat\User\User;
 
-use MythicalDash\Config\ConfigInterface;
+use Lumina\Config\ConfigInterface;
 
 class NewLogin extends Mail
 {
@@ -48,7 +48,7 @@ class NewLogin extends Mail
 
             // Use the new MailList system to add email
             $appName = App::getInstance(true)->getConfig()->getDBSetting(ConfigInterface::APP_NAME, 'MythicalSystems');
-            \MythicalDash\Chat\Mails\MailList::addEmail('New Login Detected - ' . $appName . ' Security Alert', $template, $uuid);
+            \Lumina\Chat\Mails\MailList::addEmail('New Login Detected - ' . $appName . ' Security Alert', $template, $uuid);
 
             // self::send($email, 'New Login Detected', $template);
         } catch (\Exception $e) {

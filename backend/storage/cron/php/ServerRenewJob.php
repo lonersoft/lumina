@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cron;
+namespace Lumina\Cron;
 
-use MythicalDash\Chat\TimedTask;
-use MythicalDash\Config\ConfigInterface;
+use Lumina\Chat\TimedTask;
+use Lumina\Config\ConfigInterface;
 
 class ServerRenewJob implements TimeTask
 {
@@ -56,10 +56,10 @@ class ServerRenewJob implements TimeTask
 
     private static function processServerRenewals(): void
     {
-        $app = \MythicalDash\App::getInstance(false, true);
+        $app = \Lumina\App::getInstance(false, true);
         $logger = $app->getLogger();
         $config = $app->getConfig();
-        $chat = new \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi();
+        $chat = new \Lumina\Hooks\MythicalSystems\Utils\BungeeChatApi();
 
         try {
             $chat->sendOutputWithNewLine('&aServer renewal job started');
@@ -71,7 +71,7 @@ class ServerRenewJob implements TimeTask
                 return;
             }
 
-            $servers = \MythicalDash\Chat\Servers\Server::getList();
+            $servers = \Lumina\Chat\Servers\Server::getList();
             if (empty($servers)) {
                 $chat->sendOutputWithNewLine('&eNo servers found to process');
 
@@ -109,7 +109,7 @@ class ServerRenewJob implements TimeTask
                 return;
             }
 
-            if (!\MythicalDash\Hooks\Pterodactyl\Admin\Servers::serverExists($pterodactyl_ID)) {
+            if (!\Lumina\Hooks\Pterodactyl\Admin\Servers::serverExists($pterodactyl_ID)) {
                 self::handleNonExistentServer($pterodactyl_ID, $chat);
                 TimedTask::markRun('renew-worker', false, 'Server renewal job failed for server ' . $pterodactyl_ID . ' because server does not exist');
 
@@ -133,7 +133,7 @@ class ServerRenewJob implements TimeTask
     private static function handleNonExistentServer(int $pterodactyl_ID, $chat): void
     {
         try {
-            \MythicalDash\Chat\Servers\Server::deleteServerByPterodactylId($pterodactyl_ID);
+            \Lumina\Chat\Servers\Server::deleteServerByPterodactylId($pterodactyl_ID);
             $chat->sendOutputWithNewLine("&cServer $pterodactyl_ID does not exist and has been deleted");
         } catch (\Exception $e) {
             self::logError("Failed to delete non-existent server $pterodactyl_ID: " . $e->getMessage());
@@ -176,7 +176,7 @@ class ServerRenewJob implements TimeTask
     {
         try {
             $chat->sendOutputWithNewLine("&eServer will expire in $days_until_expiry days");
-            \MythicalDash\Mail\templates\ServerRenewReminder::sendMail($user, $pterodactyl_ID);
+            \Lumina\Mail\templates\ServerRenewReminder::sendMail($user, $pterodactyl_ID);
         } catch (\Exception $e) {
             self::logError("Failed to send renewal reminder for server $pterodactyl_ID: " . $e->getMessage());
             TimedTask::markRun('renew-worker', false, 'Server renewal job failed for server ' . $pterodactyl_ID . ' because failed to send renewal reminder: ' . $e->getMessage());
@@ -187,7 +187,7 @@ class ServerRenewJob implements TimeTask
     {
         try {
             $suspension_reason = 'You didn\'t renew your server in time.';
-            \MythicalDash\Mail\templates\ServerSuspended::sendMail($user, $pterodactyl_ID, $suspension_reason);
+            \Lumina\Mail\templates\ServerSuspended::sendMail($user, $pterodactyl_ID, $suspension_reason);
 
             $serverInfo = self::getServerInfoWithRetry($pterodactyl_ID);
             if (!$serverInfo) {
@@ -212,7 +212,7 @@ class ServerRenewJob implements TimeTask
         $retries = 0;
         while ($retries < self::MAX_RETRIES) {
             try {
-                return \MythicalDash\Hooks\Pterodactyl\Admin\Servers::getServerPterodactylDetails($pterodactyl_ID);
+                return \Lumina\Hooks\Pterodactyl\Admin\Servers::getServerPterodactylDetails($pterodactyl_ID);
             } catch (\Exception $e) {
                 ++$retries;
                 if ($retries < self::MAX_RETRIES) {
@@ -229,7 +229,7 @@ class ServerRenewJob implements TimeTask
     {
         try {
             $chat->sendOutputWithNewLine('&cServer is in final day before expiry, suspending...');
-            \MythicalDash\Hooks\Pterodactyl\Admin\Servers::performSuspendServer($pterodactyl_ID);
+            \Lumina\Hooks\Pterodactyl\Admin\Servers::performSuspendServer($pterodactyl_ID);
             $chat->sendOutputWithNewLine('&aServer suspended successfully');
         } catch (\Exception $e) {
             TimedTask::markRun('renew-worker', false, 'Server renewal job failed for server ' . $pterodactyl_ID . ' because failed to suspend server: ' . $e->getMessage());
@@ -241,8 +241,8 @@ class ServerRenewJob implements TimeTask
     {
         try {
             $chat->sendOutputWithNewLine('&cServer is already suspended');
-            \MythicalDash\Mail\templates\ServerDeleted::sendMail($user);
-            \MythicalDash\Hooks\Pterodactyl\Admin\Servers::deletePterodactylServer($pterodactyl_ID);
+            \Lumina\Mail\templates\ServerDeleted::sendMail($user);
+            \Lumina\Hooks\Pterodactyl\Admin\Servers::deletePterodactylServer($pterodactyl_ID);
             $chat->sendOutputWithNewLine('&aServer deleted successfully');
         } catch (\Exception $e) {
             $logger->error("Failed to delete expired server $pterodactyl_ID: " . $e->getMessage());
@@ -254,7 +254,7 @@ class ServerRenewJob implements TimeTask
     private static function logError(string $message): void
     {
         try {
-            $app = \MythicalDash\App::getInstance(false, true);
+            $app = \Lumina\App::getInstance(false, true);
             $logger = $app->getLogger();
             $logger->error($message);
         } catch (\Exception $e) {

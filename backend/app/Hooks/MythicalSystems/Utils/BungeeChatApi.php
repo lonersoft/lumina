@@ -30,7 +30,7 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Hooks\MythicalSystems\Utils;
+namespace Lumina\Hooks\MythicalSystems\Utils;
 
 class BungeeChatApi
 {

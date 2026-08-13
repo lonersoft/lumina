@@ -30,7 +30,7 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Chat;
+namespace Lumina\Chat;
 
 use PDO;
 
@@ -92,7 +92,7 @@ class Database
         /**
          * Load the environment variables.
          */
-        \MythicalDash\App::getInstance(true)->loadEnv();
+        \Lumina\App::getInstance(true)->loadEnv();
         $con = new self($_ENV['DATABASE_HOST'], $_ENV['DATABASE_DATABASE'], $_ENV['DATABASE_USER'], $_ENV['DATABASE_PASSWORD'], $_ENV['DATABASE_PORT']);
 
         return $con->getPdo();
@@ -336,7 +336,7 @@ class Database
 
     public static function db_Error(string $message): void
     {
-        $app = \MythicalDash\App::getInstance(true);
+        $app = \Lumina\App::getInstance(true);
         $app->getLogger()->error($message, true);
     }
 

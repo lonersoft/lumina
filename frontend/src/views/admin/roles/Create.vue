@@ -246,7 +246,7 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import LayoutDashboard from '@/components/admin/LayoutDashboard.vue';
 import { PlusIcon, ArrowLeftIcon, LoaderCircle, XIcon, SearchIcon, ShieldIcon, CheckIcon } from 'lucide-vue-next';
-import Permissions from '@/mythicaldash/Permissions';
+import Permissions from '@/lumina/Permissions';
 
 interface PermissionNode {
     constant: string;

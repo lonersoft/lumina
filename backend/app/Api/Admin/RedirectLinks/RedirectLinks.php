@@ -30,20 +30,20 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Chat\RedirectLinks\RedirectLink;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Chat\RedirectLinks\RedirectLink;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 $router->get('/api/admin/redirect-links', function () {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_REDIRECT_LINKS_LIST, $session);
     $redirectLinks = RedirectLink::getAll();
@@ -54,7 +54,7 @@ $router->post('/api/admin/redirect-links/create', function () {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_REDIRECT_LINKS_CREATE, $session);
     if (!isset($_POST['name']) || empty($_POST['name'])) {
@@ -110,7 +110,7 @@ $router->post('/api/admin/redirect-links/(.*)/update', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_REDIRECT_LINKS_EDIT, $session);
     if (!RedirectLink::exists($id)) {
@@ -164,7 +164,7 @@ $router->post('/api/admin/redirect-links/(.*)/delete', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_REDIRECT_LINKS_DELETE, $session);
     if (!RedirectLink::exists($id)) {
@@ -193,7 +193,7 @@ $router->get('/api/admin/redirect-links/(.*)', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_REDIRECT_LINKS_LIST, $session);
     if (!RedirectLink::exists($id)) {

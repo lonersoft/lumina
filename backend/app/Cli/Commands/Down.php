@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
 
 class Down extends App implements CommandBuilder
 {
@@ -43,10 +43,10 @@ class Down extends App implements CommandBuilder
 
         if (file_exists(__DIR__ . '/../../../storage/caches/maintenance.php')) {
             $app->send('&cThe server is already in maintenance mode!');
-            \MythicalDash\App::getInstance(true)->getLogger()->error('The server is already in maintenance mode!');
+            \Lumina\App::getInstance(true)->getLogger()->error('The server is already in maintenance mode!');
             exit;
         }
-        \MythicalDash\App::getInstance(true)->getLogger()->info('The server is now in maintenance mode!');
+        \Lumina\App::getInstance(true)->getLogger()->info('The server is now in maintenance mode!');
         $fileTemplate = "<?php header('Content-Type: application/json');echo json_encode(['code'=>503,'message'=>'The application is under maintenance.','error'=>'Service Unavailable','success'=>false,],JSON_PRETTY_PRINT);die();";
         file_put_contents(__DIR__ . '/../../../storage/caches/maintenance.php', $fileTemplate);
         $app->send('&aThe server is now in maintenance mode.');

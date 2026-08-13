@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
-import Session from '@/mythicaldash/Session';
-import Permissions from '@/mythicaldash/Permissions';
+import Session from '@/lumina/Session';
+import Permissions from '@/lumina/Permissions';
 const locationRoutes: RouteRecordRaw[] = [
     {
         path: '/mc-admin/tickets',

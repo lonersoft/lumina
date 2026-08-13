@@ -30,15 +30,15 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cron;
+namespace Lumina\Cron;
 
-use MythicalDash\Chat\TimedTask;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\Mails\MailList;
-use MythicalDash\Chat\Mails\MailQueue;
-use MythicalDash\Config\ConfigFactory;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi;
+use Lumina\Chat\TimedTask;
+use Lumina\Chat\User\User;
+use Lumina\Chat\Mails\MailList;
+use Lumina\Chat\Mails\MailQueue;
+use Lumina\Config\ConfigFactory;
+use Lumina\Config\ConfigInterface;
+use Lumina\Hooks\MythicalSystems\Utils\BungeeChatApi;
 
 class MailSender implements TimeTask
 {
@@ -62,7 +62,7 @@ class MailSender implements TimeTask
                 $this->sendMails();
             });
         } catch (\Exception $e) {
-            $app = \MythicalDash\App::getInstance(false, true);
+            $app = \Lumina\App::getInstance(false, true);
             $app->getLogger()->error('Failed to send mail: ' . $e->getMessage());
             TimedTask::markRun('mail-sender', false, $e->getMessage());
         }
@@ -79,7 +79,7 @@ class MailSender implements TimeTask
             $this->hourlyLimitStartTime = time();
         }
 
-        $app = \MythicalDash\App::getInstance(false, true);
+        $app = \Lumina\App::getInstance(false, true);
         $config = new ConfigFactory($app->getDatabase()->getPdo());
         $mailEnabled = $config->getDBSetting(ConfigInterface::SMTP_ENABLED, 'false');
 
@@ -295,7 +295,7 @@ class MailSender implements TimeTask
     private function getMailListByQueueId(int $queueId): ?array
     {
         try {
-            $pdo = \MythicalDash\Chat\Database::getPdoConnection();
+            $pdo = \Lumina\Chat\Database::getPdoConnection();
             $stmt = $pdo->prepare('SELECT * FROM mythicaldash_mail_list WHERE queue_id = :queue_id LIMIT 1');
             $stmt->execute(['queue_id' => $queueId]);
 
@@ -311,7 +311,7 @@ class MailSender implements TimeTask
      */
     private function sendMail(array $mail, array $mailInfo, array $userInfo)
     {
-        $app = \MythicalDash\App::getInstance(false, true);
+        $app = \Lumina\App::getInstance(false, true);
         $config = new ConfigFactory($app->getDatabase()->getPdo());
 
         $maxRetries = 1; // Only one retry to avoid hitting limits (each request may add up to +1 to the limit)

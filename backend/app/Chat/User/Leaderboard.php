@@ -30,18 +30,18 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Chat\User;
+namespace Lumina\Chat\User;
 
-use MythicalDash\Chat\Database;
-use MythicalDash\Chat\Earn\ShareUS;
-use MythicalDash\Chat\Earn\LinkPays;
-use MythicalDash\Chat\Servers\Server;
-use MythicalDash\Chat\Earn\GyaniLinks;
-use MythicalDash\Chat\Earn\Linkvertise;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Referral\ReferralUses;
-use MythicalDash\Chat\Referral\ReferralCodes;
-use MythicalDash\Chat\interface\LeaderboardTypes;
+use Lumina\Chat\Database;
+use Lumina\Chat\Earn\ShareUS;
+use Lumina\Chat\Earn\LinkPays;
+use Lumina\Chat\Servers\Server;
+use Lumina\Chat\Earn\GyaniLinks;
+use Lumina\Chat\Earn\Linkvertise;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Referral\ReferralUses;
+use Lumina\Chat\Referral\ReferralCodes;
+use Lumina\Chat\interface\LeaderboardTypes;
 
 class Leaderboard extends Database
 {

@@ -30,21 +30,21 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Plugins\Events\Events\SettingsEvent;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Plugins\Events\Events\SettingsEvent;
 
 $router->post('/api/admin/settings/update', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
     $config = $appInstance->getConfig();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SETTINGS_EDIT, $session);
     if (isset($_POST['key']) && isset($_POST['value'])) {
         $key = $_POST['key'];
@@ -81,7 +81,7 @@ $router->post('/api/admin/settings/update/bulk', function (): void {
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
     $config = $appInstance->getConfig();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SETTINGS_EDIT, $session);
 
     // Get JSON input
@@ -181,7 +181,7 @@ $router->get('/api/admin/settings/get', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SETTINGS_VIEW, $session);
     $config = $appInstance->getConfig();
     $appInstance->OK('Settings retrieved successfully.', [

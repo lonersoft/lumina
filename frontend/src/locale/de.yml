@@ -612,7 +612,7 @@ account:
                 subTitle: Verwalten Sie Ihren API-Schlüssel
                 card:
                     title: API-Schlüssel
-                    description: Ihr API-Schlüssel bietet Zugriff auf die MythicalDash-API
+                    description: Ihr API-Schlüssel bietet Zugriff auf die Lumina-API
                     yourKey: Ihr API-Schlüssel
                     loading: API-Schlüssel wird geladen...
                     noApiKey: Kein API-Schlüssel verfügbar
@@ -1015,7 +1015,7 @@ referrals:
                             id: '3'
                             description: 'Sie erhalten Belohnungen, wenn Ihre Empfehlungen Belohnungen erhalten'
             share:
-                shareMessage: 'Schließen Sie sich mir auf MythicalDash an und erhalten Sie exklusive Belohnungen mit meinem Empfehlungslink!'
+                shareMessage: 'Schließen Sie sich mir auf Lumina an und erhalten Sie exklusive Belohnungen mit meinem Empfehlungslink!'
                 title: 'Empfehlungslink teilen'
                 description: 'Teilen Sie Ihren Empfehlungslink mit Freunden und verdienen Sie Belohnungen!'
                 mailTitle: 'Empfehlungslink per E-Mail teilen'

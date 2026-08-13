@@ -30,8 +30,8 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\RedirectLinks\RedirectLink;
+use Lumina\App;
+use Lumina\Chat\RedirectLinks\RedirectLink;
 
 $router->get('/api/system/redirect-links', function () {
     App::init();

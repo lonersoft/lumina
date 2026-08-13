@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Services;
+namespace Lumina\Services;
 
-use MythicalDash\App;
+use Lumina\App;
 
 class ShareXApi
 {

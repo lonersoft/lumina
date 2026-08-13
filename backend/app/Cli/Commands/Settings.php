@@ -30,12 +30,12 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\Cli\CommandBuilder;
-use MythicalDash\Config\ConfigFactory;
+use Lumina\Cli\App;
+use Lumina\Chat\Database;
+use Lumina\Cli\CommandBuilder;
+use Lumina\Config\ConfigFactory;
 
 class Settings extends App implements CommandBuilder
 {
@@ -55,7 +55,7 @@ class Settings extends App implements CommandBuilder
             exit;
         }
 
-        \MythicalDash\App::getInstance(true)->loadEnv();
+        \Lumina\App::getInstance(true)->loadEnv();
 
         try {
             $db = new Database($_ENV['DATABASE_HOST'], $_ENV['DATABASE_DATABASE'], $_ENV['DATABASE_USER'], $_ENV['DATABASE_PASSWORD'], $_ENV['DATABASE_PORT']);
@@ -114,7 +114,7 @@ class Settings extends App implements CommandBuilder
     private static function showHeader(): void
     {
         self::$cliApp->send('&6╔══════════════════════════════════════════════════════════════╗');
-        self::$cliApp->send('&6║                    &eMythicalDash Settings                    &6║');
+        self::$cliApp->send('&6║                    &eLumina Settings                    &6║');
         self::$cliApp->send('&6╠══════════════════════════════════════════════════════════════╣');
         self::$cliApp->send('&6║  &7Total Settings: &e' . count(self::$settings) . ' &7| Page: &e' . (self::$currentPage + 1) . '/' . ceil(count(self::$settings) / self::$pageSize) . ' &6║');
         self::$cliApp->send('&6╚══════════════════════════════════════════════════════════════╝');

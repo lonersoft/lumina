@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\FastChat;
+namespace Lumina\FastChat;
 
 use Predis\Client;
-use MythicalDash\App;
+use Lumina\App;
 
 class Redis
 {

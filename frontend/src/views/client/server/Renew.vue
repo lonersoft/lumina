@@ -162,13 +162,13 @@ import CardComponent from '@/components/client/ui/Card/CardComponent.vue';
 import { TextInput } from '@/components/client/ui/TextForms';
 import Button from '@/components/client/ui/Button.vue';
 import Swal from 'sweetalert2';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import { useSound } from '@vueuse/sound';
 import failedAlertSfx from '@/assets/sounds/error.mp3';
 import successAlertSfx from '@/assets/sounds/success.mp3';
 import { useI18n } from 'vue-i18n';
 import { useSettingsStore } from '@/stores/settings';
-import Session from '@/mythicaldash/Session';
+import Session from '@/lumina/Session';
 
 const Settings = useSettingsStore();
 const { t } = useI18n();
@@ -191,7 +191,7 @@ if (server_renew_enabled == 'false') {
     router.push('/dashboard');
 }
 
-MythicalDOM.setPageTitle(t('renew.pages.index.title'));
+LuminaDOM.setPageTitle(t('renew.pages.index.title'));
 
 interface ServerDetails {
     id: number;

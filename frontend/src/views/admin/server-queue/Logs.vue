@@ -48,7 +48,7 @@
 import { ref, onMounted } from 'vue';
 import LayoutDashboard from '@/components/admin/LayoutDashboard.vue';
 import { LoaderCircle } from 'lucide-vue-next';
-import ServerQueue from '@/mythicaldash/admin/ServerQueue';
+import ServerQueue from '@/lumina/admin/ServerQueue';
 
 interface Log {
     id: number;

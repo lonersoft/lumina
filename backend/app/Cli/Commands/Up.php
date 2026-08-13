@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
 
 class Up extends App implements CommandBuilder
 {
@@ -43,10 +43,10 @@ class Up extends App implements CommandBuilder
         if (file_exists(__DIR__ . '/../../../storage/caches/maintenance.php')) {
             unlink(__DIR__ . '/../../../storage/caches/maintenance.php');
             $app->send('&aThe server is no longer in maintenance mode!');
-            \MythicalDash\App::getInstance(true)->getLogger()->info('The server is no longer in maintenance mode!');
+            \Lumina\App::getInstance(true)->getLogger()->info('The server is no longer in maintenance mode!');
             exit;
         }
-        \MythicalDash\App::getInstance(true)->getLogger()->error('The server is not in maintenance mode!');
+        \Lumina\App::getInstance(true)->getLogger()->error('The server is not in maintenance mode!');
         $app->send('&cThe server is not in maintenance mode!');
         exit;
 

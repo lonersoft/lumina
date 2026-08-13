@@ -30,7 +30,7 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Services\GyaniLinks;
+namespace Lumina\Services\GyaniLinks;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;

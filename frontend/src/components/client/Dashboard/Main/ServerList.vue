@@ -15,8 +15,8 @@ import {
     X as XIcon,
 } from 'lucide-vue-next';
 import CardComponent from '../../ui/Card/CardComponent.vue';
-import Servers from '@/mythicaldash/Pterodactyl/Servers';
-import Session from '@/mythicaldash/Session';
+import Servers from '@/lumina/Pterodactyl/Servers';
+import Session from '@/lumina/Session';
 import Swal from 'sweetalert2';
 import { useSettingsStore } from '@/stores/settings';
 import { useI18n } from 'vue-i18n';

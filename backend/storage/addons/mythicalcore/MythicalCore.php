@@ -30,17 +30,17 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Addons\mythicalcore;
+namespace Lumina\Addons\mythicalcore;
 
-use MythicalDash\Plugins\MythicalDashPlugin;
-use MythicalDash\Plugins\Events\Events\AppEvent;
-use MythicalDash\Plugins\Events\Events\AuthEvent;
+use Lumina\Plugins\LuminaPlugin;
+use Lumina\Plugins\Events\Events\AppEvent;
+use Lumina\Plugins\Events\Events\AuthEvent;
 
-class MythicalCore implements MythicalDashPlugin
+class MythicalCore implements LuminaPlugin
 {
-    public static function processEvents(\MythicalDash\Plugins\PluginEvents $event): void
+    public static function processEvents(\Lumina\Plugins\PluginEvents $event): void
     {
-        $event->on(AppEvent::onRouterReady(), function (\MythicalDash\Router\Router $router): void {
+        $event->on(AppEvent::onRouterReady(), function (\Lumina\Router\Router $router): void {
             new Events\Router($router);
         });
 

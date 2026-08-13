@@ -30,12 +30,12 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\Cli\CommandBuilder;
-use MythicalDash\Config\ConfigFactory;
+use Lumina\Cli\App;
+use Lumina\Chat\Database;
+use Lumina\Cli\CommandBuilder;
+use Lumina\Config\ConfigFactory;
 
 class Getsetting extends App implements CommandBuilder
 {
@@ -50,7 +50,7 @@ class Getsetting extends App implements CommandBuilder
         $cliApp->send('&aPlease enter the setting you want to read:');
         $setting = readline('> ');
 
-        \MythicalDash\App::getInstance(true)->loadEnv();
+        \Lumina\App::getInstance(true)->loadEnv();
 
         try {
             $db = new Database($_ENV['DATABASE_HOST'], $_ENV['DATABASE_DATABASE'], $_ENV['DATABASE_USER'], $_ENV['DATABASE_PASSWORD'], $_ENV['DATABASE_PORT']);

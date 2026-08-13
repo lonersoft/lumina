@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Plugins\Mixins\Reflection;
+namespace Lumina\Plugins\Mixins\Reflection;
 
-use MythicalDash\App;
+use Lumina\App;
 
 /**
  * Class for generating dynamic proxy classes.
@@ -125,8 +125,8 @@ class ProxyGenerator
         $code = "namespace {$namespace};\n\n";
 
         // Add use statements for traits
-        $code .= "use MythicalDash\\Plugins\\Mixins\\Reflection\\MethodInterceptor;\n";
-        $code .= "use MythicalDash\\Plugins\\Mixins\\Reflection\\PropertyAccessor;\n\n";
+        $code .= "use Lumina\\Plugins\\Mixins\\Reflection\\MethodInterceptor;\n";
+        $code .= "use Lumina\\Plugins\\Mixins\\Reflection\\PropertyAccessor;\n\n";
 
         // Define the proxy class
         $code .= "class {$proxyClassName} extends {$className} {\n";
@@ -176,7 +176,7 @@ class ProxyGenerator
                     $returnType = $method->hasReturnType() ? ': ' . $method->getReturnType()->getName() : '';
 
                     $code .= "\n    public function {$methodName}({$paramsStr}){$returnType} {\n";
-                    $code .= "        return \\MythicalDash\\Plugins\\Mixins\\Reflection\\ClassPatcher::executeMethod(\$this, '{$methodName}', func_get_args());\n";
+                    $code .= "        return \\Lumina\\Plugins\\Mixins\\Reflection\\ClassPatcher::executeMethod(\$this, '{$methodName}', func_get_args());\n";
                     $code .= "    }\n";
                 }
             }

@@ -30,16 +30,16 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\Redeem\RedeemCoins;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Plugins\Events\Events\RedeemEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Chat\User\User;
+use Lumina\Chat\User\Session;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\Redeem\RedeemCoins;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Plugins\Events\Events\RedeemEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 // User endpoint to redeem a code
 $router->post('/api/user/earn/redeem', function (): void {
@@ -167,7 +167,7 @@ $router->get('/api/user/earn/redeem/check/(.*)', function ($code): void {
     }
 
     // Get code details
-    $dbConn = MythicalDash\Chat\Database::getPdoConnection();
+    $dbConn = Lumina\Chat\Database::getPdoConnection();
     $stmt = $dbConn->prepare('SELECT * FROM ' . RedeemCoins::getTableName() . ' WHERE code = :code AND deleted = "false"');
     $stmt->bindParam(':code', $code);
     $stmt->execute();

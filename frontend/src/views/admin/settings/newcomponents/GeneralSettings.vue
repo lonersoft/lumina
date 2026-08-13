@@ -156,7 +156,7 @@
                                     <strong>To change SEO settings:</strong> You must manually edit the SEO
                                     configuration on the server by running:
                                     <code class="bg-gray-800 px-2 py-1 rounded text-xs font-mono"
-                                        >php mythicaldash ApplySEO</code
+                                        >php lumina ApplySEO</code
                                     >
                                 </p>
                             </div>
@@ -179,7 +179,7 @@
                     ></textarea>
                     <p class="mt-1 text-xs text-gray-500">
                         This field is disabled. Use
-                        <code class="bg-gray-800 px-1 py-0.5 rounded text-xs">php mythicaldash ApplySEO</code> on the
+                        <code class="bg-gray-800 px-1 py-0.5 rounded text-xs">php lumina ApplySEO</code> on the
                         server to modify SEO settings.
                     </p>
                 </div>
@@ -197,7 +197,7 @@
                     />
                     <p class="mt-1 text-xs text-gray-500">
                         This field is disabled. Use
-                        <code class="bg-gray-800 px-1 py-0.5 rounded text-xs">php mythicaldash ApplySEO</code> on the
+                        <code class="bg-gray-800 px-1 py-0.5 rounded text-xs">php lumina ApplySEO</code> on the
                         server to modify SEO settings.
                     </p>
                 </div>

@@ -33,7 +33,7 @@ import UserProfile from '@/components/client/Dashboard/Main/UserProfile.vue';
 import QuickLinks from '@/components/client/Dashboard/Main/QuickLinks.vue';
 import AnnouncementsPreview from '@/components/client/Dashboard/Main/AnnouncementsPreview.vue';
 import ServerList from '@/components/client/Dashboard/Main/ServerList.vue';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 
-MythicalDOM.setPageTitle(MythicalDOM.getTranslation('dashboard.title'));
+LuminaDOM.setPageTitle(LuminaDOM.getTranslation('dashboard.title'));
 </script>

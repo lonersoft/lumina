@@ -30,11 +30,11 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Plugins\Events\Events\AfkEvent;
+use Lumina\App;
+use Lumina\Chat\User\Session;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Plugins\Events\Events\AfkEvent;
 
 $router->post('/api/user/earn/afk/work', function (): void {
     App::init();

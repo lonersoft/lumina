@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
 
 class ExportPermissions extends App implements CommandBuilder
 {
@@ -107,7 +107,7 @@ class ExportPermissions extends App implements CommandBuilder
 
         // Generate TypeScript file
         $tsContent = self::generateTypeScriptFile($permissionNodes, $permissionMetadata);
-        $tsFile = $dir . '/frontend/src/mythicaldash/Permissions.ts';
+        $tsFile = $dir . '/frontend/src/lumina/Permissions.ts';
         if (file_put_contents($tsFile, $tsContent)) {
             $app->send('&a&l✓ Generated TypeScript file: ' . $tsFile);
         } else {
@@ -177,11 +177,11 @@ class ExportPermissions extends App implements CommandBuilder
         $phpContent .= "/**\n";
         $phpContent .= " * ⚠️  WARNING: Do not modify this file manually!\n";
         $phpContent .= " * This file is auto-generated from permission_nodes.txt\n";
-        $phpContent .= " * Use 'php mythicaldash permissionExport' to regenerate this file\n";
+        $phpContent .= " * Use 'php lumina ExportPermissions' to regenerate this file\n";
         $phpContent .= " * Manual modifications will be overwritten on next generation.\n";
         $phpContent .= " */\n\n";
 
-        $phpContent .= "namespace MythicalDash;\n\n";
+        $phpContent .= "namespace Lumina;\n\n";
 
         $phpContent .= "class Permissions\n";
         $phpContent .= "{\n";
@@ -246,7 +246,7 @@ class ExportPermissions extends App implements CommandBuilder
         $tsContent .= "/**\n";
         $tsContent .= " * ⚠️  WARNING: Do not modify this file manually!\n";
         $tsContent .= " * This file is auto-generated from permission_nodes.txt\n";
-        $tsContent .= " * Use 'php mythicaldash permissionExport' to regenerate this file\n";
+        $tsContent .= " * Use 'php lumina ExportPermissions' to regenerate this file\n";
         $tsContent .= " * Manual modifications will be overwritten on next generation.\n";
         $tsContent .= " */\n\n";
 
@@ -297,8 +297,8 @@ class ExportPermissions extends App implements CommandBuilder
 
     private static function generateReadmeDocumentation(array $permissionNodes, array $permissionMetadata): string
     {
-        $readme = "# MythicalDash Permission Nodes\n\n";
-        $readme .= "This document provides a comprehensive overview of all permission nodes used in MythicalDash.\n\n";
+        $readme = "# Lumina Permission Nodes\n\n";
+        $readme .= "This document provides a comprehensive overview of all permission nodes used in Lumina.\n\n";
         $readme .= "## Overview\n\n";
         $readme .= '- **Total Permissions:** ' . count($permissionNodes) . "\n";
         $readme .= '- **Categories:** ' . count(array_unique(array_column($permissionMetadata, 'category'))) . "\n";
@@ -313,7 +313,7 @@ class ExportPermissions extends App implements CommandBuilder
         $readme .= "## Usage\n\n";
         $readme .= "### PHP\n";
         $readme .= "```php\n";
-        $readme .= "use MythicalDash\\Permissions;\n\n";
+        $readme .= "use Lumina\\Permissions;\n\n";
         $readme .= "// Check if user has permission\n";
         $readme .= "if (auth()->user()->hasPermission(Permissions::ADMIN_DASHBOARD_VIEW)) {\n";
         $readme .= "    // User can view dashboard\n";
@@ -322,7 +322,7 @@ class ExportPermissions extends App implements CommandBuilder
 
         $readme .= "### TypeScript/JavaScript\n";
         $readme .= "```typescript\n";
-        $readme .= "import Permissions from '@/mythicaldash/Permissions';\n\n";
+        $readme .= "import Permissions from '@/lumina/Permissions';\n\n";
         $readme .= "// Check if user has permission\n";
         $readme .= "if (auth.user.hasPermission(Permissions.ADMIN_DASHBOARD_VIEW)) {\n";
         $readme .= "    // User can view dashboard\n";
@@ -366,7 +366,7 @@ class ExportPermissions extends App implements CommandBuilder
         $readme .= "To add a new permission node:\n\n";
         $readme .= "1. Edit `permission_nodes.txt` in the root directory\n";
         $readme .= "2. Add your permission in the format: `CONSTANT_NAME=permission.node.value | Category | Description`\n";
-        $readme .= "3. Run `php mythicaldash permissionExport` to regenerate all files\n";
+        $readme .= "3. Run `php lumina ExportPermissions` to regenerate all files\n";
         $readme .= "4. Rebuild the frontend if necessary\n\n";
 
         $readme .= "## File Locations\n\n";

@@ -12,9 +12,9 @@ import Turnstile from 'vue-turnstile';
 import { useSettingsStore } from '@/stores/settings';
 const Settings = useSettingsStore();
 import { useRouter } from 'vue-router';
-import Session from '@/mythicaldash/Session';
-import Auth from '@/mythicaldash/Auth';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import Session from '@/lumina/Session';
+import Auth from '@/lumina/Auth';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 
 const { play: playError } = useSound(failedAlertSfx);
 const { play: playSuccess } = useSound(successAlertSfx);
@@ -32,7 +32,7 @@ const form = reactive({
 });
 const turnstileKey = ref(0);
 
-MythicalDOM.setPageTitle(t('auth.pages.twofactor_verify.page.title'));
+LuminaDOM.setPageTitle(t('auth.pages.twofactor_verify.page.title'));
 
 const handleSubmit = async () => {
     if (!form.code) {

@@ -30,23 +30,23 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\User\Roles;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\Chat\columns\RolesColumns;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Plugins\Events\Events\RolesEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\User\Roles;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\Chat\columns\RolesColumns;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Plugins\Events\Events\RolesEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 $router->get('/api/admin/roles/list', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
     global $pluginManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ROLES_LIST, $session);
     $roles = Roles::getList();
     $appInstance->OK('Roles fetched successfully', ['roles' => $roles]);
@@ -57,7 +57,7 @@ $router->post('/api/admin/roles/create', function (): void {
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
     global $eventManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ROLES_CREATE, $session);
     if (isset($_POST['name']) && isset($_POST['color']) && isset($_POST['real_name'])) {
         $name = $_POST['name'];
@@ -81,7 +81,7 @@ $router->post('/api/admin/roles/update', function (): void {
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
     global $eventManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ROLES_EDIT, $session);
     if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['color']) && isset($_POST['real_name'])) {
         $id = $_POST['id'];
@@ -108,7 +108,7 @@ $router->post('/api/admin/roles/delete', function (): void {
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
     global $eventManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ROLES_DELETE, $session);
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
@@ -129,7 +129,7 @@ $router->get('/api/admin/roles/(.*)', function (int $id): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ROLES_LIST, $session);
     $role = Roles::getRole($id);
     if ($role) {

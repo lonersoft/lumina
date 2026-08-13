@@ -607,7 +607,7 @@ account:
                 subTitle: Gestionați cheia dvs. API
                 card:
                     title: Cheie API
-                    description: Cheia dvs. API oferă acces la API-ul MythicalDash
+                    description: Cheia dvs. API oferă acces la API-ul Lumina
                     yourKey: Cheia dvs. API
                     loading: Se încarcă cheia API...
                     noApiKey: Nu este disponibilă nicio cheie API
@@ -1010,7 +1010,7 @@ referrals:
                             id: '3'
                             description: 'Veți câștiga recompense când recomandările dvs. câștigă recompense'
             share:
-                shareMessage: 'Alăturați-vă mie pe MythicalDash și obțineți recompense exclusive folosind linkul meu de recomandare!'
+                shareMessage: 'Alăturați-vă mie pe Lumina și obțineți recompense exclusive folosind linkul meu de recomandare!'
                 title: 'Împărtășiți Link de Recomandare'
                 description: 'Împărtășiți linkul dvs. de recomandare cu prietenii și câștigați recompense!'
                 mailTitle: 'Împărtășiți Link de Recomandare prin Email'

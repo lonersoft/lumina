@@ -11,17 +11,17 @@
  * Breaking any of the following rules will result in a permanent ban from the MythicalSystems community and all of its services.
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Services\GyaniLinks\GyaniLinks;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Chat\Earn\GyaniLinks as GyaniLinksDB;
-use MythicalDash\Hooks\MythicalSystems\User\UUIDManager;
-use MythicalDash\Plugins\Events\Events\LinkForRewardEvent;
+use Lumina\App;
+use Lumina\Chat\User\Session;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Services\GyaniLinks\GyaniLinks;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Chat\Earn\GyaniLinks as GyaniLinksDB;
+use Lumina\Hooks\MythicalSystems\User\UUIDManager;
+use Lumina\Plugins\Events\Events\LinkForRewardEvent;
 
 $router->get('/api/user/earn/l4r/gyanilinks/start', function (): void {
     App::init();

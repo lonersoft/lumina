@@ -30,19 +30,19 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\User\Roles;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Chat\Tickets\Tickets;
-use MythicalDash\Chat\Tickets\Messages;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Tickets\Attachments;
-use MythicalDash\Chat\Tickets\Departments;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Plugins\Events\Events\TicketEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Chat\User\User;
+use Lumina\Chat\User\Roles;
+use Lumina\Chat\User\Session;
+use Lumina\Chat\Tickets\Tickets;
+use Lumina\Chat\Tickets\Messages;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Tickets\Attachments;
+use Lumina\Chat\Tickets\Departments;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Plugins\Events\Events\TicketEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 $router->get('/api/user/ticket/(.*)/messages', function ($ticketId) {
     App::init();

@@ -30,11 +30,11 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
-use MythicalDash\Services\Cloud\MythicalCloudLogs;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
+use Lumina\Services\Cloud\MythicalCloudLogs;
 
 class Logs extends App implements CommandBuilder
 {
@@ -42,7 +42,7 @@ class Logs extends App implements CommandBuilder
     {
         $app = App::getInstance();
         define('APP_DEBUG', false);
-        $appInstance = \MythicalDash\App::getInstance(false, true);
+        $appInstance = \Lumina\App::getInstance(false, true);
 
         $app->send('&7Starting log upload process...');
         $appInstance->getLogger()->debug('Initiating log upload to cloud storage');

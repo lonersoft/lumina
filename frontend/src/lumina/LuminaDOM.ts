@@ -1,14 +1,14 @@
 import { useSettingsStore } from '@/stores/settings';
 import { onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
-export class MythicalDOM {
+export class LuminaDOM {
     /**
      * Sets the page title
      * @param title The title to set for the page
      */
     public static setPageTitle(title: string): void {
         const Settings = useSettingsStore();
-        document.title = 'MythicalDash ' + ' - ' + title;
+        document.title = 'Lumina ' + ' - ' + title;
         this.addFavicon('https://github.com/mythicalltd.png');
         const updateTitle = () => {
             document.title = Settings.getSetting('app_name') + ' - ' + title;
@@ -124,3 +124,7 @@ export class MythicalDOM {
         return t(key);
     }
 }
+
+export const MythicalDOM = LuminaDOM;
+export default LuminaDOM;
+

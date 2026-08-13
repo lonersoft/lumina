@@ -207,7 +207,7 @@ const previewValues = {
     '{user_name}': 'John Doe',
     '{user_email}': 'john@example.com',
     '{server_name}': 'Main Server',
-    '{company_name}': 'MythicalSystems',
+    '{company_name}': 'Lumina',
 };
 
 // Replace template variables with sample data

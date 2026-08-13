@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import Session from '@/mythicaldash/Session';
+import Session from '@/lumina/Session';
 import { AlertTriangle as AlertTriangleIcon, Bell as BellIcon, BellOff as BellOffIcon } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';

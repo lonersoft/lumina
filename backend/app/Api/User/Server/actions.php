@@ -30,24 +30,24 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\Eggs\Eggs;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\Images\Image;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\Eggs\EggCategories;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Locations\Locations;
-use MythicalDash\Chat\Servers\ServerQueue;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Hooks\Pterodactyl\Admin\Servers;
-use MythicalDash\Plugins\Events\Events\ServerEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Plugins\Events\Events\ServerQueueEvent;
-use MythicalDash\Hooks\MythicalSystems\CloudFlare\Turnstile;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\Eggs\Eggs;
+use Lumina\Chat\User\User;
+use Lumina\Chat\Images\Image;
+use Lumina\Chat\User\Session;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\Eggs\EggCategories;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Locations\Locations;
+use Lumina\Chat\Servers\ServerQueue;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Hooks\Pterodactyl\Admin\Servers;
+use Lumina\Plugins\Events\Events\ServerEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Plugins\Events\Events\ServerQueueEvent;
+use Lumina\Hooks\MythicalSystems\CloudFlare\Turnstile;
 
 // Update server
 $router->post('/api/user/server/(.*)/update', function (string $id): void {
@@ -442,7 +442,7 @@ $router->post('/api/user/server/(.*)/renew', function (string $id): void {
     // Get server info from database
     if (isset($server['attributes']['id'])) {
         $serverId = $server['attributes']['id'];
-        $serverInfoDb = MythicalDash\Chat\Servers\Server::getByPterodactylId((int) $serverId);
+        $serverInfoDb = Lumina\Chat\Servers\Server::getByPterodactylId((int) $serverId);
         if (!$serverInfoDb) {
             $appInstance->BadRequest('Server not found in database', ['error_code' => 'SERVER_NOT_FOUND_IN_DB']);
 
@@ -492,7 +492,7 @@ $router->post('/api/user/server/(.*)/renew', function (string $id): void {
 
     try {
         // Update server expiration
-        if (!MythicalDash\Chat\Servers\Server::update($serverInfoDb['id'], $newExpiresAt)) {
+        if (!Lumina\Chat\Servers\Server::update($serverInfoDb['id'], $newExpiresAt)) {
             throw new Exception('Failed to update server expiration');
         }
 
@@ -568,8 +568,8 @@ $router->post('/api/user/server/(.*)/delete', function (string $id): void {
         Servers::deletePterodactylServer($serverId, false);
 
         // Only delete from database after successful Pterodactyl deletion
-        if (MythicalDash\Chat\Servers\Server::doesServerExistByPterodactylId($serverId)) {
-            MythicalDash\Chat\Servers\Server::deleteServerByPterodactylId($serverId);
+        if (Lumina\Chat\Servers\Server::doesServerExistByPterodactylId($serverId)) {
+            Lumina\Chat\Servers\Server::deleteServerByPterodactylId($serverId);
         }
 
         global $eventManager;
@@ -845,7 +845,7 @@ $router->post('/api/user/server/create', function (): void {
     ];
 
     // Check if the method exists before calling it
-    if (method_exists('MythicalDash\Chat\Servers\ServerQueue', 'getUserTotalQueuedResources')) {
+    if (method_exists('Lumina\Chat\Servers\ServerQueue', 'getUserTotalQueuedResources')) {
         $queuedResources = ServerQueue::getUserTotalQueuedResources($uuid);
     }
 
@@ -932,7 +932,7 @@ $router->post('/api/user/server/create', function (): void {
         return;
     }
 
-    $serverCount = MythicalDash\Chat\Servers\Server::getServerCountByLocationId($location_id);
+    $serverCount = Lumina\Chat\Servers\Server::getServerCountByLocationId($location_id);
     if ($serverCount >= $locationInfo['slots']) {
         $appInstance->BadRequest('Location is full', ['error_code' => 'LOCATION_FULL', 'server_count' => $serverCount, 'location_slots' => $locationInfo['slots']]);
 
@@ -983,7 +983,7 @@ $router->post('/api/user/server/create', function (): void {
         }
 
         // Final resource check with lock held (in case something changed)
-        $finalQueuedResources = method_exists('MythicalDash\Chat\Servers\ServerQueue', 'getUserTotalQueuedResources')
+        $finalQueuedResources = method_exists('Lumina\Chat\Servers\ServerQueue', 'getUserTotalQueuedResources')
             ? ServerQueue::getUserTotalQueuedResources($uuid)
             : $queuedResources;
 
@@ -1161,8 +1161,8 @@ $router->get('/api/user/server/(.*)', function (string $id): void {
     $nest = EggCategories::getByPterodactylNestId($nestId);
     $server['category'] = $nest;
 
-    if (MythicalDash\Chat\Servers\Server::doesServerExistByPterodactylId($id)) {
-        $serverInfoDb = MythicalDash\Chat\Servers\Server::getByPterodactylId($id);
+    if (Lumina\Chat\Servers\Server::doesServerExistByPterodactylId($id)) {
+        $serverInfoDb = Lumina\Chat\Servers\Server::getByPterodactylId($id);
         $server['mythicaldash'] = $serverInfoDb;
     } else {
         $appInstance->BadRequest('Server not found in MythicalDash', ['error_code' => 'SERVER_NOT_FOUND_IN_MYTHICALDASH']);

@@ -1,5 +1,5 @@
 /**
- * Redeem module for handling redemption codes in MythicalDash
+ * Redeem module for handling redemption codes in Lumina
  */
 class Redeem {
     /**

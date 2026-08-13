@@ -30,11 +30,11 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Addons\mythicalcore\Events;
+namespace Lumina\Addons\mythicalcore\Events;
 
-use MythicalDash\App;
+use Lumina\App;
 
-class Auth extends \MythicalDash\Addons\mythicalcore\MythicalCore
+class Auth extends \Lumina\Addons\mythicalcore\MythicalCore
 {
     /**
      * Example usage of plugins (Referrals).

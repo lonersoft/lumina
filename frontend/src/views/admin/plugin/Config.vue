@@ -240,7 +240,7 @@ import {
 } from 'lucide-vue-next';
 import Swal from 'sweetalert2';
 import LayoutDashboard from '@/components/admin/LayoutDashboard.vue';
-import Plugins from '@/mythicaldash/admin/Plugins';
+import Plugins from '@/lumina/admin/Plugins';
 
 interface PluginInfo {
     plugin: {

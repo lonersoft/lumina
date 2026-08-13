@@ -30,12 +30,12 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Addons\mythicalcore\Cron;
+namespace Lumina\Addons\mythicalcore\Cron;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cron\Cron;
-use MythicalDash\Cron\TimeTask;
-use MythicalDash\Addons\mythicalcore\MythicalCore;
+use Lumina\Cli\App;
+use Lumina\Cron\Cron;
+use Lumina\Cron\TimeTask;
+use Lumina\Addons\mythicalcore\MythicalCore;
 
 class FixUiCron extends MythicalCore implements TimeTask
 {

@@ -6,14 +6,14 @@ import SelectInput from '@/components/client/ui/TextForms/SelectInput.vue';
 import { ref, onMounted } from 'vue';
 import TextInput from '@/components/client/ui/TextForms/TextInput.vue';
 import TextArea from '@/components/client/ui/TextForms/TextArea.vue';
-import Tickets from '@/mythicaldash/Tickets';
+import Tickets from '@/lumina/Tickets';
 import Swal from 'sweetalert2';
 import failedAlertSfx from '@/assets/sounds/error.mp3';
 import successAlertSfx from '@/assets/sounds/success.mp3';
 import { useI18n } from 'vue-i18n';
 import { useSound } from '@vueuse/sound';
 import { useRouter } from 'vue-router';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import { useSettingsStore } from '@/stores/settings';
 
 const Settings = useSettingsStore();
@@ -22,7 +22,7 @@ const { play: playError } = useSound(failedAlertSfx);
 const { play: playSuccess } = useSound(successAlertSfx);
 const router = useRouter();
 
-MythicalDOM.setPageTitle(t('tickets.pages.create_ticket.title'));
+LuminaDOM.setPageTitle(t('tickets.pages.create_ticket.title'));
 
 interface Department {
     id: number;

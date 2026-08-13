@@ -30,21 +30,21 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\Permissions;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Permissions as PermissionsIndex;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Chat\User\Permissions;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Permissions as PermissionsIndex;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 // Get permissions for a specific role
 $router->get('/api/admin/roles/(.*)/permissions', function (int $roleId): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, PermissionsIndex::ADMIN_PERMISSIONS_LIST, $session);
     $permissions = Permissions::getPermissionsByRole($roleId);
     $appInstance->OK('Permissions fetched successfully', ['permissions' => $permissions]);
@@ -55,7 +55,7 @@ $router->get('/api/admin/permissions/(.*)', function (int $id): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, PermissionsIndex::ADMIN_PERMISSIONS_LIST, $session);
     $permission = Permissions::getPermission($id);
     if ($permission) {
@@ -70,7 +70,7 @@ $router->post('/api/admin/roles/(.*)/permissions/create', function (int $roleId)
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, PermissionsIndex::ADMIN_PERMISSIONS_CREATE, $session);
     if (isset($_POST['permission']) && isset($_POST['granted'])) {
         $permission = $_POST['permission'];
@@ -92,7 +92,7 @@ $router->post('/api/admin/permissions/update', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, PermissionsIndex::ADMIN_PERMISSIONS_EDIT, $session);
     if (isset($_POST['id']) && isset($_POST['role_id']) && isset($_POST['permission']) && isset($_POST['granted'])) {
         $id = $_POST['id'];
@@ -116,7 +116,7 @@ $router->post('/api/admin/permissions/delete', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, PermissionsIndex::ADMIN_PERMISSIONS_DELETE, $session);
     if (isset($_POST['id'])) {
         if (isset($_POST['id']) && is_numeric($_POST['id'])) {

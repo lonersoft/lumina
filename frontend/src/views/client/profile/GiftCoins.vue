@@ -152,9 +152,9 @@ import { Coins, Loader, AlertCircle } from 'lucide-vue-next';
 import LayoutDashboard from '@/components/client/LayoutDashboard.vue';
 import LoadingAnimation from '@/components/client/ui/LoadingAnimation.vue';
 import Button from '@/components/client/ui/Button.vue';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import { useSettingsStore } from '@/stores/settings';
-import Session from '@/mythicaldash/Session';
+import Session from '@/lumina/Session';
 
 // Define a proper interface for the recipient user
 interface RecipientUser {
@@ -244,7 +244,7 @@ const fetchRecipientData = async () => {
 
         if (data.success && data.user) {
             recipientUser.value = data.user;
-            MythicalDOM.setPageTitle(t('profile.gift.page_title', { username: recipientUser.value.username }));
+            LuminaDOM.setPageTitle(t('profile.gift.page_title', { username: recipientUser.value.username }));
         } else {
             error.value = t('profile.gift.error.user_not_found');
         }

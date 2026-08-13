@@ -212,7 +212,7 @@ import { useI18n } from 'vue-i18n';
 import LayoutDashboard from '@/components/client/LayoutDashboard.vue';
 import CardComponent from '@/components/client/ui/Card/CardComponent.vue';
 import { Search, Loader, ExternalLink, UserX, X, Users, User, Hash, Circle, AlertTriangle } from 'lucide-vue-next';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import { useSettingsStore } from '@/stores/settings';
 import { useRouter } from 'vue-router';
 
@@ -226,7 +226,7 @@ if (Settings.getSetting('allow_public_profiles') === 'false') {
 const { t } = useI18n();
 
 // Set page title
-MythicalDOM.setPageTitle(t('lookup.title'));
+LuminaDOM.setPageTitle(t('lookup.title'));
 
 interface User {
     uuid: string;

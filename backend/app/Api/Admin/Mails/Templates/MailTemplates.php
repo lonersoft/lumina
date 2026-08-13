@@ -30,21 +30,21 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\Mails\MailTemplate;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Plugins\Events\Events\MailTemplatesEvent;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\Mails\MailTemplate;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Plugins\Events\Events\MailTemplatesEvent;
 
 $router->get('/api/admin/mail/mail-templates', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_MAIL_TEMPLATES_LIST, $session);
     $mailTemplates = MailTemplate::getAll();
@@ -55,7 +55,7 @@ $router->post('/api/admin/mail/mail-templates/create', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_MAIL_TEMPLATES_CREATE, $session);
     if (isset($_POST['name']) && isset($_POST['body']) && isset($_POST['active']) && isset($_POST['subject'])) {
@@ -128,7 +128,7 @@ $router->post('/api/admin/mail/mail-templates/(.*)/update', function (string $id
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_MAIL_TEMPLATES_EDIT, $session);
     if (isset($_POST['name']) && isset($_POST['body']) && isset($_POST['active']) && isset($_POST['subject'])) {
@@ -208,7 +208,7 @@ $router->post('/api/admin/mail/mail-templates/(.*)/delete', function (string $id
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_MAIL_TEMPLATES_DELETE, $session);
     if (!MailTemplate::exists($id)) {
@@ -240,7 +240,7 @@ $router->post('/api/admin/mail/mail-templates/(.*)/mass-send', function (string 
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     // Reuse list permission for now; optionally define a dedicated permission later
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_MAIL_SEND_MASS_MAIL, $session);
@@ -259,7 +259,7 @@ $router->post('/api/admin/mail/mail-templates/(.*)/mass-send', function (string 
     }
 
     // Retrieve all users with uuids and valid emails
-    $users = MythicalDash\Chat\User\User::getListWithFilters([
+    $users = Lumina\Chat\User\User::getListWithFilters([
         UserColumns::UUID,
         UserColumns::EMAIL,
     ], []);
@@ -272,7 +272,7 @@ $router->post('/api/admin/mail/mail-templates/(.*)/mass-send', function (string 
             continue;
         }
         // Queue email via MailList -> MailQueue
-        if (MythicalDash\Chat\Mails\MailList::addEmail((string) ($tpl['subject'] ?? 'Notification'), (string) ($tpl['body'] ?? ''), (string) $uuid)) {
+        if (Lumina\Chat\Mails\MailList::addEmail((string) ($tpl['subject'] ?? 'Notification'), (string) ($tpl['body'] ?? ''), (string) $uuid)) {
             ++$queued;
         }
     }

@@ -30,13 +30,13 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli;
+namespace Lumina\Cli;
 
-use MythicalDash\Cli\Commands\Help;
+use Lumina\Cli\Commands\Help;
 
-class App extends \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi
+class App extends \Lumina\Hooks\MythicalSystems\Utils\BungeeChatApi
 {
-    public $prefix = '&7[&5&lMythical&d&lDash&7] &8&l| &7';
+    public $prefix = '&7[&5&lLumina&7] &8&l| &7';
     public $bars = '&7&m-----------------------------------------------------&r';
     public static App $instance;
 
@@ -45,8 +45,8 @@ class App extends \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi
         $this->handleCustomCommands($commandName, $args);
         self::$instance = $this;
 
-        if (getcwd() !== '/var/www/mythicaldash-v3' && getcwd() !== '/var/www/html' && getcwd() !== '/var/www/html/backend') {
-            exit('We detected that you are not running this command from the root directory of MythicalDash. Please run this command from the root directory.');
+        if (!file_exists(getcwd() . '/backend/composer.json') && !file_exists(getcwd() . '/composer.json')) {
+            exit('We detected that you are not running this command from the root directory of Lumina. Please run this command from the root directory.');
         }
 
         $addonDir = getcwd() . '/backend/storage/addons/imagehostbridge';
@@ -76,9 +76,9 @@ class App extends \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi
             $this->sendOutput('TelemetryJob.php removed successfully!');
         }
 
-        // Check if mythicaldash-v3.log exists and rename it to mythicaldash.log
+        // Check if mythicaldash-v3.log exists and rename it to lumina.log
         $oldLogFile = getcwd() . '/backend/storage/logs/mythicaldash-v3.log';
-        $newLogFile = getcwd() . '/backend/storage/logs/mythicaldash.log';
+        $newLogFile = getcwd() . '/backend/storage/logs/lumina.log';
 
         // Create both log files if they don't exist
         if (!file_exists($oldLogFile)) {
@@ -87,7 +87,7 @@ class App extends \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi
         }
 
         if (!file_exists($newLogFile)) {
-            $this->sendOutput('Creating mythicaldash.log');
+            $this->sendOutput('Creating lumina.log');
             touch($newLogFile);
         }
 
@@ -118,7 +118,7 @@ class App extends \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi
 
         require_once $commandFile;
 
-        $commandClass = "MythicalDash\\Cli\\Commands\\$commandName";
+        $commandClass = "Lumina\\Cli\\Commands\\$commandName";
 
         if (!class_exists($commandClass)) {
             $this->send('&cCommand not found.');
@@ -169,7 +169,7 @@ class App extends \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi
                 require_once $commandsFolder . '/' . $commandFile;
 
                 $className = pathinfo($commandFile, PATHINFO_FILENAME);
-                $commandClass = "MythicalDash\\Addons\\$plugin\\Commands\\$className";
+                $commandClass = "Lumina\\Addons\\$plugin\\Commands\\$className";
 
                 if (!class_exists($commandClass)) {
                     continue;
@@ -279,7 +279,7 @@ class App extends \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi
             }
             exit;
         } elseif ($cmdName == 'backend:watch') {
-            $process = popen('tail -f backend/storage/logs/mythicaldash.log backend/storage/logs/mythicaldash-v3.log', 'r');
+            $process = popen('tail -f backend/storage/logs/lumina.log backend/storage/logs/mythicaldash-v3.log', 'r');
             $this->sendOutput('Please wait while we attach to the process...');
             $this->sendOutput(message: "\n");
             sleep(5);
@@ -391,7 +391,7 @@ class App extends \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi
         }
 
         // Strip timestamp and replace vite/VITE with MythicalDash
-        $output = preg_replace('/\d{1,2}:\d{2}:\d{2}\s[AP]M\s\[vite\]\s/', '[MythicalDash] ', $output);
+        $output = preg_replace('/\d{1,2}:\d{2}:\d{2}\s[AP]M\s\[vite\]\s/', '[Lumina] ', $output);
         $output = str_replace(['vite', 'VITE'], ['mythicalcompiler', 'MythicalCompiler'], $output);
 
         // Handle different log levels with colors
@@ -429,7 +429,7 @@ class App extends \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi
                 $this->send("\e[31m  • {$error['message']}\e[0m");
             }
 
-            $this->send("\n\e[31m⚠️  Please fix these errors before running MythicalDash.\e[0m");
+            $this->send("\n\e[31m⚠️  Please fix these errors before running Lumina.\e[0m");
             exit(1);
         }
     }
@@ -439,7 +439,7 @@ class App extends \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi
      */
     private function runHealthChecks(): void
     {
-        $this->send("\e[36mRunning MythicalDash Health Checks...\e[0m");
+        $this->send("\e[36mRunning Lumina Health Checks...\e[0m");
         $this->send("\n");
 
         // Import and run health checks
@@ -487,9 +487,9 @@ class App extends \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi
         $this->send('  • Warnings: ' . count($results['warnings']));
 
         if ($results['status'] === 'healthy') {
-            $this->send("\n\e[32m🎉 MythicalDash is healthy and ready to run!\e[0m");
+            $this->send("\n\e[32m🎉 Lumina is healthy and ready to run!\e[0m");
         } else {
-            $this->send("\n\e[31m⚠️  Please fix the errors above before running MythicalDash.\e[0m");
+            $this->send("\n\e[31m⚠️  Please fix the errors above before running Lumina.\e[0m");
         }
 
         $this->send("\n");

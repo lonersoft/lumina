@@ -30,11 +30,11 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Addons\mythicalcore\Commands;
+namespace Lumina\Addons\mythicalcore\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
-use MythicalDash\Addons\mythicalcore\MythicalCore;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
+use Lumina\Addons\mythicalcore\MythicalCore;
 
 class FixUi extends MythicalCore implements CommandBuilder
 {

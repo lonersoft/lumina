@@ -30,15 +30,15 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Middleware\Firewall;
-use MythicalDash\Chat\User\Verification;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Chat\columns\EmailVerificationColumns;
+use Lumina\App;
+use Lumina\Chat\User\User;
+use Lumina\Middleware\Firewall;
+use Lumina\Chat\User\Verification;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Chat\columns\EmailVerificationColumns;
 
 $router->get('/api/user/auth/verify', function (): void {
     App::init();

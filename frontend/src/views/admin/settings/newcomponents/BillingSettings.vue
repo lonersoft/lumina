@@ -314,7 +314,7 @@ const emit = defineEmits<{
 // Form state with default values
 const formData = ref({
     // Company info
-    company_name: 'Mythical Systems',
+    company_name: 'Lumina',
     company_address: '',
     company_city: '',
     company_state: '',
@@ -360,7 +360,7 @@ watch(
         if (newSettings) {
             formData.value = {
                 // Company info
-                company_name: newSettings['company_name'] || 'Mythical Systems',
+                company_name: newSettings['company_name'] || 'Lumina',
                 company_address: newSettings['company_address'] || '',
                 company_city: newSettings['company_city'] || '',
                 company_state: newSettings['company_state'] || '',

@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Chat\columns\UserColumns;
+use Lumina\App;
+use Lumina\Chat\User\Session;
+use Lumina\Chat\columns\UserColumns;
 
 /*
  * This file is part of MythicalDash.
@@ -47,7 +47,7 @@ use MythicalDash\Chat\columns\UserColumns;
 
 // Route handlers
 $router->post('/api/webhooks/paypal', function () {
-    $paypal = new MythicalDash\Services\PayPal\PayPalIPN();
+    $paypal = new Lumina\Services\PayPal\PayPalIPN();
     $paypal->handleIPN();
 });
 
@@ -64,10 +64,10 @@ $router->get('/api/paypal/process', function () {
         $coins = (float) $_GET['coins'];
 
         // Get the credits recharge amount setting to convert coins to currency
-        $creditsRechargeAmount = (int) $app->getConfig()->getDBSetting(MythicalDash\Config\ConfigInterface::CREDITS_RECHARGE_AMOUNT, '100');
+        $creditsRechargeAmount = (int) $app->getConfig()->getDBSetting(Lumina\Config\ConfigInterface::CREDITS_RECHARGE_AMOUNT, '100');
         $currencyAmount = $coins / $creditsRechargeAmount;
 
-        $paypal = new MythicalDash\Services\PayPal\PayPalIPN();
+        $paypal = new Lumina\Services\PayPal\PayPalIPN();
         $redirectUrl = $paypal->createPayment(
             $currencyAmount,
             $session->getInfo(UserColumns::UUID, false)

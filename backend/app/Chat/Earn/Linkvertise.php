@@ -30,11 +30,11 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Chat\Earn;
+namespace Lumina\Chat\Earn;
 
-use MythicalDash\App;
-use MythicalDash\Chat\Schema;
-use MythicalDash\Chat\Database;
+use Lumina\App;
+use Lumina\Chat\Schema;
+use Lumina\Chat\Database;
 
 class Linkvertise extends Database implements Schema
 {

@@ -168,7 +168,7 @@ import {
     XIcon,
     SearchIcon,
 } from 'lucide-vue-next';
-import Permissions from '@/mythicaldash/Permissions';
+import Permissions from '@/lumina/Permissions';
 
 interface Permission {
     id: number;

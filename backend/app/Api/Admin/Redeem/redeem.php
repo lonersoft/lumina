@@ -30,16 +30,16 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Chat\Redeem\RedeemCoins;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Plugins\Events\Events\RedeemEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\User\Session;
+use Lumina\Chat\Redeem\RedeemCoins;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Plugins\Events\Events\RedeemEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 // Get all redeem codes
 $router->get('/api/admin/redeem/codes', function (): void {

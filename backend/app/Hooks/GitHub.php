@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Hooks;
+namespace Lumina\Hooks;
 
 use GuzzleHttp\Client;
-use MythicalDash\Cache\Cache;
+use Lumina\Cache\Cache;
 
 class GitHub
 {

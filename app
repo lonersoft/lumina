@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use MythicalDash\Cli\App;
+use Lumina\Cli\App;
 if (!empty($_SERVER['DOCUMENT_ROOT'])) {
     define('APP_PUBLIC', $_SERVER['DOCUMENT_ROOT'].'/backend');
 } else {

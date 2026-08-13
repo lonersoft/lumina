@@ -57,7 +57,7 @@ import ApiKey from '@/components/client/Dashboard/Account/ApiKey.vue';
 import LinkedAccounts from '@/components/client/Dashboard/Account/LinkedAccounts.vue';
 import ImageHosting from '@/components/client/Dashboard/Account/ImageHosting.vue';
 import LayoutAccount from '@/components/client/Dashboard/Account/Layout.vue';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import {
@@ -75,7 +75,7 @@ const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 
-MythicalDOM.setPageTitle(t('account.pages.index.title'));
+LuminaDOM.setPageTitle(t('account.pages.index.title'));
 
 // Get available tab names for validation
 const availableTabs = [

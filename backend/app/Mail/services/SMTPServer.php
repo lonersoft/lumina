@@ -30,12 +30,12 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Mail\services;
+namespace Lumina\Mail\services;
 
-use MythicalDash\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\Config\ConfigFactory;
-use MythicalDash\Config\ConfigInterface;
+use Lumina\App;
+use Lumina\Chat\Database;
+use Lumina\Config\ConfigFactory;
+use Lumina\Config\ConfigInterface;
 
 class SMTPServer
 {

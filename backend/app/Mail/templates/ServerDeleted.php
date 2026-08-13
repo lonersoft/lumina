@@ -30,14 +30,14 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Mail\templates;
+namespace Lumina\Mail\templates;
 
-use MythicalDash\App;
-use MythicalDash\Mail\Mail;
-use MythicalDash\Chat\Database;
-use MythicalDash\Chat\User\User;
+use Lumina\App;
+use Lumina\Mail\Mail;
+use Lumina\Chat\Database;
+use Lumina\Chat\User\User;
 
-use MythicalDash\Config\ConfigInterface;
+use Lumina\Config\ConfigInterface;
 
 class ServerDeleted extends Mail
 {
@@ -46,7 +46,7 @@ class ServerDeleted extends Mail
         try {
             $template = self::getFinalTemplate($uuid);
             $appName = App::getInstance(true)->getConfig()->getDBSetting(ConfigInterface::APP_NAME, 'MythicalSystems');
-            \MythicalDash\Chat\Mails\MailList::addEmail('Server Deleted - ' . $appName, $template, $uuid);
+            \Lumina\Chat\Mails\MailList::addEmail('Server Deleted - ' . $appName, $template, $uuid);
         } catch (\Exception $e) {
             App::getInstance(true)->getLogger()->error('(' . APP_SOURCECODE_DIR . '/Mail/templates/ServerDeleted.php) [sendMail] Failed to send email: ' . $e->getMessage());
         }

@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
 
 class Cron extends App implements CommandBuilder
 {
@@ -101,7 +101,7 @@ class Cron extends App implements CommandBuilder
 
     public static function getDescription(): string
     {
-        return 'Run MythicalDash cron jobs with live output';
+        return 'Run Lumina cron jobs with live output';
     }
 
     public static function getSubCommands(): array

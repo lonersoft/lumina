@@ -7,7 +7,7 @@
                         <img src="https://github.com/mythicalltd.png" alt="Logo" class="h-5 w-5" />
                     </div>
                     <div class="text-sm text-gray-400">
-                        <span>© {{ currentYear }} MythicalSystems. All rights reserved.</span>
+                        <span>© {{ currentYear }} {{ settings.getSetting('app_name') }} — Powered by <a href="https://github.com/lonersoft/lumina" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:underline">Lumina</a> (Based on <a href="https://github.com/MythicalLTD/MythicalDash" target="_blank" rel="noopener noreferrer" class="hover:underline text-gray-400">MythicalDash</a>)</span>
                     </div>
                 </div>
                 <div class="flex items-center gap-6">

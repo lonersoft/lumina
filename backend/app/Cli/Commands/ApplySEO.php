@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
 
 class ApplySEO extends App implements CommandBuilder
 {
@@ -48,7 +48,7 @@ class ApplySEO extends App implements CommandBuilder
             return;
         }
 
-        $cmdInstance->send('&7Welcome to the MythicalDash Patch Manager!');
+        $cmdInstance->send('&7Welcome to the Lumina Patch Manager!');
         $cmdInstance->send('&7This tool will help you improve your website\'s SEO.');
         $cmdInstance->send('');
         $cmdInstance->send('&ePlease answer the following questions. Press Enter to skip any field.');

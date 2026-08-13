@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Plugins\Mixins;
+namespace Lumina\Plugins\Mixins;
 
-use MythicalDash\App;
+use Lumina\App;
 
 /**
  * Registry for system mixins.

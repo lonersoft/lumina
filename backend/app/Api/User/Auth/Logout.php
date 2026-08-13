@@ -30,7 +30,7 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\Hooks\MythicalSystems\Debugger;
+use Lumina\Hooks\MythicalSystems\Debugger;
 
 Debugger::ShowAllErrors();
 $router->get('/api/user/auth/logout', function (): void {

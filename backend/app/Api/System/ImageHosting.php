@@ -30,11 +30,11 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Chat\ImageReports\ImageReports;
-use MythicalDash\Plugins\Events\Events\ImageHostingReportEvent;
+use Lumina\App;
+use Lumina\Config\ConfigInterface;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Chat\ImageReports\ImageReports;
+use Lumina\Plugins\Events\Events\ImageHostingReportEvent;
 
 $router->post('/api/system/imagehosting/report', function (): void {
     App::init();

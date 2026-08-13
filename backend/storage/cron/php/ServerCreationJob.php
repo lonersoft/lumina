@@ -30,20 +30,20 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cron;
+namespace Lumina\Cron;
 
-use MythicalDash\Chat\Eggs\Eggs;
-use MythicalDash\Chat\TimedTask;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\Servers\Server;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\Eggs\EggCategories;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Locations\Locations;
-use MythicalDash\Chat\Servers\ServerQueue;
-use MythicalDash\Chat\Servers\ServerQueueLogs;
-use MythicalDash\Services\Pterodactyl\Admin\Resources\NestsResource;
-use MythicalDash\Services\Pterodactyl\Admin\Resources\ServersResource;
+use Lumina\Chat\Eggs\Eggs;
+use Lumina\Chat\TimedTask;
+use Lumina\Chat\User\User;
+use Lumina\Chat\Servers\Server;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\Eggs\EggCategories;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Locations\Locations;
+use Lumina\Chat\Servers\ServerQueue;
+use Lumina\Chat\Servers\ServerQueueLogs;
+use Lumina\Services\Pterodactyl\Admin\Resources\NestsResource;
+use Lumina\Services\Pterodactyl\Admin\Resources\ServersResource;
 
 class ServerCreationJob implements TimeTask
 {
@@ -56,9 +56,9 @@ class ServerCreationJob implements TimeTask
         $cron = new Cron('server-deploy', '1M');
         try {
             $cron->runIfDue(function () {
-                $app = \MythicalDash\App::getInstance(false, true);
+                $app = \Lumina\App::getInstance(false, true);
                 $logger = $app->getLogger();
-                $chat = new \MythicalDash\Hooks\MythicalSystems\Utils\BungeeChatApi();
+                $chat = new \Lumina\Hooks\MythicalSystems\Utils\BungeeChatApi();
 
                 $logger->info('=== Server Creation Job Started ===');
                 $startTime = microtime(true);
@@ -96,7 +96,7 @@ class ServerCreationJob implements TimeTask
 
             }, true);
         } catch (\Exception $e) {
-            $app = \MythicalDash\App::getInstance(false, true);
+            $app = \Lumina\App::getInstance(false, true);
             $app->getLogger()->error('Failed to run server creation job: ' . $e->getMessage());
             $app->getLogger()->error('Exception trace: ' . $e->getTraceAsString());
             TimedTask::markRun('server-deploy', false, 'Server creation job failed: ' . $e->getMessage());
@@ -364,7 +364,7 @@ class ServerCreationJob implements TimeTask
         self::logMessage("{$servePrefix} Validating Pterodactyl egg: {$eggId}");
 
         // Check if egg exists in Pterodactyl
-        if (!\MythicalDash\Hooks\Pterodactyl\Admin\Eggs::doesEggExist($eggId)) {
+        if (!\Lumina\Hooks\Pterodactyl\Admin\Eggs::doesEggExist($eggId)) {
             $errorMsg = 'Egg no longer exists in Pterodactyl: ' . $eggId;
             $logger->error($errorMsg);
             self::logMessage($servePrefix . '&cEgg no longer exists in Pterodactyl: ' . $eggId);
@@ -387,7 +387,7 @@ class ServerCreationJob implements TimeTask
         // Check if location exists in Pterodactyl
         $logger->info('Validating Pterodactyl location existence...');
         self::logMessage("{$servePrefix} Validating Pterodactyl location: {$locationId}");
-        if (!\MythicalDash\Hooks\Pterodactyl\Admin\Locations::doesLocationExist($locationId)) {
+        if (!\Lumina\Hooks\Pterodactyl\Admin\Locations::doesLocationExist($locationId)) {
             $errorMsg = 'Location no longer exists in Pterodactyl: ' . $locationId;
             $logger->error($errorMsg);
             self::logMessage($servePrefix . '&cLocation no longer exists in Pterodactyl: ' . $locationId);
@@ -410,7 +410,7 @@ class ServerCreationJob implements TimeTask
         // Check if nest exists in Pterodactyl
         $logger->info('Validating Pterodactyl nest existence...');
         self::logMessage("{$servePrefix} Validating Pterodactyl nest: {$nestId}");
-        if (!\MythicalDash\Hooks\Pterodactyl\Admin\Nests::doesNestExist($nestId)) {
+        if (!\Lumina\Hooks\Pterodactyl\Admin\Nests::doesNestExist($nestId)) {
             $errorMsg = 'Nest no longer exists in Pterodactyl: ' . $nestId;
             $logger->error($errorMsg);
             self::logMessage($servePrefix . '&cNest no longer exists in Pterodactyl: ' . $nestId);
@@ -433,7 +433,7 @@ class ServerCreationJob implements TimeTask
         // Check if user exists in Pterodactyl
         $logger->info('Validating Pterodactyl user existence...');
         self::logMessage("{$servePrefix} Validating Pterodactyl user: {$pterodactylUserId}");
-        if (!\MythicalDash\Hooks\Pterodactyl\Admin\User::exists($pterodactylUserId)) {
+        if (!\Lumina\Hooks\Pterodactyl\Admin\User::exists($pterodactylUserId)) {
             $errorMsg = 'User no longer exists in Pterodactyl: ' . $pterodactylUserId;
             $logger->error($errorMsg);
             self::logMessage($servePrefix . '&cUser no longer exists in Pterodactyl: ' . $pterodactylUserId);

@@ -100,7 +100,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import LayoutDashboard from '@/components/admin/LayoutDashboard.vue';
 import { ArrowLeftIcon, AlertTriangleIcon, TrashIcon, LoaderIcon } from 'lucide-vue-next';
-import EggCategories from '@/mythicaldash/admin/EggCategories';
+import EggCategories from '@/lumina/admin/EggCategories';
 import Swal from 'sweetalert2';
 import { useSound } from '@vueuse/sound';
 import failedAlertSfx from '@/assets/sounds/error.mp3';

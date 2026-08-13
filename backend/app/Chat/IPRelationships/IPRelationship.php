@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Chat\IPRelationships;
+namespace Lumina\Chat\IPRelationships;
 
-use MythicalDash\Chat\Database;
+use Lumina\Chat\Database;
 
 class IPRelationship
 {

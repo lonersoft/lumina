@@ -24,7 +24,7 @@ import LayoutDashboard from '@/components/admin/LayoutDashboard.vue';
 import TableTanstack from '@/components/client/ui/Table/TableTanstack.vue';
 import { PlusIcon, EditIcon, TrashIcon, LoaderCircle, ShieldIcon } from 'lucide-vue-next';
 import { useRouter } from 'vue-router';
-import Roles from '@/mythicaldash/admin/Roles';
+import Roles from '@/lumina/admin/Roles';
 
 interface Role {
     id: number;

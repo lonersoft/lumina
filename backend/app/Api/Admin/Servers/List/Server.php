@@ -30,29 +30,29 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\Eggs\Eggs;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Locations\Locations;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Plugins\Events\Events\ServerEvent;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\Eggs\Eggs;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Locations\Locations;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Plugins\Events\Events\ServerEvent;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 $router->post('/api/admin/servers/toggle-suspend/(.*)', function (string $id): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
     global $eventManager;
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SERVERS_EDIT, $session);
-    if (MythicalDash\Hooks\Pterodactyl\Admin\Servers::serverExists($id)) {
-        $serverInfo = MythicalDash\Hooks\Pterodactyl\Admin\Servers::getServerPterodactylDetails($id);
+    if (Lumina\Hooks\Pterodactyl\Admin\Servers::serverExists($id)) {
+        $serverInfo = Lumina\Hooks\Pterodactyl\Admin\Servers::getServerPterodactylDetails($id);
         $suspended = $serverInfo['attributes']['suspended'];
         if ($suspended) {
-            MythicalDash\Hooks\Pterodactyl\Admin\Servers::performUnsuspendServer($id);
+            Lumina\Hooks\Pterodactyl\Admin\Servers::performUnsuspendServer($id);
             $eventManager->emit(ServerEvent::onServerRemoveSuspend(), [
                 'server' => $serverInfo,
             ]);
@@ -66,7 +66,7 @@ $router->post('/api/admin/servers/toggle-suspend/(.*)', function (string $id): v
                 'server' => $serverInfo,
             ]);
         } else {
-            MythicalDash\Hooks\Pterodactyl\Admin\Servers::performSuspendServer($id);
+            Lumina\Hooks\Pterodactyl\Admin\Servers::performSuspendServer($id);
             $eventManager->emit(ServerEvent::onServerSuspend(), [
                 'server' => $serverInfo,
             ]);
@@ -90,11 +90,11 @@ $router->post('/api/admin/servers/delete/(.*)', function (string $id): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SERVERS_DELETE, $session);
-    if (MythicalDash\Hooks\Pterodactyl\Admin\Servers::serverExists((int) $id)) {
-        MythicalDash\Hooks\Pterodactyl\Admin\Servers::deletePterodactylServer((int) $id);
-        MythicalDash\Chat\Servers\Server::deleteServerByPterodactylId((int) $id);
+    if (Lumina\Hooks\Pterodactyl\Admin\Servers::serverExists((int) $id)) {
+        Lumina\Hooks\Pterodactyl\Admin\Servers::deletePterodactylServer((int) $id);
+        Lumina\Chat\Servers\Server::deleteServerByPterodactylId((int) $id);
         global $eventManager;
         $eventManager->emit(ServerEvent::onServerDeleted(), [
             'server' => $id,
@@ -116,7 +116,7 @@ $router->get('/api/admin/servers/list', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SERVERS_LIST, $session);
 
     // Pagination params
@@ -134,7 +134,7 @@ $router->get('/api/admin/servers/list', function (): void {
         $limit = $maxLimit;
     }
 
-    $servers = MythicalDash\Hooks\Pterodactyl\Admin\Servers::getAllServers($page, $limit);
+    $servers = Lumina\Hooks\Pterodactyl\Admin\Servers::getAllServers($page, $limit);
     $serversWithInfo = [];
     if (isset($servers['data'])) {
         $allServers = $servers['data'];
@@ -157,7 +157,7 @@ $router->get('/api/admin/servers/list', function (): void {
 
             // Add location info (only name needed)
             if (isset($server['attributes']['node'])) {
-                $locationId = MythicalDash\Hooks\Pterodactyl\Admin\Nodes::getLocationIdFromNode((int) $server['attributes']['node']);
+                $locationId = Lumina\Hooks\Pterodactyl\Admin\Nodes::getLocationIdFromNode((int) $server['attributes']['node']);
                 $location = Locations::getLocationByPterodactylLocationId($locationId);
                 if ($location && isset($location['id']) && isset($location['name'])) {
                     $serverData['location'] = [
@@ -181,7 +181,7 @@ $router->get('/api/admin/servers/list', function (): void {
 
             // Check if server exists in MythicalDash
             $pterodactylId = (int) $server['attributes']['id'];
-            $serverData['exists_in_mythicaldash'] = MythicalDash\Chat\Servers\Server::doesServerExistByPterodactylId($pterodactylId);
+            $serverData['exists_in_mythicaldash'] = Lumina\Chat\Servers\Server::doesServerExistByPterodactylId($pterodactylId);
 
             $serversWithInfo[] = $serverData;
         }

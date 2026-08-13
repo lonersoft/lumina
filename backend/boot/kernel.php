@@ -30,7 +30,7 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\Plugins\PluginManager;
+use Lumina\Plugins\PluginManager;
 
 /*
  * This file is part of MythicalDash.
@@ -78,8 +78,8 @@ if (file_exists(APP_DIR . 'storage/.env')) {
     $eventManager = $pluginManager->getEventManager();
 
     /**
-     * @global \MythicalDash\Plugins\PluginManager $pluginManager
-     * @global \MythicalDash\Plugins\Events\PluginEvent $eventManager
+     * @global \Lumina\Plugins\PluginManager $pluginManager
+     * @global \Lumina\Plugins\Events\PluginEvent $eventManager
      */
     global $pluginManager, $eventManager;
 }

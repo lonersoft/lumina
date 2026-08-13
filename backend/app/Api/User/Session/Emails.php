@@ -30,14 +30,14 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Chat\Mails\MailList;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
+use Lumina\App;
+use Lumina\Chat\User\User;
+use Lumina\Chat\User\Session;
+use Lumina\Chat\Mails\MailList;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Chat\interface\UserActivitiesTypes;
 
 $router->get('/api/user/session/emails', function (): void {
     App::init();
@@ -73,7 +73,7 @@ $router->get('/api/user/session/emails/(.*)/raw', function (string $id): void {
 
     if (MailList::exists($id)) {
         if (MailList::doesUserOwnEmail(User::getInfo($accountToken, UserColumns::UUID, false), $id)) {
-            $eventManager->emit(MythicalDash\Plugins\Events\Events\UserEmailEvent::onEmailView(), [$id]);
+            $eventManager->emit(Lumina\Plugins\Events\Events\UserEmailEvent::onEmailView(), [$id]);
             $mail = MailList::get($id);
             UserActivities::add(
                 User::getInfo($accountToken, UserColumns::UUID, false),
@@ -108,7 +108,7 @@ $router->delete('/api/user/session/emails/(.*)/delete', function (string $id): v
     $accountToken = $session->SESSION_KEY;
     if (MailList::exists($id)) {
         if (MailList::doesUserOwnEmail(User::getInfo($accountToken, UserColumns::UUID, false), $id)) {
-            $eventManager->emit(MythicalDash\Plugins\Events\Events\UserEmailEvent::onEmailDelete(), [$id]);
+            $eventManager->emit(Lumina\Plugins\Events\Events\UserEmailEvent::onEmailDelete(), [$id]);
             UserActivities::add(
                 User::getInfo($accountToken, UserColumns::UUID, false),
                 UserActivitiesTypes::$email_delete,

@@ -24,7 +24,7 @@ import LayoutDashboard from '@/components/admin/LayoutDashboard.vue';
 import TableTanstack from '@/components/client/ui/Table/TableTanstack.vue';
 import { PlusIcon, EditIcon, TrashIcon, LoaderCircle } from 'lucide-vue-next';
 import { useRouter } from 'vue-router';
-import Redeem from '@/mythicaldash/admin/Redeem';
+import Redeem from '@/lumina/admin/Redeem';
 
 // Interface for redeem code
 interface RedeemCode {

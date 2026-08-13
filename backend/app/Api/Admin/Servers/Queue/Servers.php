@@ -30,26 +30,26 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\Eggs\Eggs;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\Eggs\EggCategories;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Locations\Locations;
-use MythicalDash\Chat\Servers\ServerQueue;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Chat\Servers\ServerQueueLogs;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Plugins\Events\Events\ServerQueueEvent;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\Eggs\Eggs;
+use Lumina\Chat\User\User;
+use Lumina\Chat\Eggs\EggCategories;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Locations\Locations;
+use Lumina\Chat\Servers\ServerQueue;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Chat\Servers\ServerQueueLogs;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Plugins\Events\Events\ServerQueueEvent;
 
 $router->get('/api/admin/server-queue', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SERVER_QUEUE_LIST, $session);
 
     // Pagination params
@@ -130,7 +130,7 @@ $router->post('/api/admin/server-queue/create', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SERVER_QUEUE_CREATE, $session);
     if (
         isset($_POST['name']) && !empty($_POST['name'])
@@ -260,7 +260,7 @@ $router->get('/api/admin/server-queue/logs', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SERVER_QUEUE_LOGS_VIEW, $session);
     $logs = ServerQueueLogs::getAll();
@@ -271,7 +271,7 @@ $router->post('/api/admin/server-queue/(.*)/update-status', function (string $id
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SERVERS_EDIT, $session);
     $serverQueueExists = ServerQueue::exists($id);
@@ -308,7 +308,7 @@ $router->post('/api/admin/server-queue/(.*)/delete', function (string $id): void
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SERVER_QUEUE_DELETE, $session);
     $serverQueueExists = ServerQueue::exists($id);
@@ -340,7 +340,7 @@ $router->get('/api/admin/server-queue/stats', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SERVER_QUEUE_LIST, $session);
     $stats = ServerQueue::getStats();
@@ -351,7 +351,7 @@ $router->get('/api/admin/server-queue/(.*)', function (string $id): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_SERVER_QUEUE_LIST, $session);
     $serverQueueExists = ServerQueue::exists((int) $id);

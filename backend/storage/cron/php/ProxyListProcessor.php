@@ -30,9 +30,9 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cron;
+namespace Lumina\Cron;
 
-use MythicalDash\Chat\TimedTask;
+use Lumina\Chat\TimedTask;
 
 class ProxyListProcessor implements TimeTask
 {
@@ -41,7 +41,7 @@ class ProxyListProcessor implements TimeTask
         $cron = new Cron('proxy-list-processor', '7D');
         try {
             $cron->runIfDue(function () {
-                $app = \MythicalDash\App::getInstance(false, true);
+                $app = \Lumina\App::getInstance(false, true);
                 $db = $app->getDatabase()->getPdo();
 
                 // Only clear existing proxies ONCE before fetching all sources
@@ -58,7 +58,7 @@ class ProxyListProcessor implements TimeTask
                 TimedTask::markRun('proxy-list-processor', true, 'Proxy list heartbeat ' . $stats['valid'] . ' valid proxies and ' . $stats['invalid'] . ' invalid proxies');
             });
         } catch (\Exception $e) {
-            $app = \MythicalDash\App::getInstance(false, true);
+            $app = \Lumina\App::getInstance(false, true);
             TimedTask::markRun('proxy-list-processor', false, $e->getMessage());
             $app->getLogger()->error('Failed to update proxy list: ' . $e->getMessage());
         }

@@ -30,12 +30,12 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Middleware;
+namespace Lumina\Middleware;
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
+use Lumina\App;
+use Lumina\Chat\User\Session;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
 
 class PermissionMiddleware implements MiddlewareBuilder
 {

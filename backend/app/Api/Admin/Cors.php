@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Middleware\PermissionMiddleware;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\User\Session;
+use Lumina\Middleware\PermissionMiddleware;
 
 $router->add('/api/admin/cors', function (): void {
     App::init();

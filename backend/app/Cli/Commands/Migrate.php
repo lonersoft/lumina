@@ -30,12 +30,12 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\App as MainApp;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Chat\Database;
+use Lumina\App as MainApp;
+use Lumina\Cli\CommandBuilder;
 
 class Migrate extends App implements CommandBuilder
 {
@@ -145,7 +145,7 @@ class Migrate extends App implements CommandBuilder
                 if ($migrationName == '2024-11-15-22.17-create-settings.sql') {
                     $cliApp->send('&e&l🔄 Generating encryption key...');
                     // Generate an encryption key for xchacha20
-                    $encryptionKey = \MythicalDash\Hooks\MythicalSystems\Utils\XChaCha20::generateStrongKey(true);
+                    $encryptionKey = \Lumina\Hooks\MythicalSystems\Utils\XChaCha20::generateStrongKey(true);
                     MainApp::getInstance(true)->updateEnvValue('DATABASE_ENCRYPTION', 'xchacha20', false);
                     MainApp::getInstance(true)->updateEnvValue('DATABASE_ENCRYPTION_KEY', $encryptionKey, true);
                     $cliApp->send('&a&l✅ Encryption key generated successfully!');

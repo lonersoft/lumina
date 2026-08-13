@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import TableTanstack from '@/components/client/ui/Table/TableTanstack.vue';
-import Mails from '@/mythicaldash/Mails';
+import Mails from '@/lumina/Mails';
 import { format } from 'date-fns';
 import { h, onErrorCaptured, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import LoadingAnimation from '@/components/client/ui/LoadingAnimation.vue';
 import { Mail, Download } from 'lucide-vue-next';
 
 const { t } = useI18n();
-MythicalDOM.setPageTitle(t('account.pages.emails.page.title'));
+LuminaDOM.setPageTitle(t('account.pages.emails.page.title'));
 
 interface Email {
     id: string;

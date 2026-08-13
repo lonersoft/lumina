@@ -30,12 +30,12 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\Cli\CommandBuilder;
-use MythicalDash\Config\ConfigFactory;
+use Lumina\Cli\App;
+use Lumina\Chat\Database;
+use Lumina\Cli\CommandBuilder;
+use Lumina\Config\ConfigFactory;
 
 class Setsetting extends App implements CommandBuilder
 {
@@ -52,7 +52,7 @@ class Setsetting extends App implements CommandBuilder
 
         $cliApp->send('&aPlease enter the value you want to set:');
         $value = readline('> ');
-        \MythicalDash\App::getInstance(true)->loadEnv();
+        \Lumina\App::getInstance(true)->loadEnv();
 
         try {
             if (isset($_ENV['DATABASE_HOST']) && isset($_ENV['DATABASE_DATABASE']) && isset($_ENV['DATABASE_USER']) && isset($_ENV['DATABASE_PASSWORD']) && isset($_ENV['DATABASE_PORT'])) {

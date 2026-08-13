@@ -30,14 +30,14 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Referral\ReferralUses;
-use MythicalDash\Chat\Referral\ReferralCodes;
-use MythicalDash\Plugins\Events\Events\ReferralsEvent;
+use Lumina\App;
+use Lumina\Chat\User\User;
+use Lumina\Chat\User\Session;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Referral\ReferralUses;
+use Lumina\Chat\Referral\ReferralCodes;
+use Lumina\Plugins\Events\Events\ReferralsEvent;
 
 $router->get('/api/user/earn/referrals', function (): void {
     App::init();

@@ -73,9 +73,9 @@
 import Swal from 'sweetalert2';
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import Session from '@/mythicaldash/Session';
+import Session from '@/lumina/Session';
 import { useSettingsStore } from '@/stores/settings';
-import Dashboard from '@/mythicaldash/admin/Dashboard';
+import Dashboard from '@/lumina/admin/Dashboard';
 
 // Import components
 import MobileMenuButton from '@/components/admin/components/MobileMenuButton.vue';
@@ -86,9 +86,9 @@ import TheFooter from '@/components/admin/components/TheFooter.vue';
 // Import menu configuration
 import { useAdminMenu } from '@/components/admin/composables/useAdminMenu';
 import { useSearchResults } from '@/components/admin/composables/useSearchResults';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 
-MythicalDOM.setPageTitle('Admin');
+LuminaDOM.setPageTitle('Admin');
 
 const Settings = useSettingsStore();
 const router = useRouter();
@@ -176,8 +176,8 @@ const handleSearchBlur = () => {
 
 // Footer links
 const footerLinks = [
-    { name: 'Documentation', path: 'https://mythical.systems' },
-    { name: 'Status', path: 'https://status.mythical.systems' },
+    { name: 'Documentation', path: 'https://lumina.loners.software' },
+    { name: 'Discord', path: 'https://discord.loners.software' },
 ];
 
 // Keyboard shortcuts

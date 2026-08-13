@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\Session;
-use MythicalDash\Chat\User\Leaderboard;
-use MythicalDash\Chat\interface\LeaderboardTypes;
+use Lumina\App;
+use Lumina\Chat\User\Session;
+use Lumina\Chat\User\Leaderboard;
+use Lumina\Chat\interface\LeaderboardTypes;
 
 $router->add('/api/user/leaderboard/(.*)', function ($type) {
     App::init();
@@ -42,11 +42,11 @@ $router->add('/api/user/leaderboard/(.*)', function ($type) {
     new Session($appInstance);
 
     $config = $appInstance->getConfig();
-    if (!$config->getDBSetting(MythicalDash\Config\ConfigInterface::LEADERBOARD_ENABLED, 'false') == 'false') {
+    if (!$config->getDBSetting(Lumina\Config\ConfigInterface::LEADERBOARD_ENABLED, 'false') == 'false') {
         $appInstance->BadRequest('Leaderboard is disabled', ['error_code' => 'LEADERBOARD_DISABLED']);
     }
 
-    $limit = $config->getDBSetting(MythicalDash\Config\ConfigInterface::LEADERBOARD_LIMIT, 15);
+    $limit = $config->getDBSetting(Lumina\Config\ConfigInterface::LEADERBOARD_LIMIT, 15);
     if (!in_array($type, LeaderboardTypes::getLeaderboardTypes())) {
         $appInstance->BadRequest('Invalid type', ['error_code' => 'INVALID_TYPE']);
     }

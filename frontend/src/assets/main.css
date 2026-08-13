@@ -1,32 +1,58 @@
 /* ./src/index.css */
 @import 'tailwindcss';
 
-/* Define CSS Custom Properties for mythicaldash theme colors */
+/* Define CSS Custom Properties for Lumina theme colors */
 :root {
-    --mythicaldash-50: oklch(0.977 0.014 308.299);
-    --mythicaldash-100: oklch(0.946 0.033 307.174);
-    --mythicaldash-200: oklch(0.902 0.063 306.703);
-    --mythicaldash-300: oklch(0.827 0.119 306.383);
-    --mythicaldash-400: oklch(0.714 0.203 305.504);
-    --mythicaldash-500: oklch(0.627 0.265 303.9);
-    --mythicaldash-600: oklch(0.558 0.288 302.321);
-    --mythicaldash-700: oklch(0.496 0.265 301.924);
-    --mythicaldash-800: oklch(0.438 0.218 303.724);
-    --mythicaldash-900: oklch(0.381 0.176 304.987);
-    --mythicaldash-950: oklch(0.291 0.149 302.717);
-    --mythicaldash-1000: oklch(0.201 0.122 302.717);
-    --mythicaldash-1100: oklch(0.131 0.102 302.717);
-    --mythicaldash-1200: oklch(0.081 0.082 302.717);
-    --mythicaldash-1300: oklch(0.041 0.062 302.717);
-    --mythicaldash-1400: oklch(0.011 0.042 302.717);
-    --mythicaldash-1500: oklch(0.001 0.022 302.717);
-    --mythicaldash-1600: oklch(0.001 0.012 302.717);
-    --mythicaldash-1700: oklch(0.001 0.008 302.717);
-    --mythicaldash-1800: oklch(0.001 0.006 302.717);
-    --mythicaldash-1900: oklch(0.001 0.004 302.717);
-    --mythicaldash-2000: oklch(0.001 0.002 302.717);
-    --mythicaldash-2100: oklch(0.001 0.001 302.717);
-    --mythicaldash-2200: oklch(0.001 0.001 302.717);
+    --lumina-50: oklch(0.977 0.014 308.299);
+    --lumina-100: oklch(0.946 0.033 307.174);
+    --lumina-200: oklch(0.902 0.063 306.703);
+    --lumina-300: oklch(0.827 0.119 306.383);
+    --lumina-400: oklch(0.714 0.203 305.504);
+    --lumina-500: oklch(0.627 0.265 303.9);
+    --lumina-600: oklch(0.558 0.288 302.321);
+    --lumina-700: oklch(0.496 0.265 301.924);
+    --lumina-800: oklch(0.438 0.218 303.724);
+    --lumina-900: oklch(0.381 0.176 304.987);
+    --lumina-950: oklch(0.291 0.149 302.717);
+    --lumina-1000: oklch(0.201 0.122 302.717);
+    --lumina-1100: oklch(0.131 0.102 302.717);
+    --lumina-1200: oklch(0.081 0.082 302.717);
+    --lumina-1300: oklch(0.041 0.062 302.717);
+    --lumina-1400: oklch(0.011 0.042 302.717);
+    --lumina-1500: oklch(0.001 0.022 302.717);
+    --lumina-1600: oklch(0.001 0.012 302.717);
+    --lumina-1700: oklch(0.001 0.008 302.717);
+    --lumina-1800: oklch(0.001 0.006 302.717);
+    --lumina-1900: oklch(0.001 0.004 302.717);
+    --lumina-2000: oklch(0.001 0.002 302.717);
+    --lumina-2100: oklch(0.001 0.001 302.717);
+    --lumina-2200: oklch(0.001 0.001 302.717);
+
+    /* Backwards-compatibility aliases */
+    --mythicaldash-50: var(--lumina-50);
+    --mythicaldash-100: var(--lumina-100);
+    --mythicaldash-200: var(--lumina-200);
+    --mythicaldash-300: var(--lumina-300);
+    --mythicaldash-400: var(--lumina-400);
+    --mythicaldash-500: var(--lumina-500);
+    --mythicaldash-600: var(--lumina-600);
+    --mythicaldash-700: var(--lumina-700);
+    --mythicaldash-800: var(--lumina-800);
+    --mythicaldash-900: var(--lumina-900);
+    --mythicaldash-950: var(--lumina-950);
+    --mythicaldash-1000: var(--lumina-1000);
+    --mythicaldash-1100: var(--lumina-1100);
+    --mythicaldash-1200: var(--lumina-1200);
+    --mythicaldash-1300: var(--lumina-1300);
+    --mythicaldash-1400: var(--lumina-1400);
+    --mythicaldash-1500: var(--lumina-1500);
+    --mythicaldash-1600: var(--lumina-1600);
+    --mythicaldash-1700: var(--lumina-1700);
+    --mythicaldash-1800: var(--lumina-1800);
+    --mythicaldash-1900: var(--lumina-1900);
+    --mythicaldash-2000: var(--lumina-2000);
+    --mythicaldash-2100: var(--lumina-2100);
+    --mythicaldash-2200: var(--lumina-2200);
 
     /* Dark theme specific colors */
     --bg-darkest: #020203;

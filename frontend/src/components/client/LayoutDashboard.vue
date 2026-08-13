@@ -8,15 +8,15 @@ import SearchModal from '@/components/client/layout/SearchModal.vue';
 import NotificationsDropdown from '@/components/client/layout/NotificationsDropdown.vue';
 import ProfileDropdown from '@/components/client/layout/ProfileDropdown.vue';
 import { SettingsIcon, UserIcon, UsersIcon } from 'lucide-vue-next';
-import Session from '@/mythicaldash/Session';
-import MythicalDash from '@/mythicaldash/MythicalDash';
-import Permissions from '@/mythicaldash/Permissions';
-import Roles from '@/mythicaldash/admin/Roles';
+import Session from '@/lumina/Session';
+import Lumina from '@/lumina/Lumina';
+import Permissions from '@/lumina/Permissions';
+import Roles from '@/lumina/admin/Roles';
 import { useI18n } from 'vue-i18n';
 import { useSettingsStore } from '@/stores/settings';
 import Swal from 'sweetalert2';
 
-MythicalDash.download();
+Lumina.download();
 // Check for refresh flag and refresh if needed
 const checkRefreshFlag = () => {
     const needsRefresh = localStorage.getItem('needs_refresh');
@@ -569,10 +569,17 @@ const getRoleInfo = (roleId: number) => {
 
                 <!-- Footer -->
                 <footer class="relative z-10 py-4 px-6 text-center text-sm text-gray-500">
-                    <a href="https://mythical.systems" class="hover:text-indigo-400 transition-colors">
-                        MythicalSystems
-                    </a>
-                    <p>2020 - {{ new Date().getFullYear() }}</p>
+                    <p>
+                        © {{ new Date().getFullYear() }} {{ Settings.getSetting('app_name') || 'Lumina' }} — Powered by
+                        <a
+                            href="https://github.com/lonersoft/lumina"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-gray-400 hover:text-indigo-400 transition-colors underline"
+                        >
+                            Lumina
+                        </a>
+                    </p>
                 </footer>
             </template>
         </div>

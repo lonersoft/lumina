@@ -23,14 +23,14 @@ import {
     X as XIcon,
     Pause as PauseIcon,
 } from 'lucide-vue-next';
-import Users from '@/mythicaldash/admin/Users';
+import Users from '@/lumina/admin/Users';
 import Swal from 'sweetalert2';
 import { useSound } from '@vueuse/sound';
 import failedAlertSfx from '@/assets/sounds/error.mp3';
 import { useSettingsStore } from '@/stores/settings';
 const Settings = useSettingsStore();
 import successAlertSfx from '@/assets/sounds/success.mp3';
-import Roles from '@/mythicaldash/admin/Roles';
+import Roles from '@/lumina/admin/Roles';
 
 // Utility function to open URLs safely in a new tab
 function openExternalLink(url: string): void {

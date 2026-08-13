@@ -30,21 +30,21 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\Tickets\Departments;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Plugins\Events\Events\DepartmentsEvent;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\Tickets\Departments;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Plugins\Events\Events\DepartmentsEvent;
 
 $router->get('/api/admin/ticket/departments', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_DEPARTMENTS_LIST, $session);
     $departments = Departments::getAll();
 
@@ -58,7 +58,7 @@ $router->post('/api/admin/ticket/departments/create', function (): void {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_DEPARTMENTS_CREATE, $session);
     if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['open']) && isset($_POST['close']) && isset($_POST['enabled'])) {
         $name = $_POST['name'];
@@ -114,7 +114,7 @@ $router->post('/api/admin/ticket/departments/(.*)/update', function (string $id)
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_DEPARTMENTS_EDIT, $session);
     $departmentId = intval($id);
     if ($departmentId == 0) {
@@ -167,7 +167,7 @@ $router->post('/api/admin/ticket/departments/(.*)/delete', function (string $id)
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_DEPARTMENTS_DELETE, $session);
     $departmentId = intval($id);
     if ($departmentId == 0) {

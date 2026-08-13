@@ -30,19 +30,19 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\App;
-use MythicalDash\Chat\Database;
-use MythicalDash\Cli\App as CliApp;
-use MythicalDash\Cli\CommandBuilder;
-use MythicalDash\Config\ConfigFactory;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Services\Pterodactyl\Admin\Resources\NestsResource;
-use MythicalDash\Services\Pterodactyl\Admin\Resources\NodesResource;
-use MythicalDash\Services\Pterodactyl\Admin\Resources\UsersResource;
-use MythicalDash\Services\Pterodactyl\Admin\Resources\ServersResource;
-use MythicalDash\Services\Pterodactyl\Admin\Resources\LocationsResource;
+use Lumina\App;
+use Lumina\Chat\Database;
+use Lumina\Cli\App as CliApp;
+use Lumina\Cli\CommandBuilder;
+use Lumina\Config\ConfigFactory;
+use Lumina\Config\ConfigInterface;
+use Lumina\Services\Pterodactyl\Admin\Resources\NestsResource;
+use Lumina\Services\Pterodactyl\Admin\Resources\NodesResource;
+use Lumina\Services\Pterodactyl\Admin\Resources\UsersResource;
+use Lumina\Services\Pterodactyl\Admin\Resources\ServersResource;
+use Lumina\Services\Pterodactyl\Admin\Resources\LocationsResource;
 
 class Pterodactyl extends CliApp implements CommandBuilder
 {

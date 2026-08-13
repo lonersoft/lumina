@@ -30,10 +30,10 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Cli\Commands;
+namespace Lumina\Cli\Commands;
 
-use MythicalDash\Cli\App;
-use MythicalDash\Cli\CommandBuilder;
+use Lumina\Cli\App;
+use Lumina\Cli\CommandBuilder;
 
 class Backup extends App implements CommandBuilder
 {
@@ -77,7 +77,7 @@ class Backup extends App implements CommandBuilder
     public static function takeBackup(App $app): void
     {
         $app->send('&aTaking backup...');
-        \MythicalDash\Hooks\Backup::takeBackup();
+        \Lumina\Hooks\Backup::takeBackup();
         $app->send('&aBackup created successfully!');
     }
 
@@ -93,7 +93,7 @@ class Backup extends App implements CommandBuilder
 
         $backupId = (int) $args[2];
         try {
-            \MythicalDash\Hooks\Backup::deleteBackup($backupId);
+            \Lumina\Hooks\Backup::deleteBackup($backupId);
             $app->send('&aBackup #' . $backupId . ' has been removed successfully!');
         } catch (\Exception $e) {
             $app->send('&cFailed to remove backup: ' . $e->getMessage());
@@ -105,7 +105,7 @@ class Backup extends App implements CommandBuilder
         $app = App::getInstance();
 
         try {
-            $backups = \MythicalDash\Hooks\Backup::getBackups();
+            $backups = \Lumina\Hooks\Backup::getBackups();
 
             if (empty($backups)) {
                 $app->send('&7No backups found.');
@@ -157,7 +157,7 @@ class Backup extends App implements CommandBuilder
 
         try {
             $app->send('&7Restoring backup #' . $backupId . '...');
-            \MythicalDash\Hooks\Backup::restoreBackup($backupId);
+            \Lumina\Hooks\Backup::restoreBackup($backupId);
             $app->send('&aBackup restored successfully!');
             $app->send('&7You may need to restart the application for all changes to take effect.');
         } catch (\Exception $e) {

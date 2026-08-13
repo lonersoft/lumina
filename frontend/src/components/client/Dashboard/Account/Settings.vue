@@ -3,11 +3,11 @@ import { reactive, ref, onMounted, computed } from 'vue';
 import TextInput from '@/components/client/ui/TextForms/TextInput.vue';
 import Button from '@/components/client/ui/Button.vue';
 import LoadingAnimation from '@/components/client/ui/LoadingAnimation.vue';
-import Session from '@/mythicaldash/Session';
+import Session from '@/lumina/Session';
 import { useI18n } from 'vue-i18n';
 import Swal from 'sweetalert2';
-import Auth from '@/mythicaldash/Auth';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import Auth from '@/lumina/Auth';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 import {
     User as UserIcon,
     Mail as MailIcon,
@@ -20,7 +20,7 @@ import {
 } from 'lucide-vue-next';
 
 const { t } = useI18n();
-MythicalDOM.setPageTitle(t('account.pages.settings.page.title'));
+LuminaDOM.setPageTitle(t('account.pages.settings.page.title'));
 
 const isLoading = ref(true);
 const isSaving = ref(false);

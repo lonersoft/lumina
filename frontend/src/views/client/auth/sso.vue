@@ -8,12 +8,12 @@ import Turnstile from 'vue-turnstile';
 import { useSettingsStore } from '@/stores/settings';
 const Settings = useSettingsStore();
 import { useI18n } from 'vue-i18n';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 
 const { t } = useI18n();
 const router = useRouter();
 
-MythicalDOM.setPageTitle(t('auth.pages.sso.page.title'));
+LuminaDOM.setPageTitle(t('auth.pages.sso.page.title'));
 
 const loading = ref(false);
 const form = reactive({

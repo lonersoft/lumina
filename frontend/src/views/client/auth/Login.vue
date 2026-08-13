@@ -11,9 +11,9 @@ const Settings = useSettingsStore();
 import { useSound } from '@vueuse/sound';
 import failedAlertSfx from '@/assets/sounds/error.mp3';
 import successAlertSfx from '@/assets/sounds/success.mp3';
-import Auth from '@/mythicaldash/Auth';
+import Auth from '@/lumina/Auth';
 import { useI18n } from 'vue-i18n';
-import { MythicalDOM } from '@/mythicaldash/MythicalDOM';
+import { LuminaDOM } from '@/lumina/LuminaDOM';
 
 const { t } = useI18n();
 const { play: playError } = useSound(failedAlertSfx);
@@ -21,7 +21,7 @@ const { play: playSuccess } = useSound(successAlertSfx);
 const router = useRouter();
 localStorage.clear();
 sessionStorage.clear();
-MythicalDOM.setPageTitle(t('auth.pages.login.page.title'));
+LuminaDOM.setPageTitle(t('auth.pages.login.page.title'));
 
 const loading = ref(false);
 const form = reactive({

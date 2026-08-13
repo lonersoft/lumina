@@ -30,24 +30,24 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Permissions;
-use MythicalDash\Chat\User\Can;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\Chat\User\UserActivities;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Middleware\PermissionMiddleware;
-use MythicalDash\Chat\Announcements\Announcements;
-use MythicalDash\Chat\interface\UserActivitiesTypes;
-use MythicalDash\Chat\Announcements\AnnouncementsTags;
-use MythicalDash\Chat\Announcements\AnnouncementsAssets;
-use MythicalDash\Plugins\Events\Events\AnnouncementsEvent;
+use Lumina\App;
+use Lumina\Permissions;
+use Lumina\Chat\User\Can;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\Chat\User\UserActivities;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Middleware\PermissionMiddleware;
+use Lumina\Chat\Announcements\Announcements;
+use Lumina\Chat\interface\UserActivitiesTypes;
+use Lumina\Chat\Announcements\AnnouncementsTags;
+use Lumina\Chat\Announcements\AnnouncementsAssets;
+use Lumina\Plugins\Events\Events\AnnouncementsEvent;
 
 $router->get('/api/admin/announcements', function () {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ANNOUNCEMENTS_LIST, $session);
     $announcements = Announcements::getAll();
@@ -62,7 +62,7 @@ $router->post('/api/admin/announcements/create', function () {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ANNOUNCEMENTS_CREATE, $session);
     $title = $appInstance->getPostOrNull('title');
@@ -120,7 +120,7 @@ $router->post('/api/admin/announcements/(.*)/update', function ($id) {
     $appInstance = App::getInstance(true);
     global $eventManager;
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ANNOUNCEMENTS_EDIT, $session);
     $title = $appInstance->getPostOrNull('title');
@@ -170,7 +170,7 @@ $router->post('/api/admin/announcements/(.*)/tags/add', function ($id) {
     $appInstance = App::getInstance(true);
     global $eventManager;
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ANNOUNCEMENTS_EDIT, $session);
     $tag = $appInstance->getPostOrNull('tag');
@@ -210,7 +210,7 @@ $router->post('/api/admin/announcements/(.*)/assets/add', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     global $eventManager;
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ANNOUNCEMENTS_EDIT, $session);
     if (!Announcements::exists((int) $id)) {
@@ -329,7 +329,7 @@ $router->get('/api/admin/announcements/(.*)/assets', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ANNOUNCEMENTS_EDIT, $session);
 
     if (Announcements::exists((int) $id)) {
@@ -345,7 +345,7 @@ $router->post('/api/admin/announcements/(.*)/assets/(.*)/delete', function ($id,
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ANNOUNCEMENTS_EDIT, $session);
 
     if (Announcements::exists((int) $id)) {
@@ -376,7 +376,7 @@ $router->post('/api/admin/announcements/(.*)/tags/(.*)/delete', function (int $i
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
 
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ANNOUNCEMENTS_EDIT, $session);
 
@@ -410,7 +410,7 @@ $router->get('/api/admin/announcements/(.*)/tags', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyGET();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ANNOUNCEMENTS_EDIT, $session);
 
     if (!Announcements::exists((int) $id)) {
@@ -424,7 +424,7 @@ $router->post('/api/admin/announcements/(.*)/delete', function ($id) {
     App::init();
     $appInstance = App::getInstance(true);
     $appInstance->allowOnlyPOST();
-    $session = new MythicalDash\Chat\User\Session($appInstance);
+    $session = new Lumina\Chat\User\Session($appInstance);
     PermissionMiddleware::handle($appInstance, Permissions::ADMIN_ANNOUNCEMENTS_DELETE, $session);
 
     if (Announcements::exists((int) $id)) {

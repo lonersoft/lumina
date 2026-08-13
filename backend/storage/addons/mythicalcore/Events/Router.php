@@ -30,14 +30,14 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-namespace MythicalDash\Addons\mythicalcore\Events;
+namespace Lumina\Addons\mythicalcore\Events;
 
-use MythicalDash\App;
-use MythicalDash\Plugins\PluginHelper;
+use Lumina\App;
+use Lumina\Plugins\PluginHelper;
 
-class Router extends \MythicalDash\Addons\mythicalcore\MythicalCore
+class Router extends \Lumina\Addons\mythicalcore\MythicalCore
 {
-    public function __construct(\MythicalDash\Router\Router $router)
+    public function __construct(\Lumina\Router\Router $router)
     {
         $router->add('/api/system/mythicalcore', function (): void {
             $appInstance = App::getInstance(true);

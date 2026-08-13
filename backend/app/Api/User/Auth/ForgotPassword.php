@@ -30,14 +30,14 @@
  * Please rather than modifying the dashboard code try to report the thing you wish on our github or write a plugin
  */
 
-use MythicalDash\App;
-use MythicalDash\Chat\User\User;
-use MythicalDash\Middleware\Firewall;
-use MythicalDash\Config\ConfigInterface;
-use MythicalDash\Chat\columns\UserColumns;
-use MythicalDash\CloudFlare\CloudFlareRealIP;
-use MythicalDash\Plugins\Events\Events\AuthEvent;
-use MythicalDash\Hooks\MythicalSystems\CloudFlare\Turnstile;
+use Lumina\App;
+use Lumina\Chat\User\User;
+use Lumina\Middleware\Firewall;
+use Lumina\Config\ConfigInterface;
+use Lumina\Chat\columns\UserColumns;
+use Lumina\CloudFlare\CloudFlareRealIP;
+use Lumina\Plugins\Events\Events\AuthEvent;
+use Lumina\Hooks\MythicalSystems\CloudFlare\Turnstile;
 
 $router->add('/api/user/auth/forgot', function (): void {
     global $eventManager;
