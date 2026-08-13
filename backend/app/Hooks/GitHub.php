@@ -61,11 +61,11 @@ class GitHub
         }
 
         // Make GET request to GitHub API
-        $response = $this->client->request('GET', 'https://api.github.com/repos/mythicalltd/mythicaldash', [
+        $response = $this->client->request('GET', 'https://api.github.com/repos/lonersoft/lumina', [
             'headers' => [
                 'Accept' => 'application/vnd.github+json',
                 'X-GitHub-Api-Version' => '2022-11-28',
-                'User-Agent' => 'MythicalDash',
+                'User-Agent' => 'Lumina',
             ],
         ]);
 
@@ -94,12 +94,12 @@ class GitHub
         }
 
         try {
-            $response = $this->client->request('GET', 'https://api.github.com/repos/mythicalltd/mythicaldash/releases', [
+            $response = $this->client->request('GET', 'https://api.github.com/repos/lonersoft/lumina/releases', [
                 'headers' => [
                     // Request GitHub-rendered HTML in addition to JSON fields
                     'Accept' => 'application/vnd.github.v3.html+json',
                     'X-GitHub-Api-Version' => '2022-11-28',
-                    'User-Agent' => 'MythicalDash',
+                    'User-Agent' => 'Lumina',
                 ],
                 'query' => [
                     'per_page' => $perPage,

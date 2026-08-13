@@ -49,8 +49,8 @@ define('APP_DEBUG', false);
 define('SYSTEM_OS_NAME', gethostname() . '/' . PHP_OS_FAMILY);
 define('SYSTEM_KERNEL_NAME', php_uname('s'));
 define('TELEMETRY', true);
-define('APP_VERSION', '3.5.4-aurora');
-define('APP_UPSTREAM', 'github.com/mythicalltd/mythicaldash');
+define('APP_VERSION', '1.0.0-lumina');
+define('APP_UPSTREAM', 'github.com/lonersoft/lumina');
 
 if (APP_DEBUG) {
     define('RATE_LIMIT', 500000);

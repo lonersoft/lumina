@@ -17,13 +17,13 @@
                     <div class="p-5">
                         <div class="flex items-center space-x-4 mb-4">
                             <img
-                                :src="plugin.plugin.icon || 'https://github.com/mythicalltd.png'"
+                                :src="plugin.plugin.icon || 'https://github.com/lonersoft.png'"
                                 :alt="plugin.plugin.name"
-                                class="w-12 h-12 rounded-md bg-gray-600 object-cover"
+                                class="w-12 h-12 rounded-md bg-gray-600 object-cover mr-4"
                                 @error="
                                     (e: Event) => {
                                         const target = e.target as HTMLImageElement;
-                                        target.src = 'https://github.com/mythicalltd.png';
+                                        target.src = 'https://github.com/lonersoft.png';
                                     }
                                 "
                             />

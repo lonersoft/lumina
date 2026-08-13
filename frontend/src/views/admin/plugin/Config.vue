@@ -17,15 +17,15 @@
             <div class="bg-gray-800/50 rounded-xl overflow-hidden shadow-md border border-gray-700/50 p-6 mb-6">
                 <div class="flex items-center mb-4">
                     <img
-                        :src="plugin?.plugin?.icon || 'https://github.com/mythicalltd.png'"
-                        :alt="plugin?.plugin?.name"
-                        class="w-12 h-12 rounded-md bg-gray-600 object-cover mr-4"
-                        @error="
-                            (e: Event) => {
-                                const target = e.target as HTMLImageElement;
-                                target.src = 'https://github.com/mythicalltd.png';
+                        :src="plugin?.plugin?.icon || 'https://github.com/lonersoft.png'"
+                        alt="Plugin Icon"
+                        class="w-full h-full object-cover"
+                        @error="(e) => {
+                            const target = e.target as HTMLImageElement;
+                            if (target) {
+                                target.src = 'https://github.com/lonersoft.png';
                             }
-                        "
+                        }"
                     />
                     <div>
                         <h2 class="text-xl font-semibold text-white">{{ plugin?.plugin?.name || 'Plugin' }}</h2>

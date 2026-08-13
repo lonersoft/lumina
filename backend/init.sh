@@ -10,6 +10,8 @@ generate_encryption_key() {
 }
 
 if [ -f "$ENV_FILE" ]; then
+    # Ensure file ends with a newline before appending
+    [ -n "$(tail -c 1 "$ENV_FILE")" ] && echo "" >> "$ENV_FILE"
     # Update existing keys or append if missing
     grep -q '^REDIS_HOST=' "$ENV_FILE" && sed -i 's/^REDIS_HOST=.*/REDIS_HOST=redis/' "$ENV_FILE" || echo 'REDIS_HOST=redis' >> "$ENV_FILE"
     [ -n "$REDIS_PASSWORD" ] && (grep -q '^REDIS_PASSWORD=' "$ENV_FILE" && sed -i "s/^REDIS_PASSWORD=.*/REDIS_PASSWORD=${REDIS_PASSWORD}/" "$ENV_FILE" || echo "REDIS_PASSWORD=${REDIS_PASSWORD}" >> "$ENV_FILE")
