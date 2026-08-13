@@ -184,6 +184,7 @@ class Cron
      */
     private function getStoragePath(): string
     {
-        return APP_CACHE_DIR . "/cron/{$this->identifier}.mydtt";
+        $cacheDir = defined('APP_CACHE_DIR') ? APP_CACHE_DIR : (defined('APP_STORAGE_DIR') ? APP_STORAGE_DIR . 'caches' : __DIR__ . '/../../storage/caches');
+        return $cacheDir . "/cron/{$this->identifier}.mydtt";
     }
 }

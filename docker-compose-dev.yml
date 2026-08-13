@@ -97,6 +97,7 @@ services:
     working_dir: /app
     environment:
       - CI=true
+      - VITE_PROXY_TARGET=http://backend:80
     command: sh -c "npm install -g pnpm@10.22.0 && pnpm install && pnpm run dev"
     volumes:
       - ./frontend:/app

@@ -48,7 +48,7 @@ class PluginProcessor
      *
      * @return MythicalDashPlugin|null The event class instance or null if not found
      */
-    public static function getEventProcessor(string $identifier): ?MythicalDashPlugin
+    public static function getEventProcessor(string $identifier): ?LuminaPlugin
     {
         // Return cached instance if available
         if (isset(self::$pluginCache[$identifier])) {
@@ -76,8 +76,8 @@ class PluginProcessor
                 return null;
             }
 
-            if (!is_subclass_of($eventClass, MythicalDashPlugin::class)) {
-                $logger->warning("Class {$eventClass} does not implement MythicalDashPlugin");
+            if (!is_a($eventClass, LuminaPlugin::class, true) && !is_a($eventClass, MythicalDashPlugin::class, true)) {
+                $logger->warning("Class {$eventClass} does not implement LuminaPlugin");
 
                 return null;
             }

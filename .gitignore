@@ -8,3 +8,6 @@ MythicalDash.zip
 Lumina.zip
 *.mypycache
 frontend/.pnpm-store/
+.env
+backend/storage/.env
+*.mydb

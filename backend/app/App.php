@@ -113,6 +113,12 @@ class App extends LuminaAPP
             if (isset($_ENV['firewall_enabled']) && $_ENV['firewall_enabled'] == 'true') {
                 try {
                     $redis = new \Redis();
+                    $redisHost = $_ENV['REDIS_HOST'] ?? 'redis';
+                    $redisPort = intval($_ENV['REDIS_PORT'] ?? 6379);
+                    $redis->connect($redisHost, $redisPort, 2.5);
+                    if (!empty($_ENV['REDIS_PASSWORD'])) {
+                        $redis->auth($_ENV['REDIS_PASSWORD']);
+                    }
                     if (isset($_ENV['firewall_rate_limit'])) {
                         $rateLimiter = new RedisRateLimiter(Rate::perMinute($_ENV['firewall_rate_limit']), $redis, 'rate_limiting');
                         try {

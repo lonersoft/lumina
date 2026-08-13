@@ -7,6 +7,8 @@ import ViteYaml from '@modyfi/vite-plugin-yaml';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://vite.dev/config/
+const proxyTarget = process.env.VITE_PROXY_TARGET || 'http://backend:80';
+
 export default defineConfig({
     plugins: [
         ViteYaml({
@@ -25,21 +27,22 @@ export default defineConfig({
     },
     server: {
         host: '0.0.0.0',
+        allowedHosts: true,
         proxy: {
             '/api': {
-                target: 'http://localhost:6000',
+                target: proxyTarget,
                 changeOrigin: true,
                 secure: false,
                 rewrite: (path) => path,
             },
             '/attachments': {
-                target: 'http://localhost:6000',
+                target: proxyTarget,
                 changeOrigin: true,
                 secure: false,
                 rewrite: (path) => path,
             },
             '/i/': {
-                target: 'http://localhost:6000',
+                target: proxyTarget,
                 changeOrigin: true,
                 secure: false,
                 rewrite: (path) => path,

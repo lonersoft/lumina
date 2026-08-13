@@ -508,8 +508,13 @@ class HealthCheck
         if (extension_loaded('redis')) {
             try {
                 $redis = new \Redis();
-                $redis->connect('127.0.0.1', 6379, 2);
-                if ($redis->isConnected() && $redis->ping()) {
+                $redisHost = $_ENV['REDIS_HOST'] ?? '127.0.0.1';
+                $redisPort = intval($_ENV['REDIS_PORT'] ?? 6379);
+                $redis->connect($redisHost, $redisPort, 2);
+                if (!empty($_ENV['REDIS_PASSWORD'])) {
+                    $redis->auth($_ENV['REDIS_PASSWORD']);
+                }
+                if ($redis->ping()) {
                     $this->results['redis_connectivity'] = [
                         'status' => 'pass',
                         'message' => 'Redis connection successful',
@@ -540,7 +545,8 @@ class HealthCheck
      */
     private function checkEnvironmentFile(): void
     {
-        $envFile = getcwd() . '/backend/storage/.env';
+        $baseDir = file_exists(getcwd() . '/backend') ? getcwd() . '/backend' : getcwd();
+        $envFile = $baseDir . '/storage/.env';
         if (file_exists($envFile)) {
             $this->results['environment_file'] = [
                 'status' => 'pass',
@@ -559,8 +565,9 @@ class HealthCheck
      */
     private function checkComposerDependencies(): void
     {
-        $composerLock = getcwd() . '/backend/composer.lock';
-        $vendorDir = getcwd() . '/backend/storage/packages';
+        $baseDir = file_exists(getcwd() . '/backend') ? getcwd() . '/backend' : getcwd();
+        $composerLock = $baseDir . '/composer.lock';
+        $vendorDir = $baseDir . '/storage/packages';
 
         if (file_exists($composerLock)) {
             $this->results['composer_lock'] = [

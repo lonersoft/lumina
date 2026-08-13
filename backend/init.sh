@@ -2,6 +2,7 @@
 
 # Ensure storage/.env matches container networking and generate encryption key if missing
 ENV_FILE="/var/www/html/storage/.env"
+[ -d "$ENV_FILE" ] && rm -rf "$ENV_FILE"
 mkdir -p /var/www/html/storage
 
 generate_encryption_key() {
@@ -97,7 +98,7 @@ echo "🚀 Lumina Docker is ready to work! 🚀"
 echo ""
 
 # Remove the default nginx index page
-rm /var/www/html/index.nginx-debian.html
+rm -f /var/www/html/index.nginx-debian.html
 
 # Start the main application
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

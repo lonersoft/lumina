@@ -55,6 +55,13 @@ try {
     exit;
 }
 
+if (!defined('APP_STORAGE_DIR')) {
+    define('APP_STORAGE_DIR', APP_DIR . 'storage/');
+}
+if (!defined('APP_CACHE_DIR')) {
+    define('APP_CACHE_DIR', APP_STORAGE_DIR . 'caches');
+}
+
 if (!defined('IS_CLI')) {
     ini_set('expose_php', 'off');
     header_remove('X-Powered-By');

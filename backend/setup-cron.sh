@@ -8,7 +8,8 @@ mkdir -p /var/spool/cron/crontabs
 mkdir -p /var/www/html/storage/cron
 
 # Create cron jobs for www-data user
-cat > /var/spool/cron/crontabs/www-data << EOF
+touch /var/spool/cron/crontabs/www-data 2>/dev/null || true
+cat > /var/spool/cron/crontabs/www-data 2>/dev/null << EOF
 * * * * * cd /var/www/html && php storage/cron/runner.php >> /var/log/cron.log 2>&1
 * * * * * cd /var/www/html && bash storage/cron/runner.bash >> /var/log/cron.log 2>&1
 EOF
