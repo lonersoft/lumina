@@ -1,5 +1,5 @@
-# MythicalDash
-# MythicalDash Build System
+# Lumina
+# Lumina Build System
 # ==========================================
 
 # Directory configurations
@@ -43,7 +43,7 @@ SHELL := /bin/bash
 
 # Default target
 help:
-	@echo -e "${BOLD}${BLUE}MythicalDash Development System${NC}"
+	@echo -e "${BOLD}${BLUE}Lumina Development System${NC}"
 	@echo -e "${CYAN}================================${NC}\n"
 	@echo -e "${BOLD}Available commands:${NC}"
 	@echo -e "  ${GREEN}make frontend${NC}    ${ROCKET} Builds the frontend for production"
@@ -53,8 +53,8 @@ help:
 	@echo -e "  ${GREEN}make set-prod${NC}    ${PROD} Sets APP_DEBUG to false for production\n"
 	@echo -e "  ${GREEN}make set-dev${NC}     ${DEV} Sets APP_DEBUG to true for development"
 	@echo -e "  ${GREEN}make get-tools${NC}  ${TOOLS} Installs development tools (NVM, Yarn, PNPM)"
-	@echo -e "  ${GREEN}make upgrade-core${NC} ${UPGRADE} Upgrades the core of MythicalDash"
-	@echo -e "  ${GREEN}make release-package${NC} ${PACKAGE} Creates a release package MythicalDash.zip"
+	@echo -e "  ${GREEN}make upgrade-core${NC} ${UPGRADE} Upgrades the core of Lumina"
+	@echo -e "  ${GREEN}make release-package${NC} ${PACKAGE} Creates a release package Lumina.zip"
 	@echo -e "${YELLOW}Use 'make <command>' to execute a command${NC}\n"
 
 # Frontend tasks
@@ -78,7 +78,7 @@ clean-license:
 	@echo -e "\n${BOLD}${BLUE}Cleaning License${NC} ${CLEAN}"
 	@echo -e "${CYAN}=======================${NC}"
 	@echo -e "${YELLOW}${WARN} Cleaning license...${NC}"
-	@rm -rf /var/www/mythicaldash-v3/backend/storage/caches/licenses/*.json 
+	@rm -rf /var/www/lumina/backend/storage/caches/licenses/*.json 
 	@echo -e "${GREEN}${CHECK} License cleaned${NC}\n"
 
 # Release build
@@ -95,7 +95,7 @@ release:
 	@echo -e "${GREEN}${CHECK} Frontend dependencies installed${NC}\n"
 
 	@echo -e "${PURPLE}${INFO} Exporting permissions...${NC}"
-	@php mythicaldash ExportPermissions
+	@php lumina ExportPermissions
 	@echo -e "${GREEN}${CHECK} Permissions exported${NC}\n"
 	
 	@echo -e "${PURPLE}${INFO} Frontend checks...${NC}"
@@ -123,12 +123,12 @@ release-package:
 	@echo -e "${CYAN}=========================${NC}"
 	@$(MAKE) set-prod
 	@$(MAKE) release
-	@echo -e "${GREEN}${INFO} Creating MythicalDash.zip package...${NC}"
+	@echo -e "${GREEN}${INFO} Creating Lumina.zip package...${NC}"
 	@echo -e "${YELLOW}${WARN} Creating package with tracked files and frontend dist...${NC}"
-	@rm -f MythicalDash.zip
-	@git ls-files | zip MythicalDash.zip -@
-	@zip -r MythicalDash.zip $(FRONTEND_DIR)/dist
-	@echo -e "${GREEN}${CHECK} Release package created: MythicalDash.zip${NC}\n"
+	@rm -f Lumina.zip
+	@git ls-files | zip Lumina.zip -@
+	@zip -r Lumina.zip $(FRONTEND_DIR)/dist
+	@echo -e "${GREEN}${CHECK} Release package created: Lumina.zip${NC}\n"
 	@echo -e "${BOLD}${GREEN}🎉 Release package ready for distribution! 🎉${NC}\n"
 
 lint: 
@@ -193,33 +193,33 @@ get-tools:
 	@echo -e "${GREEN}${INFO} Installing backend dependencies with Composer...${NC}"
 	@cd $(BACKEND_DIR) && $(COMPOSER) install && echo -e "${GREEN}${CHECK} Backend dependencies installed successfully${NC}" || \
 		echo -e "${YELLOW}${WARN} Could not install backend dependencies. Please run 'cd $(BACKEND_DIR) && composer install' manually${NC}"
-	@echo -e "${BOLD}${GREEN}🎉 Tools are installed and you are ready to build MythicalDash! 🎉${NC}\n"
+	@echo -e "${BOLD}${GREEN}🎉 Tools are installed and you are ready to build Lumina! 🎉${NC}\n"
 	
-# Upgrade MythicalDash
+# Upgrade Lumina
 upgrade-core:
-	@echo -e "\n${BOLD}${BLUE}MythicalDash Upgrade Process${NC} ${ROCKET}"
+	@echo -e "\n${BOLD}${BLUE}Lumina Upgrade Process${NC} ${ROCKET}"
 	@echo -e "${CYAN}============================${NC}"
-	@echo -e "${YELLOW}${WARN} This will upgrade MythicalDash to the latest version!${NC}"
+	@echo -e "${YELLOW}${WARN} This will upgrade Lumina to the latest version!${NC}"
 	@echo -e "${YELLOW}${WARN} Make sure you have backed up your data before proceeding!${NC}\n"
 	@read -p "Are you sure you want to continue? (y/N): " confirm && [ "$$confirm" = "y" ] || [ "$$confirm" = "Y" ] || exit 1
 	@echo -e "\n${GREEN}${INFO} Step 1: Creating backup...${NC}"
-	@mariadb-dump -p mythicaldash_remastered > mythicaldash_backup.sql && echo -e "${GREEN}${CHECK} Database backup created: mythicaldash_backup.sql${NC}" || echo -e "${RED}${CROSS} Failed to create database backup${NC}"
-	@cd /var/www && zip -r mythicaldash_backup.zip mythicaldash-v3/ && echo -e "${GREEN}${CHECK} File system backup created: /var/www/mythicaldash_backup.zip${NC}" || echo -e "${RED}${CROSS} Failed to create file system backup${NC}"
+	@mariadb-dump -p lumina > lumina_backup.sql && echo -e "${GREEN}${CHECK} Database backup created: lumina_backup.sql${NC}" || echo -e "${RED}${CROSS} Failed to create database backup${NC}"
+	@cd /var/www && zip -r lumina_backup.zip lumina/ && echo -e "${GREEN}${CHECK} File system backup created: /var/www/lumina_backup.zip${NC}" || echo -e "${RED}${CROSS} Failed to create file system backup${NC}"
 	@echo -e "\n${GREEN}${INFO} Step 2: Downloading latest release...${NC}"
-	@curl -Lo MythicalDash.zip https://github.com/MythicalLTD/MythicalDash/releases/latest/download/MythicalDash.zip && echo -e "${GREEN}${CHECK} Latest release downloaded${NC}" || (echo -e "${RED}${CROSS} Failed to download latest release${NC}" && exit 1)
+	@curl -Lo Lumina.zip https://github.com/MythicalLTD/Lumina/releases/latest/download/Lumina.zip && echo -e "${GREEN}${CHECK} Latest release downloaded${NC}" || (echo -e "${RED}${CROSS} Failed to download latest release${NC}" && exit 1)
 	@echo -e "\n${GREEN}${INFO} Step 3: Extracting update files...${NC}"
-	@unzip -o MythicalDash.zip -d /var/www/mythicaldash-v3 && echo -e "${GREEN}${CHECK} Files extracted successfully${NC}" || (echo -e "${RED}${CROSS} Failed to extract files${NC}" && exit 1)
-	@rm -f MythicalDash.zip && echo -e "${GREEN}${CHECK} Cleanup: Removed zip file${NC}"
+	@unzip -o Lumina.zip -d /var/www/lumina && echo -e "${GREEN}${CHECK} Files extracted successfully${NC}" || (echo -e "${RED}${CROSS} Failed to extract files${NC}" && exit 1)
+	@rm -f Lumina.zip && echo -e "${GREEN}${CHECK} Cleanup: Removed zip file${NC}"
 	@echo -e "\n${GREEN}${INFO} Step 4: Updating backend dependencies...${NC}"
 	@cd $(BACKEND_DIR) && COMPOSER_ALLOW_SUPERUSER=1 $(COMPOSER) install --no-dev --optimize-autoloader && echo -e "${GREEN}${CHECK} Backend dependencies updated${NC}" || echo -e "${RED}${CROSS} Failed to update backend dependencies${NC}"
 	@echo -e "\n${GREEN}${INFO} Step 5: Running database migrations...${NC}"
-	@php mythicaldash migrate && echo -e "${GREEN}${CHECK} Database migrations completed${NC}" || echo -e "${RED}${CROSS} Database migrations failed${NC}"
+	@php lumina migrate && echo -e "${GREEN}${CHECK} Database migrations completed${NC}" || echo -e "${RED}${CROSS} Database migrations failed${NC}"
 	@echo -e "\n${GREEN}${INFO} Step 6: Setting proper file permissions...${NC}"
-	@chown -R www-data:www-data /var/www/mythicaldash-v3/* && echo -e "${GREEN}${CHECK} File permissions set${NC}" || echo -e "${YELLOW}${WARN} Could not set file permissions (you may need to run as root)${NC}"
+	@chown -R www-data:www-data /var/www/lumina/* && echo -e "${GREEN}${CHECK} File permissions set${NC}" || echo -e "${YELLOW}${WARN} Could not set file permissions (you may need to run as root)${NC}"
 	@echo -e "\n${GREEN}${INFO} Step 7: Setting production mode...${NC}"
 	@$(MAKE) set-prod
 	@echo -e "\n${BOLD}${GREEN}🎉 Upgrade completed successfully! 🎉${NC}"
-	@echo -e "${GREEN}${CHECK} MythicalDash has been upgraded to the latest version${NC}"
+	@echo -e "${GREEN}${CHECK} Lumina has been upgraded to the latest version${NC}"
 	@echo -e "${CYAN}${INFO} Backup files created:${NC}"
-	@echo -e "  - Database: mythicaldash_backup.sql"
-	@echo -e "  - Files: /var/www/mythicaldash_backup.zip\n"
+	@echo -e "  - Database: lumina_backup.sql"
+	@echo -e "  - Files: /var/www/lumina_backup.zip\n"

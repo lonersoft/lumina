@@ -1,12 +1,13 @@
 <?php
 
 /*
- * This file is part of MythicalDash.
+ * This file is part of Lumina, a fork of MythicalDash.
  *
  * MIT License
  *
  * Copyright (c) 2020-2025 MythicalSystems
  * Copyright (c) 2020-2025 Cassian Gherman (NaysKutzu)
+ * Copyright (c) 2026 Lumi
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -79,13 +80,13 @@ $router->add('/api/stripe/processed', function (): void {
                 $paid = false;
                 if ($paymentId !== '') {
                     try {
-                        $checkout = \Stripe\Checkout\Session::retrieve($paymentId);
+                        $checkout = Stripe\Checkout\Session::retrieve($paymentId);
                         $expectedCents = (int) round(
                             ((int) $coins / (int) $appInstance->getConfig()->getDBSetting(ConfigInterface::CREDITS_RECHARGE_AMOUNT, '100')) * 100
                         );
                         $paid = ($checkout->payment_status === 'paid')
                             && ((int) $checkout->amount_total === $expectedCents);
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         $appInstance->getLogger()->error('Stripe verification failed for ' . $code . ': ' . $e->getMessage());
                         $paid = false;
                     }

@@ -1,14 +1,14 @@
 {
-    "name": "mythicalsystems/mythicaldash",
-    "description": "The next generation of MythicalDash",
+    "name": "lonersoft/lumina",
+    "description": "Lumina, the next generation of MythicalDash",
     "type": "project",
-    "homepage": "https://github.com/mythicalltd/myhticaldash",
+    "homepage": "https://github.com/lonersoft/lumina",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "MythicalDash\\": "app/",
-            "MythicalDash\\Addons\\": "storage/addons/",
-			"MythicalDash\\Cron\\": "storage/cron/php/"
+            "Lumina\\": "app/",
+            "Lumina\\Addons\\": "storage/addons/",
+			"Lumina\\Cron\\": "storage/cron/php/"
         }
     },
     "config": {
@@ -45,11 +45,11 @@
     },
     "prefer-stable": true,
     "support": {
-        "wiki": "https://www.mythical.systems",
-        "chat": "https://discord.mythical.systems",
-        "issues": "https://github.com/mythicalltd/mythicalldash/issues",
-        "docs": "https://www.mythical.systems",
-        "forum": "https://discord.mythical.systems"
+        "wiki": "https://loners.software",
+        "chat": "https://discord.loners.software",
+        "issues": "https://github.com/lonersoft/lumina/issues",
+        "docs": "https://docs.loners.software",
+        "forum": "https://discord.loners.software"
     },
     "funding": [
         {

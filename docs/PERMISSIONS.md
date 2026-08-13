@@ -1,6 +1,6 @@
-# MythicalDash Permission Nodes
+# Lumina Permission Nodes
 
-This document provides a comprehensive overview of all permission nodes used in MythicalDash.
+This document provides a comprehensive overview of all permission nodes used in Lumina.
 
 ## Overview
 
@@ -19,7 +19,7 @@ CONSTANT_NAME=permission.node.value | Category | Description
 
 ### PHP
 ```php
-use MythicalDash\Permissions;
+use Lumina\Permissions;
 
 // Check if user has permission
 if (auth()->user()->hasPermission(Permissions::ADMIN_DASHBOARD_VIEW)) {
@@ -29,7 +29,7 @@ if (auth()->user()->hasPermission(Permissions::ADMIN_DASHBOARD_VIEW)) {
 
 ### TypeScript/JavaScript
 ```typescript
-import Permissions from '@/mythicaldash/Permissions';
+import Permissions from '@/lumina/Permissions';
 
 // Check if user has permission
 if (auth.user.hasPermission(Permissions.ADMIN_DASHBOARD_VIEW)) {
@@ -281,14 +281,14 @@ To add a new permission node:
 
 1. Edit `permission_nodes.txt` in the root directory
 2. Add your permission in the format: `CONSTANT_NAME=permission.node.value | Category | Description`
-3. Run `php mythicaldash permissionExport` to regenerate all files
+3. Run `php lumina permissionExport` to regenerate all files
 4. Rebuild the frontend if necessary
 
 ## File Locations
 
 - **Source:** `permission_nodes.txt` (root directory)
 - **PHP:** `backend/app/Permissions.php`
-- **TypeScript:** `frontend/src/mythicaldash/Permissions.ts`
+- **TypeScript:** `frontend/src/lumina/Permissions.ts`
 - **Documentation:** `docs/PERMISSIONS.md` (this file)
 
 ## Auto-Generation

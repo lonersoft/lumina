@@ -24,14 +24,14 @@ backend/storage/addons/
 The main configuration file that defines your plugin's metadata, dependencies, and settings.
 
 ### YourPlugin.php
-The main plugin class that implements `MythicalDashPlugin` and handles events, initialization, etc.
+The main plugin class that implements `LuminaPlugin` and handles events, initialization, etc.
 
 ## Optional Directories
 
 ### Commands/
 Place your CLI command classes here. Each command should:
 - Implement `CommandBuilder`
-- Be in the `MythicalDash\Addons\yourplugin\Commands` namespace
+- Be in the `Lumina\Addons\yourplugin\Commands` namespace
 - Provide `execute`, `getDescription`, and `getSubCommands` methods
 
 ### Events/
@@ -71,7 +71,7 @@ Scheduled task classes that:
 - Plugin identifier: lowercase (e.g., 'myplugin')
 - Class names: StudlyCase (e.g., 'MyPlugin')
 - Files: Match class names (e.g., 'MyPlugin.php')
-- Namespaces: `MythicalDash\Addons\yourplugin\*`
+- Namespaces: `Lumina\Addons\yourplugin\*`
 
 ## Best Practices
 - Keep files organized in appropriate directories

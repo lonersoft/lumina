@@ -81,7 +81,7 @@
 ## Compatibility
 
 ### Version Management
-- Check MythicalDash version
+- Check Lumina version
 - Check PHP version
 - Check extension versions
 - Handle missing dependencies

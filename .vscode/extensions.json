@@ -1,7 +1,6 @@
 {
     "recommendations": [
         "antfu.vite",
-        "inferrinizzard.prettier-sql-vscode",
         "mblode.pretty-formatter",
         "fcoury.pretty-sql",
         "devsense.profiler-php-vscode",

@@ -35,13 +35,13 @@ else
     cat > "$ENV_FILE" <<EOF
 DATABASE_HOST=mysql
 DATABASE_PORT=3306
-DATABASE_DATABASE=${DATABASE_DATABASE:-mythicaldash_v3}
-DATABASE_USER=${DATABASE_USER:-mythicaldash_v3}
-DATABASE_PASSWORD=${DATABASE_PASSWORD:-mythicaldash_v3_password}
+DATABASE_DATABASE=${DATABASE_DATABASE:-lumina}
+DATABASE_USER=${DATABASE_USER:-lumina}
+DATABASE_PASSWORD=${DATABASE_PASSWORD:-lumina_password}
 DATABASE_ENCRYPTION="xchacha20"
 DATABASE_ENCRYPTION_KEY="$ENC_KEY"
 REDIS_HOST=redis
-REDIS_PASSWORD=${REDIS_PASSWORD:-mythicaldash_v3_redis}
+REDIS_PASSWORD=${REDIS_PASSWORD:-lumina_redis}
 EOF
 fi
 
@@ -93,7 +93,7 @@ echo "Cron jobs setup completed."
 # Note: The main cron execution will be handled by supervisord using cron-runner.sh
 
 echo ""
-echo "🚀 MythicalDash Docker is ready to work! 🚀"
+echo "🚀 Lumina Docker is ready to work! 🚀"
 echo ""
 
 # Remove the default nginx index page

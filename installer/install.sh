@@ -1,5 +1,5 @@
 #!/bin/bash
-# MythicalDash Docker Installation Script
+# Lumina Docker Installation Script
 # Docker-only installer/uninstaller for Ubuntu/Debian
 
 if [ "$EUID" -ne 0 ]; then
@@ -55,7 +55,7 @@ while [[ $# -gt 0 ]]; do
 		shift 2
 		;;
 	--help | -h)
-		echo "MythicalDash Installer"
+		echo "Lumina Installer"
 		echo ""
 		echo "Usage: $0 [OPTIONS]"
 		echo ""
@@ -89,9 +89,9 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-LOG_DIR=/var/www/mythicaldash
+LOG_DIR=/var/www/lumina
 LOG_FILE=$LOG_DIR/install.log
-BACKUP_DIR="/var/www/mythicaldash/backups"
+BACKUP_DIR="/var/www/lumina/backups"
 
 # Colors (use real ANSI escapes)
 NC=$'\033[0m'
@@ -109,7 +109,7 @@ log_init() {
 	{
 		echo "========================================"
 		date '+%Y-%m-%d %H:%M:%S %Z' | sed 's/^/[START] /'
-		echo "Script: MythicalDash Installer"
+		echo "Script: Lumina Installer"
 		echo "========================================"
 	} >>"$LOG_FILE" 2>&1
 }
@@ -191,13 +191,13 @@ run_with_spinner() {
 }
 
 support_hint() {
-	echo -e "${YELLOW}Need help?${NC} Join Discord: ${BLUE}https://discord.mythical.systems${NC}  Docs: ${BLUE}https://docs.mythical.systems${NC}"
+	echo -e "${YELLOW}Need help?${NC} Join Discord: ${BLUE}https://discord.loners.software${NC}  Docs: ${BLUE}https://docs.loners.software${NC}"
 }
 
 upload_logs_on_fail() {
 	if command -v curl >/dev/null 2>&1; then
 		log_info "Uploading logs to mclo.gs for diagnostics..."
-		RESPONSE=$(curl -s -X POST --data-urlencode "content@${LOG_FILE}" "https://api.mythicaldash.com/1/log")
+		RESPONSE=$(curl -s -X POST --data-urlencode "content@${LOG_FILE}" "https://api.mclo.gs/1/log")
 
 		# Parse JSON response
 		SUCCESS=$(echo "$RESPONSE" | grep -o '"success":[^,]*' | cut -d':' -f2 | tr -d '"' 2>/dev/null)
@@ -223,13 +223,13 @@ trap 'log_error "An unexpected error occurred."; upload_logs_on_fail' ERR
 set -o pipefail
 
 print_banner() {
-	echo -e "${CYAN}${BOLD}MythicalDash${NC}"
-	echo -e "${CYAN}${BOLD}Script Version: ${BLUE}2.0.1${NC}"
+	echo -e "${CYAN}${BOLD}Lumina${NC}"
+	echo -e "${CYAN}${BOLD}Script Version: ${BLUE}1.0.0${NC}"
 	echo -e "${CYAN}${BOLD}┌────────────────────────────────────────────────────────────┐${NC}"
-	echo -e "${CYAN}${BOLD}${NC}  🌐 Website:  ${BLUE}www.mythical.systems${NC}           ${CYAN}${BOLD}${NC}"
-	echo -e "${CYAN}${BOLD}${NC}  💻 Github:   ${BLUE}github.com/mythicalltd/mythicaldash${NC}    ${CYAN}${BOLD}${NC}"
-	echo -e "${CYAN}${BOLD}${NC}  💬 Discord:  ${BLUE}discord.mythical.systems${NC}                ${CYAN}${BOLD}${NC}"
-	echo -e "${CYAN}${BOLD}${NC}  📚 Docs:     ${BLUE}docs.mythical.systems${NC}                   ${CYAN}${BOLD}${NC}"
+	echo -e "${CYAN}${BOLD}${NC}  🌐 Website:  ${BLUE}www.loners.software${NC}           ${CYAN}${BOLD}${NC}"
+	echo -e "${CYAN}${BOLD}${NC}  💻 Github:   ${BLUE}github.com/lonersoft/lumina${NC}    ${CYAN}${BOLD}${NC}"
+	echo -e "${CYAN}${BOLD}${NC}  💬 Discord:  ${BLUE}discord.loners.software${NC}                ${CYAN}${BOLD}${NC}"
+	echo -e "${CYAN}${BOLD}${NC}  📚 Docs:     ${BLUE}docs.loners.software${NC}                   ${CYAN}${BOLD}${NC}"
 	echo -e "${CYAN}${BOLD}└────────────────────────────────────────────────────────────┘${NC}"
 }
 
@@ -324,7 +324,7 @@ show_panel_menu() {
 	draw_hr
 	echo ""
 	echo -e "  ${GREEN}${BOLD}[1]${NC} ${BOLD}Install Panel${NC}"
-	echo -e "     ${BLUE}→ Install MythicalDash web interface using Docker${NC}"
+	echo -e "     ${BLUE}→ Install Lumina web interface using Docker${NC}"
 	echo -e "     ${BLUE}→ Choose access method (Cloudflare Tunnel, Nginx, Apache, Direct)${NC}"
 	echo -e "     ${BLUE}→ Choose release type (Stable Release or Development Build)${NC}"
 	echo ""
@@ -532,7 +532,7 @@ setup_qemu_emulation() {
 	fi
 
 	log_warn "Unsupported ARM architecture detected: $arch"
-	log_warn "MythicalDash only provides native images for amd64 and arm64 (aarch64)."
+	log_warn "Lumina only provides native images for amd64 and arm64 (aarch64)."
 	log_warn "QEMU emulation will be used, which may result in reduced performance."
 
 	# Ensure Docker is installed before setting up QEMU
@@ -592,16 +592,16 @@ setup_qemu_emulation() {
 	log_info "Note: Container startup may be slower due to emulation overhead."
 }
 
-# Function to stop all MythicalDash containers (including old containers that might not be in docker-compose.yml)
-stop_all_mythicaldash_containers() {
+# Function to stop all lumina containers (including old containers that might not be in docker-compose.yml)
+stop_all_lumina_containers() {
 	# First, try docker compose down if docker-compose.yml exists (stops containers defined in compose file)
-	if [ -f /var/www/mythicaldash/docker-compose.yml ]; then
-		cd /var/www/mythicaldash || true
+	if [ -f /var/www/lumina/docker-compose.yml ]; then
+		cd /var/www/lumina || true
 		sudo docker compose down >>"$LOG_FILE" 2>&1 || true
 	fi
 
-	# Then stop any remaining MythicalDash containers by name (catches old containers not in compose file)
-	RUNNING_CONTAINERS=$(sudo docker ps --format '{{.Names}}' 2>/dev/null | grep '^mythicaldash_' || true)
+	# Then stop any remaining Lumina containers by name (catches old containers not in compose file)
+	RUNNING_CONTAINERS=$(sudo docker ps --format '{{.Names}}' 2>/dev/null | grep '^lumina_' || true)
 
 	if [ -n "$RUNNING_CONTAINERS" ]; then
 		while IFS= read -r container; do
@@ -640,9 +640,9 @@ prompt_secret() {
 
 uninstall_cloudflare_tunnel() {
 	echo "Uninstalling Cloudflare Tunnel..."
-	if [ -f /var/www/mythicaldash/.env ]; then
+	if [ -f /var/www/lumina/.env ]; then
 		# shellcheck source=/dev/null
-		. /var/www/mythicaldash/.env
+		. /var/www/lumina/.env
 
 		if [ -n "$TUNNEL_ID" ] && [ -n "$ACCOUNT_ID" ] && [ -n "$ZONE_ID" ] && [ -n "$CF_HOSTNAME" ]; then
 			echo "Deleting DNS record for $CF_HOSTNAME..."
@@ -725,7 +725,7 @@ setup_cloudflare_tunnel_full_auto() {
 	# Create unique tunnel name based on hostname to avoid conflicts
 	# Use hostname as part of tunnel name, sanitize it (remove dots, special chars)
 	TUNNEL_NAME_SANITIZED=$(echo "$CF_HOSTNAME" | sed 's/[^a-zA-Z0-9-]/-/g' | tr '[:upper:]' '[:lower:]')
-	TUNNEL_NAME="MythicalDash-${TUNNEL_NAME_SANITIZED}"
+	TUNNEL_NAME="Lumina-${TUNNEL_NAME_SANITIZED}"
 
 	# Check if tunnel with this name already exists
 	TUNNEL_ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/cfd_tunnel?name=$TUNNEL_NAME" \
@@ -734,8 +734,8 @@ setup_cloudflare_tunnel_full_auto() {
 		-H "Content-Type: application/json" | jq -r '.result[0].id')
 
 	if [ "$TUNNEL_ID" == "null" ] || [ -z "$TUNNEL_ID" ]; then
-		# Check if generic "MythicalDash" tunnel exists (for backward compatibility)
-		TUNNEL_ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/cfd_tunnel?name=MythicalDash" \
+		# Check if generic "Lumina" tunnel exists (for backward compatibility)
+		TUNNEL_ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/cfd_tunnel?name=Lumina" \
 			-H "X-Auth-Email: $CF_EMAIL" \
 			-H "X-Auth-Key: $CF_API_KEY" \
 			-H "Content-Type: application/json" | jq -r '.result[0].id')
@@ -757,11 +757,11 @@ setup_cloudflare_tunnel_full_auto() {
 			log_success "Created new Cloudflare Tunnel: $TUNNEL_NAME"
 		else
 			# Found generic tunnel, ask if user wants to reuse it or create new one
-			log_warn "Found existing Cloudflare Tunnel named 'MythicalDash'."
+			log_warn "Found existing Cloudflare Tunnel named 'Lumina'."
 			draw_hr
 			echo -e "${BOLD}${YELLOW}Tunnel Conflict${NC}"
 			draw_hr
-			echo -e "${BLUE}An existing tunnel named 'MythicalDash' was found.${NC}"
+			echo -e "${BLUE}An existing tunnel named 'Lumina' was found.${NC}"
 			echo -e "${BLUE}Would you like to:${NC}"
 			echo -e "  ${GREEN}[1]${NC} Reuse existing tunnel (recommended if this is the same server)"
 			echo -e "  ${YELLOW}[2]${NC} Create new tunnel with unique name: $TUNNEL_NAME"
@@ -791,8 +791,8 @@ setup_cloudflare_tunnel_full_auto() {
 				fi
 				log_success "Created new Cloudflare Tunnel: $TUNNEL_NAME"
 			else
-				log_info "Reusing existing tunnel 'MythicalDash'."
-				TUNNEL_NAME="MythicalDash"
+				log_info "Reusing existing tunnel 'Lumina'."
+				TUNNEL_NAME="Lumina"
 			fi
 		fi
 	else
@@ -894,7 +894,7 @@ setup_cloudflare_tunnel_full_auto() {
 	log_info "Full-automatic Cloudflare Tunnel setup complete."
 
 	# Persist Cloudflare credentials to .env for future uninstall/updates
-	ENV_FILE=/var/www/mythicaldash/.env
+	ENV_FILE=/var/www/lumina/.env
 	log_info "Writing Cloudflare settings to $ENV_FILE"
 	{
 		printf 'CF_EMAIL="%s"\n' "$CF_EMAIL"
@@ -1126,11 +1126,11 @@ create_ssl_certificate_http() {
 
 	# Check if reverse proxy is already configured for this domain
 	local config_updated=false
-	if [ -f /etc/nginx/sites-enabled/mythicaldash ] && grep -q "$domain" /etc/nginx/sites-enabled/mythicaldash 2>/dev/null; then
+	if [ -f /etc/nginx/sites-enabled/lumina ] && grep -q "$domain" /etc/nginx/sites-enabled/lumina 2>/dev/null; then
 		log_info "Updating existing Nginx configuration to use SSL..."
-		curl -s "https://raw.githubusercontent.com/MythicalLTD/MythicalDash/refs/heads/v3-remastered/.github/docker/ssl/nginx.conf" |
+		curl -s "https://raw.githubusercontent.com/lonersoft/lumina/refs/heads/v3-remastered/.github/docker/ssl/nginx.conf" |
 			sed "s/your-domain.com/$domain/g" |
-			sudo tee /etc/nginx/sites-available/mythicaldash >/dev/null
+			sudo tee /etc/nginx/sites-available/lumina >/dev/null
 		if nginx -t 2>&1 | tee -a "$LOG_FILE" >/dev/null; then
 			systemctl reload nginx 2>&1 | tee -a "$LOG_FILE" >/dev/null
 			log_success "Nginx SSL configuration updated and reloaded successfully"
@@ -1138,11 +1138,11 @@ create_ssl_certificate_http() {
 		else
 			log_error "Nginx configuration test failed. Check $LOG_FILE for details."
 		fi
-	elif [ -f /etc/apache2/sites-enabled/mythicaldash.conf ] && grep -q "$domain" /etc/apache2/sites-enabled/mythicaldash.conf 2>/dev/null; then
+	elif [ -f /etc/apache2/sites-enabled/lumina.conf ] && grep -q "$domain" /etc/apache2/sites-enabled/lumina.conf 2>/dev/null; then
 		log_info "Updating existing Apache configuration to use SSL..."
-		curl -s "https://raw.githubusercontent.com/MythicalLTD/MythicalDash/refs/heads/v3-remastered/.github/docker/ssl/apache2.conf" |
+		curl -s "https://raw.githubusercontent.com/lonersoft/lumina/refs/heads/v3-remastered/.github/docker/ssl/apache2.conf" |
 			sed "s/your-domain.com/$domain/g" |
-			sudo tee /etc/apache2/sites-available/mythicaldash.conf >/dev/null
+			sudo tee /etc/apache2/sites-available/lumina.conf >/dev/null
 		if apache2ctl configtest 2>&1 | tee -a "$LOG_FILE" >/dev/null; then
 			systemctl reload apache2 2>&1 | tee -a "$LOG_FILE" >/dev/null
 			log_success "Apache SSL configuration updated and reloaded successfully"
@@ -1168,7 +1168,7 @@ create_ssl_certificate_http() {
 			draw_hr
 			echo -e "${BOLD}${YELLOW}Reverse Proxy Configuration${NC}"
 			draw_hr
-			echo -e "${BLUE}A web server ($webserver_detected) is detected but not configured for MythicalDash.${NC}"
+			echo -e "${BLUE}A web server ($webserver_detected) is detected but not configured for Lumina.${NC}"
 			echo -e "${BLUE}Would you like to automatically configure it with SSL for this domain?${NC}"
 			setup_reverse_proxy=""
 			prompt "${BOLD}Configure $webserver_detected with SSL?${NC} ${BLUE}(y/n)${NC}: " setup_reverse_proxy
@@ -1244,11 +1244,11 @@ create_ssl_certificate_dns() {
 
 	# Check if reverse proxy is already configured for this domain
 	local config_updated=false
-	if [ -f /etc/nginx/sites-enabled/mythicaldash ] && grep -q "$domain" /etc/nginx/sites-enabled/mythicaldash 2>/dev/null; then
+	if [ -f /etc/nginx/sites-enabled/lumina ] && grep -q "$domain" /etc/nginx/sites-enabled/lumina 2>/dev/null; then
 		log_info "Updating existing Nginx configuration to use SSL..."
-		curl -s "https://raw.githubusercontent.com/MythicalLTD/MythicalDash/refs/heads/v3-remastered/.github/docker/ssl/nginx.conf" |
+		curl -s "https://raw.githubusercontent.com/lonersoft/lumina/refs/heads/v3-remastered/.github/docker/ssl/nginx.conf" |
 			sed "s/your-domain.com/$domain/g" |
-			sudo tee /etc/nginx/sites-available/mythicaldash >/dev/null
+			sudo tee /etc/nginx/sites-available/lumina >/dev/null
 		if nginx -t 2>&1 | tee -a "$LOG_FILE" >/dev/null; then
 			systemctl reload nginx 2>&1 | tee -a "$LOG_FILE" >/dev/null
 			log_success "Nginx SSL configuration updated and reloaded successfully"
@@ -1256,11 +1256,11 @@ create_ssl_certificate_dns() {
 		else
 			log_error "Nginx configuration test failed. Check $LOG_FILE for details."
 		fi
-	elif [ -f /etc/apache2/sites-enabled/mythicaldash.conf ] && grep -q "$domain" /etc/apache2/sites-enabled/mythicaldash.conf 2>/dev/null; then
+	elif [ -f /etc/apache2/sites-enabled/lumina.conf ] && grep -q "$domain" /etc/apache2/sites-enabled/lumina.conf 2>/dev/null; then
 		log_info "Updating existing Apache configuration to use SSL..."
-		curl -s "https://raw.githubusercontent.com/MythicalLTD/MythicalDash/refs/heads/v3-remastered/.github/docker/ssl/apache2.conf" |
+		curl -s "https://raw.githubusercontent.com/lonersoft/lumina/refs/heads/v3-remastered/.github/docker/ssl/apache2.conf" |
 			sed "s/your-domain.com/$domain/g" |
-			sudo tee /etc/apache2/sites-available/mythicaldash.conf >/dev/null
+			sudo tee /etc/apache2/sites-available/lumina.conf >/dev/null
 		if apache2ctl configtest 2>&1 | tee -a "$LOG_FILE" >/dev/null; then
 			systemctl reload apache2 2>&1 | tee -a "$LOG_FILE" >/dev/null
 			log_success "Apache SSL configuration updated and reloaded successfully"
@@ -1286,7 +1286,7 @@ create_ssl_certificate_dns() {
 			draw_hr
 			echo -e "${BOLD}${YELLOW}Reverse Proxy Configuration${NC}"
 			draw_hr
-			echo -e "${BLUE}A web server ($webserver_detected) is detected but not configured for MythicalDash.${NC}"
+			echo -e "${BLUE}A web server ($webserver_detected) is detected but not configured for Lumina.${NC}"
 			echo -e "${BLUE}Would you like to automatically configure it with SSL for this domain?${NC}"
 			setup_reverse_proxy=""
 			prompt "${BOLD}Configure $webserver_detected with SSL?${NC} ${BLUE}(y/n)${NC}: " setup_reverse_proxy
@@ -1386,18 +1386,18 @@ setup_nginx_reverse_proxy() {
 	# Download and customize nginx config
 	if [ "$has_ssl" = "true" ]; then
 		log_info "Downloading SSL-enabled Nginx configuration..."
-		curl -s "https://raw.githubusercontent.com/MythicalLTD/MythicalDash/refs/heads/v3-remastered/.github/docker/ssl/nginx.conf" |
+		curl -s "https://raw.githubusercontent.com/lonersoft/lumina/refs/heads/v3-remastered/.github/docker/ssl/nginx.conf" |
 			sed "s/your-domain.com/$domain/g" |
-			sudo tee /etc/nginx/sites-available/mythicaldash >/dev/null
+			sudo tee /etc/nginx/sites-available/lumina >/dev/null
 	else
 		log_info "Downloading HTTP-only Nginx configuration..."
-		curl -s "https://raw.githubusercontent.com/MythicalLTD/MythicalDash/refs/heads/v3-remastered/.github/docker/plaintext/nginx.conf" |
+		curl -s "https://raw.githubusercontent.com/lonersoft/lumina/refs/heads/v3-remastered/.github/docker/plaintext/nginx.conf" |
 			sed "s/your-domain.com/$domain/g" |
-			sudo tee /etc/nginx/sites-available/mythicaldash >/dev/null
+			sudo tee /etc/nginx/sites-available/lumina >/dev/null
 	fi
 
 	# Enable the site
-	sudo ln -sf /etc/nginx/sites-available/mythicaldash /etc/nginx/sites-enabled/
+	sudo ln -sf /etc/nginx/sites-available/lumina /etc/nginx/sites-enabled/
 
 	# Test nginx configuration
 	if nginx -t 2>&1 | tee -a "$LOG_FILE" >/dev/null; then
@@ -1429,18 +1429,18 @@ setup_apache_reverse_proxy() {
 	# Download and customize apache config
 	if [ "$has_ssl" = "true" ]; then
 		log_info "Downloading SSL-enabled Apache configuration..."
-		curl -s "https://raw.githubusercontent.com/MythicalLTD/MythicalDash/refs/heads/v3-remastered/.github/docker/ssl/apache2.conf" |
+		curl -s "https://raw.githubusercontent.com/lonersoft/lumina/refs/heads/v3-remastered/.github/docker/ssl/apache2.conf" |
 			sed "s/your-domain.com/$domain/g" |
-			sudo tee /etc/apache2/sites-available/mythicaldash.conf >/dev/null
+			sudo tee /etc/apache2/sites-available/lumina.conf >/dev/null
 	else
 		log_info "Downloading HTTP-only Apache configuration..."
-		curl -s "https://raw.githubusercontent.com/MythicalLTD/MythicalDash/refs/heads/v3-remastered/.github/docker/plaintext/apache2.conf" |
+		curl -s "https://raw.githubusercontent.com/lonersoft/lumina/refs/heads/v3-remastered/.github/docker/plaintext/apache2.conf" |
 			sed "s/your-domain.com/$domain/g" |
-			sudo tee /etc/apache2/sites-available/mythicaldash.conf >/dev/null
+			sudo tee /etc/apache2/sites-available/lumina.conf >/dev/null
 	fi
 
 	# Enable the site
-	a2ensite mythicaldash 2>&1 | tee -a "$LOG_FILE" >/dev/null || true
+	a2ensite lumina 2>&1 | tee -a "$LOG_FILE" >/dev/null || true
 
 	# Test apache configuration
 	if apache2ctl configtest 2>&1 | tee -a "$LOG_FILE" >/dev/null; then
@@ -1472,27 +1472,27 @@ install_acme_sh() {
 	log_info "For more information, visit: https://github.com/acmesh-official/acme.sh"
 }
 
-install_mythicaldash_command() {
-	log_step "Installing global 'mythicaldash' command..."
+install_lumina_command() {
+	log_step "Installing global 'lumina' command..."
 
-	# Create the mythicaldash command script (container CLI + run-script)
-	cat <<'SCRIPT' | sudo tee /usr/local/bin/mythicaldash >/dev/null
+	# Create the lumina command script (container CLI + run-script)
+	cat <<'SCRIPT' | sudo tee /usr/local/bin/lumina >/dev/null
 #!/bin/bash
-# MythicalDash CLI wrapper - runs commands in the backend container or installer
+# Lumina CLI wrapper - runs commands in the backend container or installer
 
-# run-script: fetch and run the MythicalDash installer
+# run-script: fetch and run the Lumina installer
 if [ "$1" = "run-script" ]; then
-    echo "Running MythicalDash installer..."
-    curl -sSL "https://raw.githubusercontent.com/MythicalLTD/MythicalDash/refs/heads/v3-remastered/installer/install.sh" | sudo bash
+    echo "Running Lumina installer..."
+    curl -sSL "https://raw.githubusercontent.com/lonersoft/lumina/refs/heads/v3-remastered/installer/install.sh" | sudo bash
     exit $?
 fi
 
-CONTAINER_NAME="mythicaldash_v3_backend"
+CONTAINER_NAME="lumina_backend"
 
 # Check if container exists and is running
 if ! docker ps --format '{{.Names}}' | grep -q "^${CONTAINER_NAME}$"; then
-    echo "Error: MythicalDash backend container '${CONTAINER_NAME}' is not running." >&2
-    echo "Please ensure MythicalDash is installed and running." >&2
+    echo "Error: Lumina backend container '${CONTAINER_NAME}' is not running." >&2
+    echo "Please ensure Lumina is installed and running." >&2
     exit 1
 fi
 
@@ -1505,26 +1505,26 @@ fi
 SCRIPT
 
 	# Make it executable
-	sudo chmod +x /usr/local/bin/mythicaldash
+	sudo chmod +x /usr/local/bin/lumina
 
-	log_success "Global 'mythicaldash' command installed successfully."
-	log_info "You can now use: mythicaldash <command> (runs in backend container)"
-	log_info "  or: mythicaldash run-script (runs the installer)"
-	log_info "Example: mythicaldash help"
+	log_success "Global 'lumina' command installed successfully."
+	log_info "You can now use: lumina <command> (runs in backend container)"
+	log_info "  or: lumina run-script (runs the installer)"
+	log_info "Example: lumina help"
 }
 
 # Backup management functions
 create_backup() {
-	log_step "Creating MythicalDash backup..."
+	log_step "Creating Lumina backup..."
 
-	if [ ! -f /var/www/mythicaldash/.installed ]; then
-		log_error "MythicalDash is not installed. Nothing to backup."
+	if [ ! -f /var/www/lumina/.installed ]; then
+		log_error "Lumina is not installed. Nothing to backup."
 		return 1
 	fi
 
 	# Check if containers are running
-	if ! sudo docker ps --format '{{.Names}}' 2>/dev/null | grep -q "mythicaldash_v3_backend\|mythicaldash_v3_mysql"; then
-		log_error "MythicalDash containers are not running. Cannot create backup."
+	if ! sudo docker ps --format '{{.Names}}' 2>/dev/null | grep -q "lumina_backend\|lumina_mysql"; then
+		log_error "Lumina containers are not running. Cannot create backup."
 		return 1
 	fi
 
@@ -1533,7 +1533,7 @@ create_backup() {
 
 	# Generate backup filename with timestamp
 	BACKUP_TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-	BACKUP_NAME="mythicaldash_backup_${BACKUP_TIMESTAMP}.tar.gz"
+	BACKUP_NAME="lumina_backup_${BACKUP_TIMESTAMP}.tar.gz"
 	BACKUP_PATH="${BACKUP_DIR}/${BACKUP_NAME}"
 
 	log_info "Backup will be saved to: $BACKUP_PATH"
@@ -1552,7 +1552,7 @@ create_backup() {
 	declare -a ACTUAL_VOLUMES=()
 
 	# Get volumes directly from running containers
-	for container in mythicaldash_v3_mysql mythicaldash_v3_backend mythicaldash_v3_redis; do
+	for container in lumina_mysql lumina_backend lumina_redis; do
 		if sudo docker ps --format '{{.Names}}' 2>/dev/null | grep -q "^${container}$"; then
 			# Get volume names from container mounts
 			while IFS= read -r volume_name; do
@@ -1567,18 +1567,18 @@ create_backup() {
 	if [ ${#ACTUAL_VOLUMES[@]} -eq 0 ]; then
 		log_info "Getting volumes from docker volume list..."
 		while IFS= read -r volume_name; do
-			if [ -n "$volume_name" ] && [[ "$volume_name" =~ ^mythicaldash ]]; then
+			if [ -n "$volume_name" ] && [[ "$volume_name" =~ ^lumina ]]; then
 				if [[ ! " ${ACTUAL_VOLUMES[*]} " =~ " ${volume_name} " ]]; then
 					ACTUAL_VOLUMES+=("$volume_name")
 				fi
 			fi
-		done < <(sudo docker volume ls --format "{{.Name}}" 2>/dev/null | grep "^mythicaldash" || true)
+		done < <(sudo docker volume ls --format "{{.Name}}" 2>/dev/null | grep "^lumina" || true)
 	fi
 
 	# Fallback: Try known volume names if still nothing found
 	if [ ${#ACTUAL_VOLUMES[@]} -eq 0 ]; then
 		log_warn "Could not detect volumes from containers, trying known volume names..."
-		ACTUAL_VOLUMES=("mythicaldash_mariadb_data" "mythicaldash_redis_data" "mythicaldash_mythicaldash_v3_attachments" "mythicaldash_mythicaldash_v3_snapshots")
+		ACTUAL_VOLUMES=("lumina_mariadb_data" "lumina_redis_data" "lumina_v3_attachments" "lumina_v3_snapshots")
 	fi
 
 	# Backup each volume that actually exists
@@ -1606,7 +1606,7 @@ create_backup() {
 	done
 
 	if [ $VOLUMES_FOUND -eq 0 ]; then
-		log_error "No volumes found to backup. Is MythicalDash installed and running?"
+		log_error "No volumes found to backup. Is Lumina installed and running?"
 		return 1
 	fi
 
@@ -1623,19 +1623,19 @@ create_backup() {
 	mkdir -p "$CONFIG_DIR"
 
 	# Copy important config files
-	if [ -f /var/www/mythicaldash/docker-compose.yml ]; then
-		sudo cp /var/www/mythicaldash/docker-compose.yml "$CONFIG_DIR/" 2>>"$LOG_FILE"
+	if [ -f /var/www/lumina/docker-compose.yml ]; then
+		sudo cp /var/www/lumina/docker-compose.yml "$CONFIG_DIR/" 2>>"$LOG_FILE"
 	fi
-	if [ -f /var/www/mythicaldash/.env ]; then
-		sudo cp /var/www/mythicaldash/.env "$CONFIG_DIR/" 2>>"$LOG_FILE"
+	if [ -f /var/www/lumina/.env ]; then
+		sudo cp /var/www/lumina/.env "$CONFIG_DIR/" 2>>"$LOG_FILE"
 	fi
 
 	# Create backup info file
 	cat >"${TEMP_BACKUP_DIR}/backup_info.txt" <<EOF
-MythicalDash Backup
+Lumina Backup
 Created: $(date)
 Backup Name: $BACKUP_NAME
-Version: $(grep -oP 'image: ghcr.io/mythicalltd/mythicaldash_v3-backend:\K[^\s]+' /var/www/mythicaldash/docker-compose.yml 2>/dev/null || echo "unknown")
+Version: $(grep -oP 'image: ghcr.io/lonersoft/lumina-backend:\K[^\s]+' /var/www/lumina/docker-compose.yml 2>/dev/null || echo "unknown")
 Backup Method: Volume-only backup (safest and most reliable)
 Volumes Backed Up: $VOLUMES_FOUND
 Database: Backed up via mariadb_data volume (raw files)
@@ -1656,14 +1656,14 @@ EOF
 }
 
 list_backups() {
-	log_step "Listing MythicalDash backups..."
+	log_step "Listing Lumina backups..."
 
 	if [ ! -d "$BACKUP_DIR" ]; then
 		log_warn "Backup directory does not exist. No backups found."
 		return 0
 	fi
 
-	mapfile -t BACKUP_FILES < <(sudo find "$BACKUP_DIR" -name "mythicaldash_backup_*.tar.gz" -type f 2>/dev/null | sort -r)
+	mapfile -t BACKUP_FILES < <(sudo find "$BACKUP_DIR" -name "lumina_backup_*.tar.gz" -type f 2>/dev/null | sort -r)
 
 	if [ ${#BACKUP_FILES[@]} -eq 0 ]; then
 		log_warn "No backups found in $BACKUP_DIR"
@@ -1684,7 +1684,7 @@ list_backups() {
 		BACKUP_DATE=$(sudo stat -c %y "$backup_file" 2>/dev/null | cut -d' ' -f1,2 | cut -d'.' -f1 || echo "Unknown")
 
 		# Extract timestamp from filename
-		BACKUP_TIMESTAMP=$(echo "$BACKUP_NAME" | sed -n 's/mythicaldash_backup_\(.*\)\.tar\.gz/\1/p')
+		BACKUP_TIMESTAMP=$(echo "$BACKUP_NAME" | sed -n 's/lumina_backup_\(.*\)\.tar\.gz/\1/p')
 
 		echo -e "  ${GREEN}[$index]${NC} ${BOLD}$BACKUP_NAME${NC}"
 		echo -e "     ${BLUE}• Size:${NC} $BACKUP_SIZE"
@@ -1699,10 +1699,10 @@ list_backups() {
 }
 
 restore_backup() {
-	log_step "Restoring MythicalDash from backup..."
+	log_step "Restoring Lumina from backup..."
 
-	if [ ! -f /var/www/mythicaldash/.installed ]; then
-		log_error "MythicalDash is not installed. Please install first before restoring."
+	if [ ! -f /var/www/lumina/.installed ]; then
+		log_error "Lumina is not installed. Please install first before restoring."
 		return 1
 	fi
 
@@ -1712,7 +1712,7 @@ restore_backup() {
 		return 1
 	fi
 
-	mapfile -t BACKUP_FILES < <(sudo find "$BACKUP_DIR" -name "mythicaldash_backup_*.tar.gz" -type f 2>/dev/null | sort -r)
+	mapfile -t BACKUP_FILES < <(sudo find "$BACKUP_DIR" -name "lumina_backup_*.tar.gz" -type f 2>/dev/null | sort -r)
 
 	if [ ${#BACKUP_FILES[@]} -eq 0 ]; then
 		log_error "No backups found in $BACKUP_DIR"
@@ -1745,7 +1745,7 @@ restore_backup() {
 	echo ""
 	echo -e "${RED}${BOLD}⚠️  WARNING: Restoring will replace all current Panel data!${NC}"
 	echo -e "${YELLOW}This operation will:${NC}"
-	echo -e "  ${RED}•${NC} Stop all MythicalDash containers"
+	echo -e "  ${RED}•${NC} Stop all Lumina containers"
 	echo -e "  ${RED}•${NC} Replace database with backup data"
 	echo -e "  ${RED}•${NC} Replace all volumes with backup data"
 	echo -e "  ${RED}•${NC} Restart containers with restored data"
@@ -1773,9 +1773,9 @@ restore_backup() {
 		return 0
 	fi
 
-	log_info "Stopping MythicalDash containers..."
+	log_info "Stopping Lumina containers..."
 	if ! run_with_spinner "Stopping containers" "Containers stopped." \
-		bash -c "cd /var/www/mythicaldash && sudo docker compose down"; then
+		bash -c "cd /var/www/lumina && sudo docker compose down"; then
 		log_error "Failed to stop containers"
 		return 1
 	fi
@@ -1878,20 +1878,20 @@ restore_backup() {
 		prompt "${BOLD}Restore configuration files (docker-compose.yml, .env)?${NC} ${BLUE}(y/n)${NC}: " restore_config
 		if [[ "$restore_config" =~ ^[yY]$ ]]; then
 			if [ -f "${TEMP_RESTORE_DIR}/config/docker-compose.yml" ]; then
-				sudo cp "${TEMP_RESTORE_DIR}/config/docker-compose.yml" /var/www/mythicaldash/docker-compose.yml
+				sudo cp "${TEMP_RESTORE_DIR}/config/docker-compose.yml" /var/www/lumina/docker-compose.yml
 				log_info "docker-compose.yml restored"
 			fi
 			if [ -f "${TEMP_RESTORE_DIR}/config/.env" ]; then
-				sudo cp "${TEMP_RESTORE_DIR}/config/.env" /var/www/mythicaldash/.env
-				sudo chmod 600 /var/www/mythicaldash/.env
+				sudo cp "${TEMP_RESTORE_DIR}/config/.env" /var/www/lumina/.env
+				sudo chmod 600 /var/www/lumina/.env
 				log_info ".env restored"
 			fi
 		fi
 	fi
 
-	log_info "Starting MythicalDash containers..."
+	log_info "Starting Lumina containers..."
 	if ! run_with_spinner "Starting containers" "Containers started." \
-		bash -c "cd /var/www/mythicaldash && sudo docker compose up -d"; then
+		bash -c "cd /var/www/lumina && sudo docker compose up -d"; then
 		log_error "Failed to start containers"
 		return 1
 	fi
@@ -1902,14 +1902,14 @@ restore_backup() {
 }
 
 delete_backup() {
-	log_step "Deleting MythicalDash backup..."
+	log_step "Deleting Lumina backup..."
 
 	if [ ! -d "$BACKUP_DIR" ]; then
 		log_error "Backup directory does not exist. No backups found."
 		return 1
 	fi
 
-	mapfile -t BACKUP_FILES < <(sudo find "$BACKUP_DIR" -name "mythicaldash_backup_*.tar.gz" -type f 2>/dev/null | sort -r)
+	mapfile -t BACKUP_FILES < <(sudo find "$BACKUP_DIR" -name "lumina_backup_*.tar.gz" -type f 2>/dev/null | sort -r)
 
 	if [ ${#BACKUP_FILES[@]} -eq 0 ]; then
 		log_error "No backups found in $BACKUP_DIR"
@@ -1974,26 +1974,26 @@ delete_backup() {
 }
 
 export_migration() {
-	log_step "Creating migration package for MythicalDash..."
+	log_step "Creating migration package for Lumina..."
 
-	if [ ! -f /var/www/mythicaldash/.installed ]; then
-		log_error "MythicalDash is not installed. Nothing to export."
+	if [ ! -f /var/www/lumina/.installed ]; then
+		log_error "Lumina is not installed. Nothing to export."
 		return 1
 	fi
 
 	# Check if containers are running
-	if ! sudo docker ps --format '{{.Names}}' 2>/dev/null | grep -q "mythicaldash_v3_backend\|mythicaldash_v3_mysql"; then
-		log_error "MythicalDash containers are not running. Cannot create migration package."
+	if ! sudo docker ps --format '{{.Names}}' 2>/dev/null | grep -q "lumina_v3_backend\|lumina_v3_mysql"; then
+		log_error "Lumina containers are not running. Cannot create migration package."
 		return 1
 	fi
 
 	# Create migration directory
-	MIGRATION_DIR="/var/www/mythicaldash/migrations"
+	MIGRATION_DIR="/var/www/lumina/migrations"
 	sudo mkdir -p "$MIGRATION_DIR"
 
 	# Generate migration filename with timestamp
 	MIGRATION_TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-	MIGRATION_NAME="mythicaldash_migration_${MIGRATION_TIMESTAMP}.tar.gz"
+	MIGRATION_NAME="lumina_migration_${MIGRATION_TIMESTAMP}.tar.gz"
 	MIGRATION_PATH="${MIGRATION_DIR}/${MIGRATION_NAME}"
 
 	log_info "Migration package will be saved to: $MIGRATION_PATH"
@@ -2012,7 +2012,7 @@ export_migration() {
 	declare -a ACTUAL_VOLUMES=()
 
 	# Get volumes directly from running containers
-	for container in mythicaldash_v3_mysql mythicaldash_v3_backend mythicaldash_v3_redis; do
+	for container in lumina_v3_mysql lumina_v3_backend lumina_v3_redis; do
 		if sudo docker ps --format '{{.Names}}' 2>/dev/null | grep -q "^${container}$"; then
 			# Get volume names from container mounts
 			while IFS= read -r volume_name; do
@@ -2027,18 +2027,18 @@ export_migration() {
 	if [ ${#ACTUAL_VOLUMES[@]} -eq 0 ]; then
 		log_info "Getting volumes from docker volume list..."
 		while IFS= read -r volume_name; do
-			if [ -n "$volume_name" ] && [[ "$volume_name" =~ ^mythicaldash ]]; then
+			if [ -n "$volume_name" ] && [[ "$volume_name" =~ ^lumina ]]; then
 				if [[ ! " ${ACTUAL_VOLUMES[*]} " =~ " ${volume_name} " ]]; then
 					ACTUAL_VOLUMES+=("$volume_name")
 				fi
 			fi
-		done < <(sudo docker volume ls --format "{{.Name}}" 2>/dev/null | grep "^mythicaldash" || true)
+		done < <(sudo docker volume ls --format "{{.Name}}" 2>/dev/null | grep "^lumina" || true)
 	fi
 
 	# Fallback: Try known volume names if still nothing found
 	if [ ${#ACTUAL_VOLUMES[@]} -eq 0 ]; then
 		log_warn "Could not detect volumes from containers, trying known volume names..."
-		ACTUAL_VOLUMES=("mythicaldash_mariadb_data" "mythicaldash_redis_data" "mythicaldash_mythicaldash_v3_attachments" "mythicaldash_mythicaldash_v3_snapshots")
+		ACTUAL_VOLUMES=("lumina_mariadb_data" "lumina_redis_data" "lumina_attachments" "lumina_v3_snapshots")
 	fi
 
 	# Export each volume that actually exists
@@ -2066,7 +2066,7 @@ export_migration() {
 	done
 
 	if [ $VOLUMES_FOUND -eq 0 ]; then
-		log_error "No volumes found to export. Is MythicalDash installed and running?"
+		log_error "No volumes found to export. Is Lumina installed and running?"
 		return 1
 	fi
 
@@ -2083,27 +2083,27 @@ export_migration() {
 	mkdir -p "$CONFIG_DIR"
 
 	# Copy important config files
-	if [ -f /var/www/mythicaldash/docker-compose.yml ]; then
-		sudo cp /var/www/mythicaldash/docker-compose.yml "$CONFIG_DIR/" 2>>"$LOG_FILE"
+	if [ -f /var/www/lumina/docker-compose.yml ]; then
+		sudo cp /var/www/lumina/docker-compose.yml "$CONFIG_DIR/" 2>>"$LOG_FILE"
 	fi
-	if [ -f /var/www/mythicaldash/.env ]; then
-		sudo cp /var/www/mythicaldash/.env "$CONFIG_DIR/" 2>>"$LOG_FILE"
+	if [ -f /var/www/lumina/.env ]; then
+		sudo cp /var/www/lumina/.env "$CONFIG_DIR/" 2>>"$LOG_FILE"
 	fi
 
 	# Create migration info file
 	cat >"${TEMP_MIGRATION_DIR}/migration_info.txt" <<EOF
-MythicalDash Migration Package
+Lumina Migration Package
 Created: $(date)
 Migration Name: $MIGRATION_NAME
 Source Server: $(hostname)
 Source IP: $(curl -s ifconfig.me 2>/dev/null || echo "Unknown")
-Version: $(grep -oP 'image: ghcr.io/mythicalltd/mythicaldash_v3-backend:\K[^\s]+' /var/www/mythicaldash/docker-compose.yml 2>/dev/null || echo "unknown")
+Version: $(grep -oP 'image: ghcr.io/lonersoft/lumina-backend:\K[^\s]+' /var/www/lumina/docker-compose.yml 2>/dev/null || echo "unknown")
 Backup Method: Volume-only backup (safest and most reliable)
 
-IMPORTANT: This is a migration package for moving MythicalDash to another server.
+IMPORTANT: This is a migration package for moving Lumina to another server.
 To import this package on the destination server:
 1. Transfer this file to the destination server
-2. Launch the MythicalDash installer and navigate to: Panel > Backup Manager > Import Migration
+2. Launch the Lumina installer and navigate to: Panel > Backup Manager > Import Migration
 3. Follow the import wizard to complete the migration
 
 This package contains:
@@ -2115,10 +2115,10 @@ EOF
 	# Create README with transfer instructions
 	cat >"${TEMP_MIGRATION_DIR}/README_MIGRATION.txt" <<'EOF'
 ========================================
-MythicalDash Migration Package
+Lumina Migration Package
 ========================================
 
-This package contains a complete export of your MythicalDash installation
+This package contains a complete export of your Lumina installation
 that can be imported on another server.
 
 TRANSFER METHODS:
@@ -2126,7 +2126,7 @@ TRANSFER METHODS:
 Method 1: SCP (Recommended)
 ----------------------------
 On the DESTINATION server, run:
-  scp user@source-server:/var/www/mythicaldash/migrations/mythicaldash_migration_*.tar.gz ./
+  scp user@source-server:/var/www/lumina/migrations/lumina_migration_*.tar.gz ./
 
 Method 2: Manual Download
 -------------------------
@@ -2136,21 +2136,21 @@ Method 2: Manual Download
    - Cloud storage (upload from source, download on destination)
 
 2. Transfer to destination server at:
-   /var/www/mythicaldash/migrations/
+   /var/www/lumina/migrations/
 
 Method 3: rsync
 ---------------
 On the DESTINATION server, run:
-  rsync -avz user@source-server:/var/www/mythicaldash/migrations/mythicaldash_migration_*.tar.gz ./
+  rsync -avz user@source-server:/var/www/lumina/migrations/lumina_migration_*.tar.gz ./
 
 IMPORT INSTRUCTIONS:
 --------------------
-1. Ensure MythicalDash is installed on the destination server
-2. Launch the MythicalDash installer
+1. Ensure Lumina is installed on the destination server
+2. Launch the Lumina installer
 3. Navigate to: Panel > Backup Manager > Import Migration
 4. Follow the import wizard to complete the migration
 
-NOTE: The destination server must have MythicalDash installed before
+NOTE: The destination server must have Lumina installed before
 importing this migration package.
 EOF
 
@@ -2187,19 +2187,19 @@ EOF
 		echo -e "${GREEN}Method 3: Manual Download${NC}"
 		echo -e "  ${BLUE}1.${NC} Download the file from: ${CYAN}$MIGRATION_PATH${NC}"
 		echo -e "  ${BLUE}2.${NC} Upload to destination server"
-		echo -e "  ${BLUE}3.${NC} Place in: ${CYAN}/var/www/mythicaldash/migrations/${NC}"
+		echo -e "  ${BLUE}3.${NC} Place in: ${CYAN}/var/www/lumina/migrations/${NC}"
 		echo ""
 		draw_hr
 		print_centered "Import Instructions" "$YELLOW"
 		draw_hr
 		echo ""
 		echo -e "${BOLD}On the destination server:${NC}"
-		echo -e "  ${BLUE}1.${NC} Ensure MythicalDash is installed"
-		echo -e "  ${BLUE}2.${NC} Launch the MythicalDash installer"
+		echo -e "  ${BLUE}1.${NC} Ensure Lumina is installed"
+		echo -e "  ${BLUE}2.${NC} Launch the Lumina installer"
 		echo -e "  ${BLUE}3.${NC} Navigate to: ${CYAN}Panel > Backup Manager > Import Migration${NC}"
 		echo -e "  ${BLUE}4.${NC} Follow the import wizard"
 		echo ""
-		echo -e "${YELLOW}${BOLD}Note:${NC} The destination server must have MythicalDash installed before importing."
+		echo -e "${YELLOW}${BOLD}Note:${NC} The destination server must have Lumina installed before importing."
 		echo ""
 		draw_hr
 
@@ -2211,17 +2211,17 @@ EOF
 }
 
 import_migration() {
-	log_step "Importing MythicalDash migration package..."
+	log_step "Importing Lumina migration package..."
 
 	# Check if already installed (optional - can import during fresh install)
-	MIGRATION_DIR="/var/www/mythicaldash/migrations"
+	MIGRATION_DIR="/var/www/lumina/migrations"
 	sudo mkdir -p "$MIGRATION_DIR"
 
 	# Look for migration packages
-	mapfile -t MIGRATION_FILES < <(sudo find "$MIGRATION_DIR" -name "mythicaldash_migration_*.tar.gz" -type f 2>/dev/null | sort -r)
+	mapfile -t MIGRATION_FILES < <(sudo find "$MIGRATION_DIR" -name "lumina_migration_*.tar.gz" -type f 2>/dev/null | sort -r)
 
 	# Also check current directory and common locations
-	mapfile -t ADDITIONAL_FILES < <(sudo find /root /home -maxdepth 2 -name "mythicaldash_migration_*.tar.gz" -type f 2>/dev/null | head -5)
+	mapfile -t ADDITIONAL_FILES < <(sudo find /root /home -maxdepth 2 -name "lumina_migration_*.tar.gz" -type f 2>/dev/null | head -5)
 	MIGRATION_FILES+=("${ADDITIONAL_FILES[@]}")
 
 	if [ ${#MIGRATION_FILES[@]} -eq 0 ]; then
@@ -2280,13 +2280,13 @@ import_migration() {
 		echo ""
 		echo -e "${RED}${BOLD}⚠️  WARNING: Importing will replace all current Panel data!${NC}"
 		echo -e "${YELLOW}This operation will:${NC}"
-		if [ -f /var/www/mythicaldash/.installed ]; then
-			echo -e "  ${RED}•${NC} Stop all MythicalDash containers"
+		if [ -f /var/www/lumina/.installed ]; then
+			echo -e "  ${RED}•${NC} Stop all Lumina containers"
 			echo -e "  ${RED}•${NC} Replace database with migration data"
 			echo -e "  ${RED}•${NC} Replace all volumes with migration data"
 			echo -e "  ${RED}•${NC} Restart containers with imported data"
 		else
-			echo -e "  ${RED}•${NC} Install MythicalDash with imported data"
+			echo -e "  ${RED}•${NC} Install Lumina with imported data"
 			echo -e "  ${RED}•${NC} Restore database and volumes from migration"
 		fi
 		echo ""
@@ -2330,17 +2330,17 @@ import_migration() {
 	fi
 
 	# Check if Panel is installed
-	if [ -f /var/www/mythicaldash/.installed ]; then
-		log_info "Stopping MythicalDash containers..."
+	if [ -f /var/www/lumina/.installed ]; then
+		log_info "Stopping Lumina containers..."
 		if ! run_with_spinner "Stopping containers" "Containers stopped." \
-			bash -c "cd /var/www/mythicaldash && sudo docker compose down"; then
+			bash -c "cd /var/www/lumina && sudo docker compose down"; then
 			log_error "Failed to stop containers"
 			return 1
 		fi
 	else
-		log_info "MythicalDash not installed. Will install with imported data."
+		log_info "Lumina not installed. Will install with imported data."
 		# Ensure directories exist
-		sudo mkdir -p /var/www/mythicaldash
+		sudo mkdir -p /var/www/lumina
 		sudo mkdir -p "$BACKUP_DIR"
 	fi
 
@@ -2355,8 +2355,8 @@ import_migration() {
 	fi
 
 	# Check if this is a fresh install or update
-	if [ ! -f /var/www/mythicaldash/.installed ]; then
-		log_info "Fresh installation detected. Setting up MythicalDash first..."
+	if [ ! -f /var/www/lumina/.installed ]; then
+		log_info "Fresh installation detected. Setting up Lumina first..."
 
 		# Install Docker if not present
 		if ! command -v docker &>/dev/null; then
@@ -2368,15 +2368,15 @@ import_migration() {
 		fi
 
 		# Download docker-compose.yml if not present
-		if [ ! -f /var/www/mythicaldash/docker-compose.yml ]; then
+		if [ ! -f /var/www/lumina/docker-compose.yml ]; then
 			if [ -f "${TEMP_IMPORT_DIR}/config/docker-compose.yml" ]; then
-				sudo cp "${TEMP_IMPORT_DIR}/config/docker-compose.yml" /var/www/mythicaldash/docker-compose.yml
+				sudo cp "${TEMP_IMPORT_DIR}/config/docker-compose.yml" /var/www/lumina/docker-compose.yml
 				log_info "Using docker-compose.yml from migration package"
 			else
 				log_info "Downloading docker-compose.yml..."
 				COMPOSE_URL=$(get_compose_file_url)
 				if ! run_with_spinner "Downloading docker-compose.yml" "docker-compose.yml downloaded." \
-					curl -fsSL -o /var/www/mythicaldash/docker-compose.yml "$COMPOSE_URL"; then
+					curl -fsSL -o /var/www/lumina/docker-compose.yml "$COMPOSE_URL"; then
 					log_error "Failed to download docker-compose.yml"
 					return 1
 				fi
@@ -2385,8 +2385,8 @@ import_migration() {
 
 		# Copy .env if present in migration
 		if [ -f "${TEMP_IMPORT_DIR}/config/.env" ]; then
-			sudo cp "${TEMP_IMPORT_DIR}/config/.env" /var/www/mythicaldash/.env
-			sudo chmod 600 /var/www/mythicaldash/.env
+			sudo cp "${TEMP_IMPORT_DIR}/config/.env" /var/www/lumina/.env
+			sudo chmod 600 /var/www/lumina/.env
 			log_info "Restored .env from migration package"
 		fi
 	fi
@@ -2396,7 +2396,7 @@ import_migration() {
 	if [ -f "${TEMP_IMPORT_DIR}/database.sql" ]; then
 		# Start MySQL container
 		if ! run_with_spinner "Starting MySQL for import" "MySQL started." \
-			bash -c "cd /var/www/mythicaldash && sudo docker compose up -d mysql"; then
+			bash -c "cd /var/www/lumina && sudo docker compose up -d mysql"; then
 			log_error "Failed to start MySQL container"
 			return 1
 		fi
@@ -2406,7 +2406,7 @@ import_migration() {
 		max_attempts=30
 		attempt=0
 		while [ $attempt -lt $max_attempts ]; do
-			if sudo docker exec mythicaldash_v3_mysql mysql -u root -pmythicaldash_v3_root -e "SELECT 1" >/dev/null 2>&1; then
+			if sudo docker exec lumina_mysql mysql -u root -plumina_root -e "SELECT 1" >/dev/null 2>&1; then
 				break
 			fi
 			attempt=$((attempt + 1))
@@ -2420,13 +2420,13 @@ import_migration() {
 
 		# Drop and recreate database
 		log_info "Preparing database for import..."
-		sudo docker exec -i mythicaldash_v3_mysql mysql -u root -pmythicaldash_v3_root <<EOF 2>>"$LOG_FILE" || true
-DROP DATABASE IF EXISTS mythicaldash_v3;
-CREATE DATABASE mythicaldash_v3;
+		sudo docker exec -i lumina_mysql mysql -u root -p lumina_root <<EOF 2>>"$LOG_FILE" || true
+DROP DATABASE IF EXISTS lumina;
+CREATE DATABASE lumina;
 EOF
 
 		# Restore database
-		if sudo docker exec -i mythicaldash_v3_mysql mysql -u root -pmythicaldash_v3_root mythicaldash_v3 <"${TEMP_IMPORT_DIR}/database.sql" 2>>"$LOG_FILE"; then
+		if sudo docker exec -i lumina_mysql mysql -u root -p lumina_root lumina <"${TEMP_IMPORT_DIR}/database.sql" 2>>"$LOG_FILE"; then
 			log_success "Database imported"
 		else
 			log_error "Failed to import database"
@@ -2463,18 +2463,18 @@ EOF
 		log_warn "Volumes backup not found in migration package"
 	fi
 
-	log_info "Starting MythicalDash containers..."
+	log_info "Starting Lumina containers..."
 	if ! run_with_spinner "Starting containers" "Containers started." \
-		bash -c "cd /var/www/mythicaldash && sudo docker compose up -d"; then
+		bash -c "cd /var/www/lumina && sudo docker compose up -d"; then
 		log_error "Failed to start containers"
 		return 1
 	fi
 
 	# Mark as installed
-	sudo touch /var/www/mythicaldash/.installed
+	sudo touch /var/www/lumina/.installed
 
-	# Install global mythicaldash command
-	install_mythicaldash_command
+	# Install global lumina command
+	install_lumina_command
 
 	log_success "Migration import completed successfully from $MIGRATION_NAME"
 	log_warn "Please verify that the Panel is working correctly after import."
@@ -2518,12 +2518,12 @@ modify_compose_for_dev() {
 		sudo cp "$compose_file" "${compose_file}.backup"
 	fi
 
-	# Use sed to replace image tags (MythicalDash v3 images)
-	sudo sed -i "s|image: ghcr.io/mythicalltd/mythicaldash_v3-backend:latest|image: ghcr.io/mythicalltd/mythicaldash_v3-backend:${backend_tag}|g" "$compose_file"
-	sudo sed -i "s|image: ghcr.io/mythicalltd/mythicaldash_v3-backend:.*|image: ghcr.io/mythicalltd/mythicaldash_v3-backend:${backend_tag}|g" "$compose_file"
+	# Use sed to replace image tags (Lumina v3 images)
+	sudo sed -i "s|image: ghcr.io/lonersoft/lumina-backend:latest|image: ghcr.io/lonersoft/lumina-backend:${backend_tag}|g" "$compose_file"
+	sudo sed -i "s|image: ghcr.io/lonersoft/lumina-backend:.*|image: ghcr.io/lonersoft/lumina-backend:${backend_tag}|g" "$compose_file"
 
-	sudo sed -i "s|image: ghcr.io/mythicalltd/mythicaldash_v3-frontend:latest|image: ghcr.io/mythicalltd/mythicaldash_v3-frontend:${frontend_tag}|g" "$compose_file"
-	sudo sed -i "s|image: ghcr.io/mythicalltd/mythicaldash_v3-frontend:.*|image: ghcr.io/mythicalltd/mythicaldash_v3-frontend:${frontend_tag}|g" "$compose_file"
+	sudo sed -i "s|image: ghcr.io/lonersoft/lumina-frontend:latest|image: ghcr.io/lonersoft/lumina-frontend:${frontend_tag}|g" "$compose_file"
+	sudo sed -i "s|image: ghcr.io/lonersoft/lumina-frontend:.*|image: ghcr.io/lonersoft/lumina-frontend:${frontend_tag}|g" "$compose_file"
 
 	log_success "docker-compose.yml modified for dev images"
 }
@@ -2561,21 +2561,21 @@ get_compose_file_url() {
 		if [ -n "$DEV_BRANCH" ]; then
 			branch="$DEV_BRANCH"
 		fi
-		# MythicalDash may use docker-compose.v2.dev.yml for dev; fallback to docker-compose.yml
+		# Lumina may use docker-compose.v2.dev.yml for dev; fallback to docker-compose.yml
 		compose_file="docker-compose.yml"
 	fi
 
-	echo "https://raw.githubusercontent.com/MythicalLTD/MythicalDash/refs/heads/${branch}/${compose_file}"
+	echo "https://raw.githubusercontent.com/lonersoft/Lumina/refs/heads/${branch}/${compose_file}"
 }
 
 # Docker-only flow
 uninstall_docker() {
-	if [ ! -f /var/www/mythicaldash/.installed ]; then
-		log_warn "MythicalDash does not appear to be installed. Nothing to uninstall."
+	if [ ! -f /var/www/lumina/.installed ]; then
+		log_warn "Lumina does not appear to be installed. Nothing to uninstall."
 		support_hint
 		return 0
 	fi
-	echo "Uninstalling MythicalDash (Docker)..."
+	echo "Uninstalling Lumina (Docker)..."
 	uninstall_cloudflare_tunnel
 	# Stop and remove any cloudflared containers started by this installer
 	if command -v docker >/dev/null 2>&1; then
@@ -2588,33 +2588,33 @@ uninstall_docker() {
 			docker rm -f "$CF_IDS" >/dev/null 2>&1 && log_info "Removed cloudflared container(s) by image"
 		fi
 	fi
-	if [ -f /var/www/mythicaldash/docker-compose.yml ]; then
+	if [ -f /var/www/lumina/docker-compose.yml ]; then
 		log_step "Stopping and removing Docker containers..."
-		(cd /var/www/mythicaldash && sudo docker compose down -v) >>"$LOG_FILE" 2>&1 || true
+		(cd /var/www/lumina && sudo docker compose down -v) >>"$LOG_FILE" 2>&1 || true
 	fi
 	# Remove secrets and sensitive files
-	if [ -f /var/www/mythicaldash/.env ]; then
+	if [ -f /var/www/lumina/.env ]; then
 		echo "Removing .env file containing secrets..."
-		sudo rm -f /var/www/mythicaldash/.env
+		sudo rm -f /var/www/lumina/.env
 	fi
 
-	# Remove global mythicaldash command
-	if [ -f /usr/local/bin/mythicaldash ]; then
-		log_info "Removing global 'mythicaldash' command..."
-		sudo rm -f /usr/local/bin/mythicaldash
+	# Remove global lumina command
+	if [ -f /usr/local/bin/lumina ]; then
+		log_info "Removing global 'lumina' command..."
+		sudo rm -f /usr/local/bin/lumina
 	fi
 
-	rm -rf /var/www/mythicaldash
+	rm -rf /var/www/lumina
 	echo "Docker-based uninstallation complete."
 }
 
 ensure_env_cloudflare() {
-	ENV_FILE=/var/www/mythicaldash/.env
+	ENV_FILE=/var/www/lumina/.env
 	if [ -f "$ENV_FILE" ]; then
-		log_info ".env already exists at /var/www/mythicaldash/.env. Skipping creation."
+		log_info ".env already exists at /var/www/lumina/.env. Skipping creation."
 		return 0
 	fi
-	log_info "Creating /var/www/mythicaldash/.env for Cloudflare settings..."
+	log_info "Creating /var/www/lumina/.env for Cloudflare settings..."
 	cat <<EOF | sudo tee "$ENV_FILE" >/dev/null
 # Cloudflare settings used by the installer/uninstaller
 CF_EMAIL=""
@@ -2808,7 +2808,7 @@ if [ -f /etc/os-release ]; then
 		echo -e "${YELLOW}This means:${NC}"
 		echo -e "  ${RED}•${NC} No security updates or patches are available"
 		echo -e "  ${RED}•${NC} Your system is vulnerable to security issues"
-		echo -e "  ${RED}•${NC} MythicalDash may not work correctly"
+		echo -e "  ${RED}•${NC} Lumina may not work correctly"
 		echo ""
 		echo -e "${BOLD}${RED}We strongly recommend upgrading to a supported OS version.${NC}"
 		echo ""
@@ -2909,7 +2909,7 @@ if [ -f /etc/os-release ]; then
 				echo -e "${BLUE}Docker Daemon:${NC} ${GREEN}Running${NC}"
 			else
 				echo -e "${BLUE}Docker Daemon:${NC} ${RED}Not running${NC}"
-				echo -e "${YELLOW}  The Docker daemon must be running for MythicalDash to work.${NC}"
+				echo -e "${YELLOW}  The Docker daemon must be running for Lumina to work.${NC}"
 			fi
 
 			if [ "$docker_daemon_running" = true ]; then
@@ -2931,10 +2931,10 @@ if [ -f /etc/os-release ]; then
 			draw_hr
 			echo -e "${RED}${BOLD}Important Notice:${NC}"
 			echo ""
-			echo -e "${YELLOW}${BOLD}MythicalDash and MythicalSystems are NOT obligated to provide${NC}"
+			echo -e "${YELLOW}${BOLD}Lumina and lonersoft are NOT obligated to provide${NC}"
 			echo -e "${YELLOW}${BOLD}support for installations on systems with existing Docker installations.${NC}"
 			echo ""
-			echo -e "${BLUE}${BOLD}We strongly recommend installing MythicalDash on a clean VM${NC}"
+			echo -e "${BLUE}${BOLD}We strongly recommend installing Lumina on a clean VM${NC}"
 			echo -e "${BLUE}${BOLD}without any pre-existing Docker setup.${NC}"
 			echo ""
 			if [ "$docker_compose_works" != true ]; then
@@ -3048,7 +3048,7 @@ if [ -f /etc/os-release ]; then
 			echo ""
 			echo -e "${YELLOW}${BOLD}Your system appears to be running on ${virt_warning} virtualization.${NC}"
 			echo ""
-			echo -e "${RED}${BOLD}WARNING:${NC} ${YELLOW}MythicalDash requires Docker, which typically does NOT work${NC}"
+			echo -e "${RED}${BOLD}WARNING:${NC} ${YELLOW}Lumina requires Docker, which typically does NOT work${NC}"
 			echo -e "${YELLOW}on systems using ${virt_warning} virtualization.${NC}"
 			echo ""
 			echo -e "${BLUE}System Requirements:${NC}"
@@ -3091,7 +3091,7 @@ if [ -f /etc/os-release ]; then
 			echo ""
 			draw_hr
 			echo ""
-			echo -e "${RED}${BOLD}MythicalDash and MythicalSystems are NOT obligated to provide${NC}"
+			echo -e "${RED}${BOLD}Lumina and lonersoft are NOT obligated to provide${NC}"
 			echo -e "${RED}${BOLD}support for installations on incompatible virtualization platforms.${NC}"
 			echo ""
 			draw_hr
@@ -3147,7 +3147,7 @@ if [ -f /etc/os-release ]; then
 			echo -e "${RED}${BOLD}⚠️  WARNING: Uninstall Operation${NC}"
 			draw_hr
 			echo -e "${YELLOW}This will permanently delete:${NC}"
-			echo -e "  ${RED}•${NC} All MythicalDash Docker containers"
+			echo -e "  ${RED}•${NC} All Lumina Docker containers"
 			echo -e "  ${RED}•${NC} All Panel data and configuration"
 			echo -e "  ${RED}•${NC} Installation files"
 			echo ""
@@ -3213,23 +3213,23 @@ if [ -f /etc/os-release ]; then
 	# Handle operations based on component and action
 	if [ "$COMPONENT_TYPE" = "1" ] && [ "$INST_TYPE" = "1" ]; then
 		# Panel Install
-		# Check if MythicalDash is already installed (unless skip flag is set)
+		# Check if Lumina is already installed (unless skip flag is set)
 		if [ "$SKIP_INSTALL_CHECK" = false ]; then
 			INSTALLED=false
 
 			# Check for .installed file
-			if [ -f /var/www/mythicaldash/.installed ]; then
+			if [ -f /var/www/lumina/.installed ]; then
 				INSTALLED=true
 			fi
 
 			# Check for docker-compose.yml
-			if [ -f /var/www/mythicaldash/docker-compose.yml ]; then
+			if [ -f /var/www/lumina/docker-compose.yml ]; then
 				INSTALLED=true
 			fi
 
 			# Check if containers are running
 			if command -v docker >/dev/null 2>&1; then
-				if sudo docker ps --format '{{.Names}}' 2>/dev/null | grep -q "mythicaldash_v3_backend\|mythicaldash_v3_frontend\|mythicaldash_v3_mysql\|mythicaldash_v3_redis"; then
+				if sudo docker ps --format '{{.Names}}' 2>/dev/null | grep -q "lumina_backend\|lumina_frontend\|lumina_mysql\|lumina_redis"; then
 					INSTALLED=true
 				fi
 			fi
@@ -3238,16 +3238,16 @@ if [ -f /etc/os-release ]; then
 				if [ -t 1 ]; then clear; fi
 				print_banner
 				draw_hr
-				echo -e "${YELLOW}${BOLD}⚠️  MythicalDash Already Installed${NC}"
+				echo -e "${YELLOW}${BOLD}⚠️  Lumina Already Installed${NC}"
 				draw_hr
 				echo ""
-				echo -e "${BLUE}MythicalDash appears to be already installed on this system.${NC}"
+				echo -e "${BLUE}Lumina appears to be already installed on this system.${NC}"
 				echo ""
 				echo -e "${BLUE}Detected installation indicators:${NC}"
-				[ -f /var/www/mythicaldash/.installed ] && echo -e "  ${GREEN}✓${NC} Installation marker file exists"
-				[ -f /var/www/mythicaldash/docker-compose.yml ] && echo -e "  ${GREEN}✓${NC} docker-compose.yml found"
-				if command -v docker >/dev/null 2>&1 && sudo docker ps --format '{{.Names}}' 2>/dev/null | grep -q "mythicaldash"; then
-					echo -e "  ${GREEN}✓${NC} MythicalDash containers are running"
+				[ -f /var/www/lumina/.installed ] && echo -e "  ${GREEN}✓${NC} Installation marker file exists"
+				[ -f /var/www/lumina/docker-compose.yml ] && echo -e "  ${GREEN}✓${NC} docker-compose.yml found"
+				if command -v docker >/dev/null 2>&1 && sudo docker ps --format '{{.Names}}' 2>/dev/null | grep -q "lumina"; then
+					echo -e "  ${GREEN}✓${NC} Lumina containers are running"
 				fi
 				echo ""
 				echo -e "${YELLOW}What would you like to do?${NC}"
@@ -3268,7 +3268,7 @@ if [ -f /etc/os-release ]; then
 				case $reinstall_choice in
 				1)
 					echo ""
-					echo -e "${GREEN}To update MythicalDash, please run the installer again and select:${NC}"
+					echo -e "${GREEN}To update Lumina, please run the installer again and select:${NC}"
 					echo -e "  ${CYAN}•${NC} Component: ${BOLD}Panel${NC} (option 1)"
 					echo -e "  ${CYAN}•${NC} Operation: ${BOLD}Update Panel${NC} (option 2)"
 					echo ""
@@ -3287,12 +3287,12 @@ if [ -f /etc/os-release ]; then
 					fi
 					log_info "Proceeding with reinstallation..."
 					# Stop and remove existing containers before reinstalling
-					if [ -f /var/www/mythicaldash/docker-compose.yml ] && command -v docker >/dev/null 2>&1; then
-						log_info "Stopping existing MythicalDash containers..."
-						cd /var/www/mythicaldash && sudo docker compose down -v >/dev/null 2>&1 || true
+					if [ -f /var/www/lumina/docker-compose.yml ] && command -v docker >/dev/null 2>&1; then
+						log_info "Stopping existing Lumina containers..."
+						cd /var/www/lumina && sudo docker compose down -v >/dev/null 2>&1 || true
 					fi
 					# Remove .installed marker to allow fresh installation
-					sudo rm -f /var/www/mythicaldash/.installed
+					sudo rm -f /var/www/lumina/.installed
 					# Continue with installation (will overwrite)
 					;;
 				3)
@@ -3509,16 +3509,16 @@ if [ -f /etc/os-release ]; then
 				draw_hr
 				echo ""
 				echo -e "${YELLOW}${BOLD}IMPORTANT NOTICE:${NC}"
-				echo -e "${BLUE}MythicalDash provides native images for ${BOLD}amd64${NC} and ${BOLD}arm64 (aarch64)${NC} only.${NC}"
+				echo -e "${BLUE}Lumina provides native images for ${BOLD}amd64${NC} and ${BOLD}arm64 (aarch64)${NC} only.${NC}"
 				echo -e "${BLUE}Your system architecture (${BOLD}$ARCH${NC}) is not natively supported.${NC}"
 				echo ""
-				echo -e "${BLUE}To allow MythicalDash to run on your ARM system, the installer will:${NC}"
+				echo -e "${BLUE}To allow Lumina to run on your ARM system, the installer will:${NC}"
 				echo -e "  ${CYAN}•${NC} Install QEMU virtualization and emulation packages"
 				echo -e "  ${CYAN}•${NC} Configure Docker to use emulation for amd64 containers"
-				echo -e "  ${CYAN}•${NC} Run MythicalDash containers through emulation"
+				echo -e "  ${CYAN}•${NC} Run Lumina containers through emulation"
 				echo ""
 				echo -e "${YELLOW}${BOLD}Performance Notice:${NC}"
-				echo -e "${YELLOW}Running MythicalDash through emulation will result in:${NC}"
+				echo -e "${YELLOW}Running Lumina through emulation will result in:${NC}"
 				echo -e "  ${YELLOW}•${NC} Slower container startup times"
 				echo -e "  ${YELLOW}•${NC} Higher CPU and memory usage"
 				echo -e "  ${YELLOW}•${NC} Reduced overall performance compared to native systems"
@@ -3534,19 +3534,19 @@ if [ -f /etc/os-release ]; then
 			setup_qemu_emulation
 		fi
 
-		sudo mkdir -p /var/www/mythicaldash
+		sudo mkdir -p /var/www/lumina
 		sudo mkdir -p "$BACKUP_DIR"
-		cd /var/www/mythicaldash || exit 1
+		cd /var/www/lumina || exit 1
 
 		# Only create Cloudflare .env if Cloudflare Tunnel is selected
 		if [[ "$CF_TUNNEL_SETUP" =~ ^[yY]$ ]]; then
 			ensure_env_cloudflare
 		fi
 
-		if [ ! -f /var/www/mythicaldash/docker-compose.yml ]; then
+		if [ ! -f /var/www/lumina/docker-compose.yml ]; then
 			COMPOSE_URL=$(get_compose_file_url)
-			if ! run_with_spinner "Downloading docker-compose.yml for MythicalDash" "docker-compose.yml downloaded." \
-				curl -fsSL -o /var/www/mythicaldash/docker-compose.yml "$COMPOSE_URL"; then
+			if ! run_with_spinner "Downloading docker-compose.yml for Lumina" "docker-compose.yml downloaded." \
+				curl -fsSL -o /var/www/lumina/docker-compose.yml "$COMPOSE_URL"; then
 				exit 1
 			fi
 		fi
@@ -3566,7 +3566,7 @@ if [ -f /etc/os-release ]; then
 				echo -e "${YELLOW}${BOLD}⚠️  Development Release Mode${NC}"
 				draw_hr
 				echo ""
-				echo -e "${YELLOW}You are installing a ${BOLD}development release${NC} of MythicalDash.${NC}"
+				echo -e "${YELLOW}You are installing a ${BOLD}development release${NC} of Lumina.${NC}"
 				echo ""
 				echo -e "${BLUE}Dev Release Information:${NC}"
 				if [ -n "$DEV_BRANCH" ]; then
@@ -3590,7 +3590,7 @@ if [ -f /etc/os-release ]; then
 				fi
 			fi
 
-			modify_compose_for_dev "/var/www/mythicaldash/docker-compose.yml" "$DEV_TAG" "$DEV_TAG"
+			modify_compose_for_dev "/var/www/lumina/docker-compose.yml" "$DEV_TAG" "$DEV_TAG"
 		fi
 
 		print_banner
@@ -3607,11 +3607,11 @@ if [ -f /etc/os-release ]; then
 			fi
 		fi
 
-		# Stop all existing MythicalDash containers (including old v1 containers) before starting
-		stop_all_mythicaldash_containers
+		# Stop all existing Lumina containers (including old v1 containers) before starting
+		stop_all_lumina_containers
 
-		if ! run_with_spinner "Starting MythicalDash stack" "MythicalDash stack started." sudo docker compose up -d; then
-			log_error "Failed to start MythicalDash stack"
+		if ! run_with_spinner "Starting Lumina stack" "Lumina stack started." sudo docker compose up -d; then
+			log_error "Failed to start Lumina stack"
 			echo ""
 			draw_hr
 			echo -e "${RED}${BOLD}Container Start Failure${NC}"
@@ -3620,7 +3620,7 @@ if [ -f /etc/os-release ]; then
 			# Check Docker logs for common errors
 			log_info "Checking Docker container logs..."
 			if command -v docker >/dev/null 2>&1; then
-				cd /var/www/mythicaldash || true
+				cd /var/www/lumina || true
 				CONTAINER_LOGS=$(sudo docker compose logs --tail=50 2>&1 || sudo docker-compose logs --tail=50 2>&1 || echo "")
 
 				if echo "$CONTAINER_LOGS" | grep -qi "exec format error"; then
@@ -3648,8 +3648,8 @@ if [ -f /etc/os-release ]; then
 			echo ""
 			draw_hr
 			echo -e "${BLUE}For more details, check:${NC}"
-			echo -e "  ${CYAN}•${NC} Docker logs: ${BOLD}sudo docker compose -f /var/www/mythicaldash/docker-compose.yml logs${NC}"
-			echo -e "  ${CYAN}•${NC} Container status: ${BOLD}sudo docker compose -f /var/www/mythicaldash/docker-compose.yml ps${NC}"
+			echo -e "  ${CYAN}•${NC} Docker logs: ${BOLD}sudo docker compose -f /var/www/lumina/docker-compose.yml logs${NC}"
+			echo -e "  ${CYAN}•${NC} Container status: ${BOLD}sudo docker compose -f /var/www/lumina/docker-compose.yml ps${NC}"
 			echo -e "  ${CYAN}•${NC} Installation log: ${BOLD}$LOG_FILE${NC}"
 			draw_hr
 			upload_logs_on_fail
@@ -3658,17 +3658,17 @@ if [ -f /etc/os-release ]; then
 
 		# Verify containers are actually running
 		sleep 2
-		if ! sudo docker compose -f /var/www/mythicaldash/docker-compose.yml ps | grep -q "Up"; then
+		if ! sudo docker compose -f /var/www/lumina/docker-compose.yml ps | grep -q "Up"; then
 			log_error "Containers started but are not running"
 			echo ""
 			draw_hr
 			echo -e "${RED}${BOLD}Container Status Check Failed${NC}"
 			draw_hr
 			log_info "Container status:"
-			sudo docker compose -f /var/www/mythicaldash/docker-compose.yml ps
+			sudo docker compose -f /var/www/lumina/docker-compose.yml ps
 			echo ""
 			log_info "Recent container logs:"
-			sudo docker compose -f /var/www/mythicaldash/docker-compose.yml logs --tail=30
+			sudo docker compose -f /var/www/lumina/docker-compose.yml logs --tail=30
 			echo ""
 			draw_hr
 			upload_logs_on_fail
@@ -3704,7 +3704,7 @@ if [ -f /etc/os-release ]; then
 			fi
 
 			log_info "Using domain: $panel_domain"
-			log_info "This will be the main domain for your MythicalDash (not a subdirectory like /panel)."
+			log_info "This will be the main domain for your Lumina (not a subdirectory like /panel)."
 
 			# Ask if user wants to set up SSL certificate
 			setup_ssl_during_install=""
@@ -3829,17 +3829,17 @@ if [ -f /etc/os-release ]; then
 			fi
 
 			# Ensure Panel is running
-			if ! sudo docker compose -f /var/www/mythicaldash/docker-compose.yml ps | grep -q "Up"; then
-				log_info "Ensuring MythicalDash containers are running..."
+			if ! sudo docker compose -f /var/www/lumina/docker-compose.yml ps | grep -q "Up"; then
+				log_info "Ensuring Lumina containers are running..."
 
 				# Check architecture - ARM64 is natively supported
 				ARCH=$(uname -m)
 				if [[ "$ARCH" == "aarch64" ]] || [[ "$ARCH" == "arm64" ]]; then
 					log_info "ARM64 architecture detected: $ARCH - native images available"
 					# Try to start with native images
-					if ! run_with_spinner "Starting MythicalDash stack" "MythicalDash stack started." \
-						bash -c "cd /var/www/mythicaldash && sudo docker compose up -d"; then
-						log_warn "Failed to start MythicalDash. Reverse proxy configured but Panel is not running."
+					if ! run_with_spinner "Starting Lumina stack" "Lumina stack started." \
+						bash -c "cd /var/www/lumina && sudo docker compose up -d"; then
+						log_warn "Failed to start Lumina. Reverse proxy configured but Panel is not running."
 					fi
 				elif [[ "$ARCH" == "armv7l" ]] || [[ "$ARCH" == "armv6l" ]]; then
 					if [ "$FORCE_ARM" = true ]; then
@@ -3848,15 +3848,15 @@ if [ -f /etc/os-release ]; then
 						log_info "Unsupported ARM architecture detected: $ARCH - QEMU emulation will be used"
 					fi
 					# Try to start anyway (QEMU should be configured)
-					if ! run_with_spinner "Starting MythicalDash stack" "MythicalDash stack started." \
-						bash -c "cd /var/www/mythicaldash && sudo docker compose up -d"; then
-						log_warn "Failed to start MythicalDash. Reverse proxy configured but Panel is not running."
+					if ! run_with_spinner "Starting Lumina stack" "Lumina stack started." \
+						bash -c "cd /var/www/lumina && sudo docker compose up -d"; then
+						log_warn "Failed to start Lumina. Reverse proxy configured but Panel is not running."
 						log_info "Ensure QEMU emulation is properly configured."
 					fi
 				else
-					if ! run_with_spinner "Starting MythicalDash stack" "MythicalDash stack started." \
-						bash -c "cd /var/www/mythicaldash && sudo docker compose up -d"; then
-						log_error "Failed to start MythicalDash stack"
+					if ! run_with_spinner "Starting Lumina stack" "Lumina stack started." \
+						bash -c "cd /var/www/lumina && sudo docker compose up -d"; then
+						log_error "Failed to start Lumina stack"
 						echo ""
 						draw_hr
 						echo -e "${RED}${BOLD}Container Start Failure${NC}"
@@ -3864,7 +3864,7 @@ if [ -f /etc/os-release ]; then
 
 						# Check Docker logs for common errors
 						log_info "Checking Docker container logs..."
-						cd /var/www/mythicaldash || true
+						cd /var/www/lumina || true
 						CONTAINER_LOGS=$(sudo docker compose logs --tail=50 2>&1 || sudo docker-compose logs --tail=50 2>&1 || echo "")
 
 						if echo "$CONTAINER_LOGS" | grep -qi "exec format error"; then
@@ -3882,37 +3882,37 @@ if [ -f /etc/os-release ]; then
 
 						echo ""
 						draw_hr
-						log_warn "Failed to start MythicalDash. Reverse proxy is configured but Panel is not running."
-						log_info "Check logs: sudo docker compose -f /var/www/mythicaldash/docker-compose.yml logs"
+						log_warn "Failed to start Lumina. Reverse proxy is configured but Panel is not running."
+						log_info "Check logs: sudo docker compose -f /var/www/lumina/docker-compose.yml logs"
 					else
 						# Verify containers are actually running
 						sleep 2
-						if ! sudo docker compose -f /var/www/mythicaldash/docker-compose.yml ps | grep -q "Up"; then
+						if ! sudo docker compose -f /var/www/lumina/docker-compose.yml ps | grep -q "Up"; then
 							log_error "Containers started but are not running"
 							log_info "Container status:"
-							sudo docker compose -f /var/www/mythicaldash/docker-compose.yml ps
+							sudo docker compose -f /var/www/lumina/docker-compose.yml ps
 							log_warn "Panel containers failed to start. Check Docker logs for details."
 						fi
 					fi
 				fi
 			else
-				log_info "MythicalDash containers are already running."
+				log_info "Lumina containers are already running."
 			fi
 
 			draw_hr
 			if [ "$has_ssl" = "true" ]; then
-				log_info "Reverse proxy configured with SSL. You can access MythicalDash at https://$panel_domain"
+				log_info "Reverse proxy configured with SSL. You can access Lumina at https://$panel_domain"
 			else
-				log_info "Reverse proxy configured. You can access MythicalDash at http://$panel_domain"
+				log_info "Reverse proxy configured. You can access Lumina at http://$panel_domain"
 				log_info "To add SSL later, use the SSL Certificate options in the main menu."
 			fi
 			draw_hr
 		fi
 
-		sudo touch /var/www/mythicaldash/.installed
+		sudo touch /var/www/lumina/.installed
 
-		# Install global mythicaldash command
-		install_mythicaldash_command
+		# Install global lumina command
+		install_lumina_command
 
 		# Get public IP for access information
 		PUBLIC_IP=$(curl -s ifconfig.me 2>/dev/null || curl -s ipinfo.io/ip 2>/dev/null || echo "Unable to detect")
@@ -4002,8 +4002,8 @@ if [ -f /etc/os-release ]; then
 		log_info "Installation log saved at: $LOG_FILE"
 	elif [ "$COMPONENT_TYPE" = "1" ] && [ "$INST_TYPE" = "2" ]; then
 		# Panel Uninstall
-		if [ ! -f /var/www/mythicaldash/.installed ]; then
-			echo "MythicalDash does not appear to be installed. Nothing to uninstall."
+		if [ ! -f /var/www/lumina/.installed ]; then
+			echo "Lumina does not appear to be installed. Nothing to uninstall."
 			exit 0
 		fi
 		prompt "Are you sure you want to uninstall the Docker-based installation? (y/n): " confirm
@@ -4015,15 +4015,15 @@ if [ -f /etc/os-release ]; then
 		fi
 	elif [ "$COMPONENT_TYPE" = "1" ] && [ "$INST_TYPE" = "3" ]; then
 		# Panel Update
-		if [ ! -f /var/www/mythicaldash/.installed ]; then
-			echo "MythicalDash does not appear to be installed. Nothing to update."
+		if [ ! -f /var/www/lumina/.installed ]; then
+			echo "Lumina does not appear to be installed. Nothing to update."
 			exit 0
 		fi
 
 		# Check current installation type BEFORE doing anything
 		CURRENT_IS_DEV=false
-		if [ -f /var/www/mythicaldash/docker-compose.yml ]; then
-			if grep -q "mythicaldash_v3-backend:dev" /var/www/mythicaldash/docker-compose.yml 2>/dev/null; then
+		if [ -f /var/www/lumina/docker-compose.yml ]; then
+			if grep -q "lumina-backend:dev" /var/www/lumina/docker-compose.yml 2>/dev/null; then
 				CURRENT_IS_DEV=true
 			fi
 		fi
@@ -4056,11 +4056,11 @@ if [ -f /etc/os-release ]; then
 				if [ "$update_choice" = "1" ]; then
 					USE_DEV=true
 					# Try to detect current branch from compose file
-					if grep -q "mythicaldash_v3-backend:dev-v3-remastered" /var/www/mythicaldash/docker-compose.yml 2>/dev/null; then
+					if grep -q "lumina-backend:dev-v3-remastered" /var/www/lumina/docker-compose.yml 2>/dev/null; then
 						DEV_BRANCH="v3-remastered"
-					elif grep -q "mythicaldash_v3-backend:dev-" /var/www/mythicaldash/docker-compose.yml 2>/dev/null; then
+					elif grep -q "lumina-backend:dev-" /var/www/lumina/docker-compose.yml 2>/dev/null; then
 						# Extract branch from tag
-						EXTRACTED_BRANCH=$(grep "mythicaldash_v3-backend:dev-" /var/www/mythicaldash/docker-compose.yml | sed -n 's/.*mythicaldash_v3-backend:dev-\([^-]*\).*/\1/p' | head -1)
+						EXTRACTED_BRANCH=$(grep "lumina-backend:dev-" /var/www/lumina/docker-compose.yml | sed -n 's/.*lumina-backend:dev-\([^-]*\).*/\1/p' | head -1)
 						if [ -n "$EXTRACTED_BRANCH" ]; then
 							DEV_BRANCH="$EXTRACTED_BRANCH"
 						else
@@ -4137,17 +4137,17 @@ if [ -f /etc/os-release ]; then
 		fi
 
 		print_banner
-		log_step "Updating MythicalDash components..."
+		log_step "Updating Lumina components..."
 		COMPOSE_URL=$(get_compose_file_url)
-		if [ ! -f /var/www/mythicaldash/docker-compose.yml ]; then
-			if ! run_with_spinner "Downloading docker-compose.yml for MythicalDash" "docker-compose.yml downloaded." \
-				curl -fsSL -o /var/www/mythicaldash/docker-compose.yml "$COMPOSE_URL"; then
+		if [ ! -f /var/www/lumina/docker-compose.yml ]; then
+			if ! run_with_spinner "Downloading docker-compose.yml for Lumina" "docker-compose.yml downloaded." \
+				curl -fsSL -o /var/www/lumina/docker-compose.yml "$COMPOSE_URL"; then
 				upload_logs_on_fail
 				exit 1
 			fi
 		else
 			if ! run_with_spinner "Refreshing docker-compose.yml from upstream" "docker-compose.yml refreshed." \
-				curl -fsSL -o /var/www/mythicaldash/docker-compose.yml "$COMPOSE_URL"; then
+				curl -fsSL -o /var/www/lumina/docker-compose.yml "$COMPOSE_URL"; then
 				log_warn "Could not refresh compose file; keeping existing copy."
 			fi
 		fi
@@ -4156,19 +4156,19 @@ if [ -f /etc/os-release ]; then
 		if [ "$USE_DEV" = true ]; then
 			DEV_TAG=$(get_dev_image_tag)
 			log_info "Using dev release mode with tag: $DEV_TAG"
-			modify_compose_for_dev "/var/www/mythicaldash/docker-compose.yml" "$DEV_TAG" "$DEV_TAG"
-		elif [ -f /var/www/mythicaldash/docker-compose.yml ] && grep -q "mythicaldash_v3-backend:dev" /var/www/mythicaldash/docker-compose.yml 2>/dev/null; then
+			modify_compose_for_dev "/var/www/lumina/docker-compose.yml" "$DEV_TAG" "$DEV_TAG"
+		elif [ -f /var/www/lumina/docker-compose.yml ] && grep -q "lumina-backend:dev" /var/www/lumina/docker-compose.yml 2>/dev/null; then
 			# Switching from dev to release - restore to latest
 			log_info "Switching to release images (latest)"
-			modify_compose_for_dev "/var/www/mythicaldash/docker-compose.yml" "latest" "latest"
+			modify_compose_for_dev "/var/www/lumina/docker-compose.yml" "latest" "latest"
 		fi
 
-		# Stop all existing MythicalDash containers first (including old v1 containers)
-		if ! run_with_spinner "Stopping all MythicalDash containers" "All containers stopped." stop_all_mythicaldash_containers; then
+		# Stop all existing Lumina containers first (including old v1 containers)
+		if ! run_with_spinner "Stopping all Lumina containers" "All containers stopped." stop_all_lumina_containers; then
 			log_warn "Some containers may not have stopped cleanly, continuing..."
 		fi
 
-		if ! run_with_spinner "Pulling MythicalDash Docker images" "Docker images updated." bash -c "cd /var/www/mythicaldash && sudo docker compose pull"; then
+		if ! run_with_spinner "Pulling Lumina Docker images" "Docker images updated." bash -c "cd /var/www/lumina && sudo docker compose pull"; then
 			upload_logs_on_fail
 			exit 1
 		fi
@@ -4183,13 +4183,13 @@ if [ -f /etc/os-release ]; then
 				log_warn "Unsupported ARM architecture detected: $ARCH (--force-arm flag set)"
 			else
 				log_info "Unsupported ARM architecture detected: $ARCH - using QEMU emulation"
-				log_warn "Note: MythicalDash runs through emulation on unsupported ARM. Consider using AMD64/x86_64 or ARM64 for better performance."
+				log_warn "Note: Lumina runs through emulation on unsupported ARM. Consider using AMD64/x86_64 or ARM64 for better performance."
 			fi
 			setup_qemu_emulation
 		fi
 
-		if ! run_with_spinner "Starting MythicalDash stack" "MythicalDash stack started." bash -c "cd /var/www/mythicaldash && sudo docker compose up -d"; then
-			log_error "Failed to start MythicalDash stack"
+		if ! run_with_spinner "Starting Lumina stack" "Lumina stack started." bash -c "cd /var/www/lumina && sudo docker compose up -d"; then
+			log_error "Failed to start Lumina stack"
 			echo ""
 			draw_hr
 			echo -e "${RED}${BOLD}Container Start Failure${NC}"
@@ -4197,7 +4197,7 @@ if [ -f /etc/os-release ]; then
 
 			# Check Docker logs for common errors
 			log_info "Checking Docker container logs..."
-			cd /var/www/mythicaldash || true
+			cd /var/www/lumina || true
 			CONTAINER_LOGS=$(sudo docker compose logs --tail=50 2>&1 || sudo docker-compose logs --tail=50 2>&1 || echo "")
 
 			if echo "$CONTAINER_LOGS" | grep -qi "exec format error"; then
@@ -4224,8 +4224,8 @@ if [ -f /etc/os-release ]; then
 			echo ""
 			draw_hr
 			echo -e "${BLUE}For more details, check:${NC}"
-			echo -e "  ${CYAN}•${NC} Docker logs: ${BOLD}sudo docker compose -f /var/www/mythicaldash/docker-compose.yml logs${NC}"
-			echo -e "  ${CYAN}•${NC} Container status: ${BOLD}sudo docker compose -f /var/www/mythicaldash/docker-compose.yml ps${NC}"
+			echo -e "  ${CYAN}•${NC} Docker logs: ${BOLD}sudo docker compose -f /var/www/lumina/docker-compose.yml logs${NC}"
+			echo -e "  ${CYAN}•${NC} Container status: ${BOLD}sudo docker compose -f /var/www/lumina/docker-compose.yml ps${NC}"
 			echo -e "  ${CYAN}•${NC} Installation log: ${BOLD}$LOG_FILE${NC}"
 			draw_hr
 			upload_logs_on_fail
@@ -4234,32 +4234,32 @@ if [ -f /etc/os-release ]; then
 
 		# Verify containers are actually running
 		sleep 2
-		if ! sudo docker compose -f /var/www/mythicaldash/docker-compose.yml ps | grep -q "Up"; then
+		if ! sudo docker compose -f /var/www/lumina/docker-compose.yml ps | grep -q "Up"; then
 			log_error "Containers started but are not running"
 			echo ""
 			draw_hr
 			echo -e "${RED}${BOLD}Container Status Check Failed${NC}"
 			draw_hr
 			log_info "Container status:"
-			sudo docker compose -f /var/www/mythicaldash/docker-compose.yml ps
+			sudo docker compose -f /var/www/lumina/docker-compose.yml ps
 			echo ""
 			log_info "Recent container logs:"
-			sudo docker compose -f /var/www/mythicaldash/docker-compose.yml logs --tail=30
+			sudo docker compose -f /var/www/lumina/docker-compose.yml logs --tail=30
 			echo ""
 			draw_hr
 			upload_logs_on_fail
 			exit 1
 		fi
 
-		# Always ensure global mythicaldash command is installed/updated
-		install_mythicaldash_command
+		# Always ensure global lumina command is installed/updated
+		install_lumina_command
 
-		log_success "MythicalDash updated successfully."
+		log_success "Lumina updated successfully."
 		exit 0
 	elif [ "$COMPONENT_TYPE" = "1" ] && [ "$INST_TYPE" = "4" ]; then
 		# Panel Backup Manager
-		if [ ! -f /var/www/mythicaldash/.installed ]; then
-			log_error "MythicalDash is not installed. Nothing to backup."
+		if [ ! -f /var/www/lumina/.installed ]; then
+			log_error "Lumina is not installed. Nothing to backup."
 			exit 1
 		fi
 

@@ -20,6 +20,7 @@ MythicalDash provides hosting providers with a complete management solution that
 
 ## 🛣️ Roadmap
 
+<!-- TODO Implement the 3 features on the todo -->
 View the full roadmap [here](https://github.com/orgs/MythicalLTD/projects/5).
 
 ---
@@ -83,7 +84,8 @@ Contributions are always welcome! For guidelines on how to contribute, please se
 
 Experience MythicalDash in action at our demo site:
 
-- **Demo URL**: [https://mythicaldash-v3.mythical.systems](https://mythicaldash-v3.mythical.systems)
+<!-- TODO Make a working demo -->
+- **Demo URL**: [https://lumina.lumis.moe](https://lumina.lumis.moe)
 
 > Note: The demo site is reset periodically to ensure a clean testing environment for all users.
 
@@ -93,29 +95,25 @@ Experience MythicalDash in action at our demo site:
 
 ⚠️ **Warning**: This is a beta version. Not recommended for production use!
 
+<!-- working docs with fumadocs, use mythical website for reference -->
 > https://docs.mythical.systems/docs/mythicaldash-v3-remastered/os/pick
 
 ---
 
-## 📜 Serial Code
-
-```bash
-1 490 650 284
-```
-
                         
 ## Stargazers over time
-[![Stargazers over time](https://starchart.cc/MythicalLTD/MythicalDash.svg?variant=adaptive)](https://starchart.cc/MythicalLTD/MythicalDash)
+[![Star History Chart](https://api.star-history.com/chart?repos=lonersoft/lumina&type=date&legend=top-left&sealed_token=obuz8pcqluyhSYjuVCjCtyWEH3U24PuuEfjepHhJrBLXzUpC_vklBntmCzPcW-1DJ7oyIyvfIVeGRlf4A4iHAxn79dWw03pBq_Mm2TiYs6HMaAe8p8d4Kwv6jrNXa8EMNV7CBpstp7zu22LJHRCNXxF6zUKYxXbkHP4imHtpbjKnLcl5syGr2UIsnesF)](https://www.star-history.com/?repos=lonersoft%2Flumina&type=date&legend=top-left)
 
                     
 
 ## 📄 License
 
-MythicalDash is licensed under the MIT. See the LICENSE file for more details.
+Lumina is licensed under the MIT, as it is forked from MythicalDash. See the LICENSE file for more details.
 
 ---
 
 <p align="center">
-  <b>Developed with ❤️ by MythicalSystems</b><br>
-  <a href="https://www.mythical.systems">https://www.mythical.systems</a>
+  <b>Developed with ❤️ by MythicalSystems, continued by lonersoft</b><br>
+  <a href="https://www.mythical.systems">https://www.mythical.systems</a><br>
+  <a href="https://loners.software">https://loners.software</a>
 </p>

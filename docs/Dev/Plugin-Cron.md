@@ -1,10 +1,10 @@
 # Plugin Cron Jobs
 
-MythicalDash plugins can register cron jobs (scheduled tasks) that run automatically at specified intervals. This is useful for background tasks, cleanup operations, scheduled notifications, and more.
+Lumina plugins can register cron jobs (scheduled tasks) that run automatically at specified intervals. This is useful for background tasks, cleanup operations, scheduled notifications, and more.
 
 ## Required Structure
 
-Every cron job in MythicalDash MUST use the `Cron` class with:
+Every cron job in Lumina MUST use the `Cron` class with:
 1. A unique identifier
 2. An interval specification
 
@@ -13,11 +13,11 @@ Every cron job in MythicalDash MUST use the `Cron` class with:
 ```php
 <?php
 
-namespace MythicalDash\Addons\yourplugin\Cron;
+namespace Lumina\Addons\yourplugin\Cron;
 
-use MythicalDash\Cron\TimeTask;
-use MythicalDash\Cron\Cron;
-use MythicalDash\App;
+use Lumina\Cron\TimeTask;
+use Lumina\Cron\Cron;
+use Lumina\App;
 
 class YourCronJob implements TimeTask
 {
@@ -179,7 +179,7 @@ public function run(): void
 1. **Cron not running at expected interval**
    - Verify interval format is correct
    - Check if cron ID is unique
-   - Ensure MythicalDash cron system is running
+   - Ensure Lumina cron system is running
 
 2. **Multiple executions**
    - Use unique cron IDs

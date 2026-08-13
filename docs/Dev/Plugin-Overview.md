@@ -1,6 +1,6 @@
-# MythicalDash Plugin System: Overview
+# Lumina Plugin System: Overview
 
-Welcome to the MythicalDash plugin system documentation! This is your master entry point for all plugin development topics.
+Welcome to the Lumina plugin system documentation! This is your master entry point for all plugin development topics.
 
 ## Table of Contents
 
@@ -29,7 +29,7 @@ Welcome to the MythicalDash plugin system documentation! This is your master ent
 
 ## What is a Plugin?
 
-A plugin is a modular extension that can add new features, integrations, and customizations to MythicalDash. Plugins can:
+A plugin is a modular extension that can add new features, integrations, and customizations to Lumina. Plugins can:
 
 - Add CLI commands
 - Hook into backend events

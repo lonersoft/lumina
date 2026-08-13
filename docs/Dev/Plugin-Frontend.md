@@ -12,7 +12,7 @@
 
 ## Vue Component Injection
 
-If supported, you can inject Vue components or extend the dashboard UI. (Check the latest MythicalDash docs for current support.)
+If supported, you can inject Vue components or extend the dashboard UI. (Check the latest Lumina docs for current support.)
 
 ## Communication with Main App
 

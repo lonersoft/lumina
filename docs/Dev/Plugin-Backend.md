@@ -27,8 +27,8 @@ Create scheduled jobs in `Cron/` and register them:
 
 ```php
 // Cron/MyJob.php
-namespace MythicalDash\Addons\myplugin\Cron;
-use MythicalDash\Cron\TimeTask;
+namespace Lumina\Addons\myplugin\Cron;
+use Lumina\Cron\TimeTask;
 class MyJob implements TimeTask {
     public function run(): void {
         // Your scheduled code here
@@ -36,7 +36,7 @@ class MyJob implements TimeTask {
 }
 
 // In your main plugin class
-$event->registerCron(new \MythicalDash\Addons\myplugin\Cron\MyJob());
+$event->registerCron(new \Lumina\Addons\myplugin\Cron\MyJob());
 ```
 
 ## Database Integration

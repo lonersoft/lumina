@@ -1,12 +1,13 @@
 <?php
 
 /*
- * This file is part of MythicalDash.
+ * This file is part of Lumina, a fork of MythicalDash.
  *
  * MIT License
  *
  * Copyright (c) 2020-2025 MythicalSystems
  * Copyright (c) 2020-2025 Cassian Gherman (NaysKutzu)
+ * Copyright (c) 2026 Lumi
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

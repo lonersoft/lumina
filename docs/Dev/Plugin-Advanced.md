@@ -1,6 +1,6 @@
 # Advanced Plugin Features
 
-This section covers advanced topics for MythicalDash plugin development.
+This section covers advanced topics for Lumina plugin development.
 
 ---
 
@@ -21,9 +21,9 @@ plugin:
 
 **Using a Mixin in Your Plugin**
 ```php
-use MythicalDash\Plugins\Mixins\LoggingMixin;
+use Lumina\Plugins\Mixins\LoggingMixin;
 
-class MyPlugin implements MythicalDashPlugin
+class MyPlugin implements LuminaPlugin
 {
     public static function processEvents(PluginEvents $event): void
     {
@@ -46,7 +46,7 @@ If supported, you can create a Vue component or custom page for your plugin’s 
 
 **Example: Adding a Settings Page**
 ```js
-// JavaScript: Register a settings page (if supported by MythicalDash)
+// JavaScript: Register a settings page (if supported by Lumina)
 window.dispatchEvent(new CustomEvent('register-plugin-settings', {
   detail: {
     plugin: 'myplugin',
@@ -98,7 +98,7 @@ if ($otherPlugin) {
 **Best Practices**
 - Use logging for debugging.
 - Test in a development environment.
-- Use MythicalDash’s debug panel/tools.
+- Use Lumina’s debug panel/tools.
 
 **Example: Logging**
 ```php
@@ -114,9 +114,9 @@ $app->getLogger()->debug('Debug message from my plugin');
 - Distribute via your own site or a plugin marketplace (if available).
 
 **Updating Plugins**
-- Follow MythicalDash’s update process (if supported).
+- Follow Lumina’s update process (if supported).
 - Use version numbers in conf.yml.
 
 ---
 
-For more details, see the main plugin documentation and MythicalDash developer resources.
+For more details, see the main plugin documentation and Lumina developer resources.
