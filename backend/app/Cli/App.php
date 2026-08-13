@@ -76,19 +76,10 @@ class App extends \Lumina\Hooks\MythicalSystems\Utils\BungeeChatApi
             $this->sendOutput('TelemetryJob.php removed successfully!');
         }
 
-        // Check if mythicaldash-v3.log exists and rename it to lumina.log
-        $oldLogFile = getcwd() . '/backend/storage/logs/mythicaldash-v3.log';
+        // Ensure lumina.log exists
         $newLogFile = getcwd() . '/backend/storage/logs/lumina.log';
-
-        // Create both log files if they don't exist
-        if (!file_exists($oldLogFile)) {
-            $this->sendOutput('Creating mythicaldash-v3.log');
-            touch($oldLogFile);
-        }
-
         if (!file_exists($newLogFile)) {
-            $this->sendOutput('Creating lumina.log');
-            touch($newLogFile);
+            @touch($newLogFile);
         }
 
         // Try plugin commands first, then fall back to built-in commands

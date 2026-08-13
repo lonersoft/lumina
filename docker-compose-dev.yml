@@ -15,18 +15,7 @@ services:
     networks:
       - lumina_network
     healthcheck:
-      test:
-        [
-          "CMD",
-          "mariadb-admin",
-          "ping",
-          "-h",
-          "localhost",
-          "-u",
-          "root",
-          "-p",
-          "${MARIADB_ROOT_PASSWORD:-lumina_root}",
-        ]
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -u root -p$${MARIADB_ROOT_PASSWORD:-lumina_root}"]
       timeout: 20s
       retries: 10
 
@@ -45,7 +34,10 @@ services:
       retries: 10
 
   backend:
-    image: ghcr.io/lonersoft/lumina-backend:dev
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: lumina-backend:dev
     container_name: lumina_backend
     restart: unless-stopped
     environment:
@@ -68,6 +60,7 @@ services:
       timeout: 20s
       retries: 10
     volumes:
+      - ./backend:/var/www/html
       - lumina_attachments:/var/www/html/public/attachments
       - ./.env:/var/www/html/storage/.env
       - lumina_snapshots:/var/www/html/storage/backups
@@ -75,7 +68,10 @@ services:
       - lumina_network
 
   frontend:
-    image: ghcr.io/lonersoft/lumina-frontend:dev
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: lumina-frontend:dev
     container_name: lumina_frontend
     restart: unless-stopped
     volumes: []
@@ -92,6 +88,20 @@ services:
       retries: 10
     ports:
       - "4832:80"
+    networks:
+      - lumina_network
+
+  frontend-dev:
+    image: node:24-alpine
+    container_name: lumina_frontend_dev
+    working_dir: /app
+    environment:
+      - CI=true
+    command: sh -c "npm install -g pnpm@10.22.0 && pnpm install && pnpm run dev"
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5173:5173"
     networks:
       - lumina_network
 

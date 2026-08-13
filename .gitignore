@@ -7,3 +7,4 @@ count-results/
 MythicalDash.zip
 Lumina.zip
 *.mypycache
+frontend/.pnpm-store/

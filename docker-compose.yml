@@ -15,18 +15,7 @@ services:
     networks:
       - lumina_network
     healthcheck:
-      test:
-        [
-          "CMD",
-          "mariadb-admin",
-          "ping",
-          "-h",
-          "localhost",
-          "-u",
-          "root",
-          "-p",
-          "${MARIADB_ROOT_PASSWORD:-lumina_root}",
-        ]
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -u root -p$${MARIADB_ROOT_PASSWORD:-lumina_root}"]
       timeout: 20s
       retries: 10
 
